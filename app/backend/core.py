@@ -1,15 +1,25 @@
+import json
 import os
-from typing import Any, Dict, cast
+from pathlib import Path
+from typing import Any, Dict, List, cast
 
 from dotenv import load_dotenv
 from langchain.agents import create_agent
 from langchain.chat_models import init_chat_model
 from langchain.messages import ToolMessage
 from langchain.tools import tool
+from langchain_classic.retrievers import EnsembleRetriever
+from langchain_community.retrievers import BM25Retriever
+from langchain_core.documents import Document
 from langchain_pinecone import PineconeVectorStore
 from langchain_openai import OpenAIEmbeddings
 
+from logger import log_warning
+
 load_dotenv()
+
+# How many chunks each retriever pulls before the ensemble merges/dedupes them.
+RETRIEVAL_K = 10
 
 # MUST match ingestion.py exactly: query vectors and stored vectors have to come
 # from the same model or similarity search is meaningless.
@@ -25,6 +35,43 @@ vectorstore = PineconeVectorStore(
 # Initialize chat model
 model = init_chat_model("gpt-4o-mini", model_provider="openai")
 
+# Chunk dump written by ingestion.py (app/ -> project root -> data/chunks.json).
+CHUNKS_PATH = Path(__file__).resolve().parent.parent.parent / "data" / "chunks.json"
+
+
+def _load_local_chunks() -> List[Document]:
+    if not CHUNKS_PATH.exists():
+        return []
+    raw = json.loads(CHUNKS_PATH.read_text(encoding="utf-8"))
+    return [Document(page_content=item["page_content"], metadata=item["metadata"]) for item in raw]
+
+
+def _build_retriever():
+    """Hybrid retriever: BM25 (lexical) + Pinecone (semantic), merged by
+    EnsembleRetriever (reciprocal rank fusion). BM25 catches exact
+    keyword/function-name matches ("lpf", "gain") that dense embeddings alone
+    sometimes rank low; the vector side catches paraphrases/synonyms BM25 can't
+    see. Falls back to vector-only if ingestion hasn't been run yet (no local
+    chunk dump to build BM25 from).
+    """
+    vector_retriever = vectorstore.as_retriever(search_kwargs={"k": RETRIEVAL_K})
+
+    local_chunks = _load_local_chunks()
+    if not local_chunks:
+        log_warning(
+            f"No local chunk dump found at {CHUNKS_PATH}: falling back to vector-only retrieval. "
+            "Run `uv run python app/ingestion.py` to enable hybrid BM25 + vector search."
+        )
+        return vector_retriever
+
+    bm25_retriever = BM25Retriever.from_documents(local_chunks)
+    bm25_retriever.k = RETRIEVAL_K
+
+    return EnsembleRetriever(retrievers=[bm25_retriever, vector_retriever], weights=[0.5, 0.5])
+
+
+retriever = _build_retriever()
+
 
 # response_format="content_and_artifact" makes the tool return a 2-tuple:
 #   [0] content  -> the string the MODEL sees (must be text)
@@ -35,12 +82,10 @@ model = init_chat_model("gpt-4o-mini", model_provider="openai")
 @tool(response_format="content_and_artifact")
 def retrieve_context(query: str):
     """Retrieve relevant documentation to help answer user queries about Strudel REPL."""
-    # NOTE: k belongs in the retriever config, not in invoke(). Passing it here
-    # is ignored, so this actually returns the retriever default (k=4 anyway).
-    # The explicit form is: vectorstore.as_retriever(search_kwargs={"k": 4})
-    # Retrieve top 4 most similar documents
-    retrieved_docs = vectorstore.as_retriever().invoke(query, k=10)
-    
+    # Hybrid BM25 + vector retrieval (see _build_retriever above), k=RETRIEVAL_K
+    # actually applied via search_kwargs/bm25_retriever.k, not passed to invoke().
+    retrieved_docs = retriever.invoke(query)
+
     # The source URL is embedded in the text the model reads, which is what makes
     # the "always cite the sources" instruction in the system prompt satisfiable.
     # Serialize documents for the model
