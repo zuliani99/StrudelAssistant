@@ -1,0 +1,6207 @@
+[
+  {
+    "path": "packages/codemirror/codemirror.mjs",
+    "name": "markcss",
+    "tags": [],
+    "synonyms": [],
+    "params": [],
+    "description": "Overrides the css of highlighted events. Make sure to use single quotes!",
+    "examples": [
+      "note(\"c a f e\")\n.markcss('text-decoration:underline')"
+    ]
+  },
+  {
+    "path": "packages/codemirror/slider.mjs",
+    "name": "slider",
+    "tags": [
+      "external_io",
+      "visualization"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} value Initial value",
+      "{number} min Minimum value - optional, defaults to 0",
+      "{number} max Maximum value - optional, defaults to 1",
+      "{number} step Step size - optional"
+    ],
+    "description": "Displays a slider widget to allow the user manipulate a value",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "s",
+    "tags": [
+      "superdough",
+      "samples"
+    ],
+    "synonyms": [
+      "sound"
+    ],
+    "params": [
+      "{string | Pattern} sound The sound / pattern of sounds to pick"
+    ],
+    "description": "Select a sound / sample by name. When using mininotation, you can also optionally supply 'n' and 'gain' parameters\nseparated by ':'.",
+    "examples": [
+      "s(\"bd hh\")",
+      "s(\"bd:0 bd:1 bd:0:0.3 bd:1:1.4\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "wt",
+    "tags": [
+      "wavetable",
+      "superdough"
+    ],
+    "synonyms": [
+      "wavetablePosition"
+    ],
+    "params": [
+      "{number | Pattern} position Position in the wavetable from 0 to 1"
+    ],
+    "description": "Position in the wavetable of the wavetable oscillator",
+    "examples": [
+      "s(\"squelch\").bank(\"wt_digital\").seg(8).note(\"F1\").wt(\"0 0.25 0.5 0.75 1\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "wtenv",
+    "tags": [
+      "wavetable",
+      "envelope",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} amount between 0 and 1"
+    ],
+    "description": "Amount of envelope applied wavetable oscillator's position envelope",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "wtattack",
+    "tags": [
+      "wavetable",
+      "envelope",
+      "superdough"
+    ],
+    "synonyms": [
+      "wtatt"
+    ],
+    "params": [
+      "{number | Pattern} time attack time in seconds"
+    ],
+    "description": "Attack time of the wavetable oscillator's position envelope",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "wtdecay",
+    "tags": [
+      "wavetable",
+      "envelope",
+      "superdough"
+    ],
+    "synonyms": [
+      "wtdec"
+    ],
+    "params": [
+      "{number | Pattern} time decay time in seconds"
+    ],
+    "description": "Decay time of the wavetable oscillator's position envelope",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "wtsustain",
+    "tags": [
+      "wavetable",
+      "envelope",
+      "superdough"
+    ],
+    "synonyms": [
+      "wtsus"
+    ],
+    "params": [
+      "{number | Pattern} gain sustain level (0 to 1)"
+    ],
+    "description": "Sustain time of the wavetable oscillator's position envelope",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "wtrelease",
+    "tags": [
+      "wavetable",
+      "envelope",
+      "superdough"
+    ],
+    "synonyms": [
+      "wtrel"
+    ],
+    "params": [
+      "{number | Pattern} time release time in seconds"
+    ],
+    "description": "Release time of the wavetable oscillator's position envelope",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "wtrate",
+    "tags": [
+      "wavetable",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} rate rate in hertz"
+    ],
+    "description": "Rate of the LFO for the wavetable oscillator's position",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "wtsync",
+    "tags": [
+      "wavetable",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} rate rate in cycles"
+    ],
+    "description": "cycle synced rate of the LFO for the wavetable oscillator's position",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "wtdepth",
+    "tags": [
+      "wavetable",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} depth depth of modulation"
+    ],
+    "description": "Depth of the LFO for the wavetable oscillator's position",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "wtshape",
+    "tags": [
+      "wavetable",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} shape Shape of the lfo (0, 1, 2, ..)"
+    ],
+    "description": "Shape of the LFO for the wavetable oscillator's position",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "wtdc",
+    "tags": [
+      "wavetable",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} dcoffset dc offset. set to 0 for unipolar"
+    ],
+    "description": "DC offset of the LFO for the wavetable oscillator's position",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "wtskew",
+    "tags": [
+      "wavetable",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} skew How much to bend the LFO shape"
+    ],
+    "description": "Skew of the LFO for the wavetable oscillator's position",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "warp",
+    "tags": [
+      "wavetable",
+      "superdough"
+    ],
+    "synonyms": [
+      "wavetableWarp"
+    ],
+    "params": [
+      "{number | Pattern} amount Warp of the wavetable from 0 to 1"
+    ],
+    "description": "Amount of warp (alteration of the waveform) to apply to the wavetable oscillator",
+    "examples": [
+      "s(\"basique\").bank(\"wt_digital\").seg(8).note(\"F1\").warp(\"0 0.25 0.5 0.75 1\")\n.warpmode(\"spin\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "warpattack",
+    "tags": [
+      "wavetable",
+      "envelope",
+      "superdough"
+    ],
+    "synonyms": [
+      "warpatt"
+    ],
+    "params": [
+      "{number | Pattern} time attack time in seconds"
+    ],
+    "description": "Attack time of the wavetable oscillator's warp envelope",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "warpdecay",
+    "tags": [
+      "wavetable",
+      "envelope",
+      "superdough"
+    ],
+    "synonyms": [
+      "warpdec"
+    ],
+    "params": [
+      "{number | Pattern} time decay time in seconds"
+    ],
+    "description": "Decay time of the wavetable oscillator's warp envelope",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "warpsustain",
+    "tags": [
+      "wavetable",
+      "envelope",
+      "superdough"
+    ],
+    "synonyms": [
+      "warpsus"
+    ],
+    "params": [
+      "{number | Pattern} gain sustain level (0 to 1)"
+    ],
+    "description": "Sustain time of the wavetable oscillator's warp envelope",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "warprelease",
+    "tags": [
+      "wavetable",
+      "envelope",
+      "superdough"
+    ],
+    "synonyms": [
+      "warprel"
+    ],
+    "params": [
+      "{number | Pattern} time release time in seconds"
+    ],
+    "description": "Release time of the wavetable oscillator's warp envelope",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "warprate",
+    "tags": [
+      "wavetable",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} rate rate in hertz"
+    ],
+    "description": "Rate of the LFO for the wavetable oscillator's warp",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "warpdepth",
+    "tags": [
+      "wavetable",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} depth depth of modulation"
+    ],
+    "description": "Depth of the LFO for the wavetable oscillator's warp",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "warpshape",
+    "tags": [
+      "wavetable",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} shape Shape of the lfo (0, 1, 2, ..)"
+    ],
+    "description": "Shape of the LFO for the wavetable oscillator's warp",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "warpdc",
+    "tags": [
+      "wavetable",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} dcoffset dc offset. set to 0 for unipolar"
+    ],
+    "description": "DC offset of the LFO for the wavetable oscillator's warp",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "warpskew",
+    "tags": [
+      "wavetable",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} skew How much to bend the LFO shape"
+    ],
+    "description": "Skew of the LFO for the wavetable oscillator's warp",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "warpmode",
+    "tags": [
+      "wavetable",
+      "superdough"
+    ],
+    "synonyms": [
+      "wavetableWarpMode"
+    ],
+    "params": [
+      "{number | string | Pattern} mode Warp mode"
+    ],
+    "description": "Type of warp (alteration of the waveform) to apply to the wavetable oscillator.\n\nThe current options are: none, asym, bendp, bendm, bendmp, sync, quant, fold, pwm, orbit,\nspin, chaos, primes, binary, brownian, reciprocal, wormhole, logistic, sigmoid, fractal, flip",
+    "examples": [
+      "s(\"morgana\").bank(\"wt_digital\").seg(8).note(\"F1\").warp(\"0 0.25 0.5 0.75 1\")\n.warpmode(\"<asym bendp spin logistic sync wormhole brownian>*2\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "wtphaserand",
+    "tags": [
+      "wavetable",
+      "superdough"
+    ],
+    "synonyms": [
+      "wavetablePhaseRand"
+    ],
+    "params": [
+      "{number | Pattern} amount Randomness of the initial phase. Between 0 (not random) and 1 (fully random)"
+    ],
+    "description": "Amount of randomness of the initial phase of the wavetable oscillator.",
+    "examples": [
+      "s(\"basique\").bank(\"wt_digital\").seg(16).wtphaserand(\"<0 1>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "warpenv",
+    "tags": [
+      "wavetable",
+      "envelope",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} amount between 0 and 1"
+    ],
+    "description": "Amount of envelope applied wavetable oscillator's position envelope",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "warpsync",
+    "tags": [
+      "wavetable",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} rate rate in cycles"
+    ],
+    "description": "cycle synced rate of the LFO for the wavetable warp position",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "source",
+    "tags": [
+      "external_io",
+      "superdough"
+    ],
+    "synonyms": [
+      "src"
+    ],
+    "params": [
+      "{function} getSource"
+    ],
+    "description": "Define a custom webaudio node to use as a sound source.",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "n",
+    "tags": [
+      "superdough",
+      "samples",
+      "tonal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} value sample index starting from 0"
+    ],
+    "description": "Selects the given index:\n- for samples, it picks the sample by index, with wrap around\n- for scales, it picks the scale degree\n- for voicings, it picks the voice index",
+    "examples": [
+      "s(\"bd sd [~ bd] sd,hh*6\").n(\"<0 1>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "i",
+    "tags": [
+      "tonal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} value"
+    ],
+    "description": "Selects the given degree. Currently used in `xen` and `tune`:",
+    "examples": [
+      "i(\"0 1 2 3 4 5 6 7\").xen(\"<5edo 10edo 15edo hexany15>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "note",
+    "tags": [
+      "tonal"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Plays the given note name or midi number. A note name consists of\n\n- a letter (a-g or A-G)\n- optional accidentals (b or #)\n- optional (possibly negative) octave number (0-9). Defaults to 3\n\nExamples of valid note names: `c`, `bb`, `Bb`, `f#`, `c3`, `A4`, `Eb2`, `c#5`\n\nYou can also use midi numbers instead of note names, where 69 is mapped to A4 440Hz in 12EDO.",
+    "examples": [
+      "note(\"c a f e\")",
+      "note(\"c4 a4 f4 e4\")",
+      "note(\"60 69 65 64\")",
+      "note(\"fbb1 a#0 cbbb-1 e##-2\").sound(\"saw\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "accelerate",
+    "tags": [
+      "samples",
+      "superdirt"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} amount acceleration."
+    ],
+    "description": "A pattern of numbers that speed up (or slow down) samples while they play. Currently only supported by osc / superdirt.",
+    "examples": [
+      "s(\"sax\").accelerate(\"<0 1 2 4 8 16>\").slow(2).osc()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "velocity",
+    "tags": [
+      "amplitude",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "vel"
+    ],
+    "params": [],
+    "description": "Sets the velocity from 0 to 1. Is multiplied together with gain.",
+    "examples": [
+      "s(\"hh*8\")\n.gain(\".4!2 1 .4!2 1 .4 1\")\n.velocity(\".4 1\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "gain",
+    "tags": [
+      "amplitude",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} amount gain."
+    ],
+    "description": "Controls the gain by an exponential amount.",
+    "examples": [
+      "s(\"hh*8\").gain(\".4!2 1 .4!2 1 .4 1\").fast(2)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "postgain",
+    "tags": [
+      "amplitude",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Gain applied after all effects have been processed.",
+    "examples": [
+      "s(\"bd sd [~ bd] sd,hh*8\")\n.compressor(\"-20:20:10:.002:.02\").postgain(1.5)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "amp",
+    "tags": [
+      "amplitude",
+      "superdirt"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} amount gain."
+    ],
+    "description": "Like `gain`, but linear.",
+    "examples": [
+      "s(\"bd*8\").amp(\".1*2 .5 .1*2 .5 .1 .5\").osc()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "fmh",
+    "tags": [
+      "fm",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} harmonicity"
+    ],
+    "description": "Sets the Frequency Modulation Harmonicity Ratio.\nControls the timbre of the sound.\nWhole numbers and simple ratios sound more natural,\nwhile decimal numbers and complex ratios sound metallic.\n\nA number may be added afterwards to control the harmonicity of\nany of the 8 individual FMs (e.g. `fmh2`)",
+    "examples": [
+      "note(\"c e g b g e\")\n.fm(4)\n.fmh(\"<1 2 1.5 1.61>\")\n._scope()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "fmi",
+    "tags": [
+      "fm",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "fm"
+    ],
+    "params": [
+      "{number | Pattern} brightness modulation index"
+    ],
+    "description": "Sets the Frequency Modulation of the synth.\nControls the modulation index, which defines the brightness of the sound.\n\nA number may be added afterwards to control the modulation index of\nany of the 8 individual FMs (e.g. `fm3`). Also, FMs may be routed into\neach other with matrix commands like `fm13`, which would send `fm1` back into\n`fm3`",
+    "examples": [
+      "note(\"c e g b g e\")\n.fm(\"<0 1 2 8 32>\")\n._scope()",
+      "s(\"sine\").note(\"F1\").seg(8)\n.fm(4).fm2(rand.mul(4)).fm3(saw.mul(8).slow(8))\n.fmh(1.06).fmh2(10).fmh3(0.1)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "fmenv",
+    "tags": [
+      "fm",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "fme"
+    ],
+    "params": [
+      "{number | Pattern} type lin | exp"
+    ],
+    "description": "Ramp type of fm envelope. Exp might be a bit broken..\n\nA number may be added afterwards to control the envelope of\nany of the 8 individual FMs (e.g. `fmenv4`)",
+    "examples": [
+      "note(\"c e g b g e\")\n.fm(4)\n.fmdecay(.2)\n.fmsustain(0)\n.fmenv(\"<exp lin>\")\n._scope()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "fmattack",
+    "tags": [
+      "fm",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "fmatt"
+    ],
+    "params": [
+      "{number | Pattern} time attack time"
+    ],
+    "description": "Attack time for the FM envelope: time it takes to reach maximum modulation\n\nA number may be added afterwards to control the attack of the envelope of\nany of the 8 individual FMs (e.g. `fmatt5`)",
+    "examples": [
+      "note(\"c e g b g e\")\n.fm(4)\n.fmattack(\"<0 .05 .1 .2>\")\n._scope()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "fmwave",
+    "tags": [
+      "fm",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} wave waveform"
+    ],
+    "description": "Waveform of the fm modulator\n\nA number may be added afterwards to control the waveform\nany of the 8 individual FMs (e.g. `fmwave6`)",
+    "examples": [
+      "n(\"0 1 2 3\".fast(4)).scale(\"d:minor\").s(\"sine\").fmwave(\"<sine square sawtooth crackle>\").fm(4).fmh(2.01)",
+      "n(\"0 1 2 3\".fast(4)).chord(\"<Dm Am F G>\").voicing().s(\"sawtooth\").fmwave(\"brown\").fm(.6)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "fmdecay",
+    "tags": [
+      "fm",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "fmdec"
+    ],
+    "params": [
+      "{number | Pattern} time decay time"
+    ],
+    "description": "Decay time for the FM envelope: seconds until the sustain level is reached after the attack phase.\n\nA number may be added afterwards to control the decay of the envelope of\nany of the 8 individual FMs (e.g. `fmdec6`)",
+    "examples": [
+      "note(\"c e g b g e\")\n.fm(4)\n.fmdecay(\"<.01 .05 .1 .2>\")\n.fmsustain(.4)\n._scope()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "fmsustain",
+    "tags": [
+      "fm",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "fmsus"
+    ],
+    "params": [
+      "{number | Pattern} level sustain level"
+    ],
+    "description": "Sustain level for the FM envelope: how much modulation is applied after the decay phase\n\nA number may be added afterwards to control the sustain of the envelope of\nany of the 8 individual FMs (e.g. `fmsus7`)",
+    "examples": [
+      "note(\"c e g b g e\")\n.fm(4)\n.fmdecay(.1)\n.fmsustain(\"<1 .75 .5 0>\")\n._scope()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "fmrelease",
+    "tags": [
+      "fm",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "fmrel"
+    ],
+    "params": [
+      "{number | Pattern} time release time"
+    ],
+    "description": "Release time for the FM envelope: how much modulation is applied after the note is released\n\nA number may be added afterwards to control the release of the envelope of\nany of the 8 individual FMs (e.g. `fmrel8`)",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "bank",
+    "tags": [
+      "samples",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{string | Pattern} bank the name of the bank"
+    ],
+    "description": "Select the sound bank to use. To be used together with `s`. The bank name (+ \"_\") will be prepended to the value of `s`.",
+    "examples": [
+      "s(\"bd sd [~ bd] sd\").bank('RolandTR909') // = s(\"RolandTR909_bd RolandTR909_sd\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "chorus",
+    "tags": [
+      "pitch"
+    ],
+    "synonyms": [],
+    "params": [
+      "{string | Pattern} chorus mix amount between 0 and 1"
+    ],
+    "description": "mix control for the chorus effect",
+    "examples": [
+      "note(\"d d a# a\").s(\"sawtooth\").chorus(.5)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "attack",
+    "tags": [
+      "amplitude",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "att"
+    ],
+    "params": [
+      "{number | Pattern} attack time in seconds."
+    ],
+    "description": "Amplitude envelope attack time: Specifies how long it takes for the sound to reach its peak value, relative to the onset.",
+    "examples": [
+      "note(\"c3 e3 f3 g3\").attack(\"<0 .1 .5>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "decay",
+    "tags": [
+      "amplitude",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "dec"
+    ],
+    "params": [
+      "{number | Pattern} time decay time in seconds"
+    ],
+    "description": "Amplitude envelope decay time: the time it takes after the attack time to reach the sustain level.\nNote that the decay is only audible if the sustain value is lower than 1.",
+    "examples": [
+      "note(\"c3 e3 f3 g3\").decay(\"<.1 .2 .3 .4>\").sustain(0)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "sustain",
+    "tags": [
+      "amplitude",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "sus"
+    ],
+    "params": [
+      "{number | Pattern} gain sustain level between 0 and 1"
+    ],
+    "description": "Amplitude envelope sustain level: The level which is reached after attack / decay, being sustained until the offset.",
+    "examples": [
+      "note(\"c3 e3 f3 g3\").decay(.2).sustain(\"<0 .1 .4 .6 1>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "release",
+    "tags": [
+      "amplitude",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "rel"
+    ],
+    "params": [
+      "{number | Pattern} time release time in seconds"
+    ],
+    "description": "Amplitude envelope release time: The time it takes after the offset to go from sustain level to zero.",
+    "examples": [
+      "note(\"c3 e3 g3 c4\").release(\"<0 .1 .4 .6 1>/2\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "bpf",
+    "tags": [
+      "filter",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "bandf",
+      "bp"
+    ],
+    "params": [
+      "{number | Pattern} frequency center frequency"
+    ],
+    "description": "Sets the center frequency of the **b**and-**p**ass **f**ilter. When using mininotation, you\ncan also optionally supply the 'bpq' parameter separated by ':'.",
+    "examples": [
+      "s(\"bd sd [~ bd] sd,hh*6\").bpf(\"<1000 2000 4000 8000>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "bpq",
+    "tags": [
+      "filter",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "bandq"
+    ],
+    "params": [
+      "{number | Pattern} q q factor"
+    ],
+    "description": "Sets the **b**and-**p**ass **q**-factor (resonance).",
+    "examples": [
+      "s(\"bd sd [~ bd] sd\").bpf(500).bpq(\"<0 1 2 3>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "begin",
+    "tags": [
+      "samples"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} amount between 0 and 1, where 1 is the length of the sample"
+    ],
+    "description": "A pattern of numbers from 0 to 1. Skips the beginning of each sample, e.g. `0.25` to cut off the first quarter from each sample.",
+    "examples": [
+      "samples({ rave: 'rave/AREUREADY.wav' }, 'github:tidalcycles/dirt-samples')\ns(\"rave\").begin(\"<0 .25 .5 .75>\").fast(2)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "end",
+    "tags": [
+      "samples"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} length 1 = whole sample, .5 = half sample, .25 = quarter sample etc.."
+    ],
+    "description": "The same as .begin, but cuts off the end off each sample.",
+    "examples": [
+      "s(\"bd*2,oh*4\").end(\"<.1 .2 .5 1>\").fast(2)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "loop",
+    "tags": [
+      "samples"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} on If 1, the sample is looped"
+    ],
+    "description": "Loops the sample.\nNote that the tempo of the loop is not synced with the cycle tempo.\nTo change the loop region, use loopBegin / loopEnd.",
+    "examples": [
+      "s(\"casio\").loop(1)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "loopBegin",
+    "tags": [
+      "samples"
+    ],
+    "synonyms": [
+      "loopb"
+    ],
+    "params": [
+      "{number | Pattern} time between 0 and 1, where 1 is the length of the sample"
+    ],
+    "description": "Begin to loop at a specific point in the sample (inbetween `begin` and `end`).\nNote that the loop point must be inbetween `begin` and `end`, and before `loopEnd`!\nNote: Samples starting with wt_ will automatically loop! (wt = wavetable)",
+    "examples": [
+      "s(\"space\").loop(1)\n.loopBegin(\"<0 .125 .25>\")._scope()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "loopEnd",
+    "tags": [
+      "samples"
+    ],
+    "synonyms": [
+      "loope"
+    ],
+    "params": [
+      "{number | Pattern} time between 0 and 1, where 1 is the length of the sample"
+    ],
+    "description": "End the looping section at a specific point in the sample (inbetween `begin` and `end`).\nNote that the loop point must be inbetween `begin` and `end`, and after `loopBegin`!",
+    "examples": [
+      "s(\"space\").loop(1)\n.loopEnd(\"<1 .75 .5 .25>\")._scope()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "crush",
+    "tags": [
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} depth between 1 (for drastic reduction in bit-depth) to 16 (for barely no reduction)."
+    ],
+    "description": "Bit crusher effect.",
+    "examples": [
+      "s(\"<bd sd>,hh*3\").fast(2).crush(\"<16 8 7 6 5 4 3 2>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "coarse",
+    "tags": [
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} factor 1 for original 2 for half, 3 for a third and so on."
+    ],
+    "description": "Fake-resampling for lowering the sample rate. Caution: This effect seems to only work in chromium based browsers",
+    "examples": [
+      "s(\"bd sd [~ bd] sd,hh*8\").coarse(\"<1 4 8 16 32>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "tremolo",
+    "tags": [
+      "amplitude",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [
+      "trem"
+    ],
+    "params": [
+      "{number | Pattern} speed modulation speed in HZ"
+    ],
+    "description": "Modulate the amplitude of a sound with a continuous waveform",
+    "examples": [
+      "note(\"d d d# d\".fast(4)).s(\"supersaw\").tremolo(\"<3 2 100> \").tremoloskew(\"<.5>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "tremolosync",
+    "tags": [
+      "amplitude",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [
+      "tremsync"
+    ],
+    "params": [
+      "{number | Pattern} cycles modulation speed in cycles"
+    ],
+    "description": "Modulate the amplitude of a sound with a continuous waveform",
+    "examples": [
+      "note(\"d d d# d\".fast(4)).s(\"supersaw\").tremolosync(\"4\").tremoloskew(\"<1 .5 0>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "tremolodepth",
+    "tags": [
+      "amplitude",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [
+      "tremdepth"
+    ],
+    "params": [
+      "{number | Pattern} depth"
+    ],
+    "description": "Depth of amplitude modulation",
+    "examples": [
+      "note(\"a1 a1 a#1 a1\".fast(4)).s(\"pulse\").tremsync(4).tremolodepth(\"<1 2 .7>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "tremoloskew",
+    "tags": [
+      "amplitude",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [
+      "tremskew"
+    ],
+    "params": [
+      "{number | Pattern} amount between 0 & 1, the shape of the waveform"
+    ],
+    "description": "Alter the shape of the modulation waveform",
+    "examples": [
+      "note(\"{f a c e}%16\").s(\"sawtooth\").tremsync(4).tremoloskew(\"<.5 0 1>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "tremolophase",
+    "tags": [
+      "amplitude",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [
+      "tremphase"
+    ],
+    "params": [
+      "{number | Pattern} offset the offset in cycles of the modulation"
+    ],
+    "description": "Alter the phase of the modulation waveform",
+    "examples": [
+      "note(\"{f a c e}%16\").s(\"sawtooth\").tremsync(4).tremolophase(\"<0 .25 .66>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "tremoloshape",
+    "tags": [
+      "amplitude",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [
+      "tremshape"
+    ],
+    "params": [
+      "{number | Pattern} shape tri | square | sine | saw | ramp"
+    ],
+    "description": "Shape of amplitude modulation",
+    "examples": [
+      "note(\"{f g c d}%16\").tremsync(4).tremoloshape(\"<sine tri square>\").s(\"sawtooth\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "drive",
+    "tags": [
+      "filter",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} amount"
+    ],
+    "description": "Filter overdrive for supported filter types",
+    "examples": [
+      "note(\"{f g g c d a a#}%16\".sub(17)).s(\"supersaw\").lpenv(8).lpf(150).lpq(.8).ftype('ladder').drive(\"<.5 4>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "duckorbit",
+    "tags": [
+      "amplitude",
+      "orbit",
+      "superdough"
+    ],
+    "synonyms": [
+      "duck"
+    ],
+    "params": [
+      "{number | Pattern} orbit target orbit"
+    ],
+    "description": "Modulate the amplitude of an orbit to create a \"sidechain\" like effect.\n\nCan be applied to multiple orbits with the ':' mininotation, e.g. `duckorbit(\"2:3\")`",
+    "examples": [
+      "$: n(run(16)).scale(\"c:minor:pentatonic\").s(\"sawtooth\").delay(.7).orbit(2)\n$: s(\"bd:4!4\").beat(\"0,4,8,11,14\",16).duckorbit(2).duckattack(0.2).duckdepth(1)",
+      "$: n(run(16)).scale(\"c:minor:pentatonic\").s(\"sawtooth\").delay(.7).orbit(2)\n$: s(\"hh*16\").orbit(3)\n$: s(\"bd:4!4\").beat(\"0,4,8,11,14\",16).duckorbit(\"2:3\").duckattack(0.2).duckdepth(1)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "duckdepth",
+    "tags": [
+      "amplitude",
+      "orbit",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} depth depth of modulation from 0 to 1"
+    ],
+    "description": "The amount of ducking applied to target orbit\n\nCan vary across orbits with the ':' mininotation, e.g. `duckdepth(\"0.3:0.1\")`.\nNote: this requires first applying the effect to multiple orbits with e.g. `duckorbit(\"2:3\")`.",
+    "examples": [
+      "stack( n(run(8)).scale(\"c:minor\").s(\"sawtooth\").delay(.7).orbit(2), s(\"bd:4!4\").beat(\"0,4,8,11,14\",16).duckorbit(2).duckattack(0.2).duckdepth(\"<1 .9 .6 0>\"))",
+      "$: n(run(16)).scale(\"c:minor:pentatonic\").s(\"sawtooth\").delay(.7).orbit(2)\n$: s(\"hh*16\").orbit(3)\n$: s(\"bd:4!4\").beat(\"0,4,8,11,14\",16).duckorbit(\"2:3\").duckattack(0.2).duckdepth(\"1:0.5\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "duckonset",
+    "tags": [
+      "amplitude",
+      "envelope",
+      "orbit",
+      "superdough"
+    ],
+    "synonyms": [
+      "duckons"
+    ],
+    "params": [
+      "{number | Pattern} time The onset time in seconds"
+    ],
+    "description": "The time required for the ducked signal(s) to reach their lowest volume.\nCan be used to prevent clicking or for creative rhythmic effects.\n\nCan vary across orbits with the ':' mininotation, e.g. `duckonset(\"0:0.003\")`.\nNote: this requires first applying the effect to multiple orbits with e.g. `duckorbit(\"2:3\")`.",
+    "examples": [
+      "// Clicks\nsound: freq(\"63.2388\").s(\"sine\").orbit(2).gain(4)\nduckerWithClick: s(\"bd*4\").duckorbit(2).duckattack(0.3).duckonset(0).postgain(0)",
+      "// No clicks\nsound: freq(\"63.2388\").s(\"sine\").orbit(2).gain(4)\nduckerWithoutClick: s(\"bd*4\").duckorbit(2).duckattack(0.3).duckonset(0.01).postgain(0)",
+      "// Rhythmic\nnoise: s(\"pink\").distort(\"2:1\").orbit(4) // used rhythmically with 0.3 onset below\nhhat: s(\"hh*16\").orbit(7)\nducker: s(\"bd*4\").bank(\"tr909\").duckorbit(\"4:7\").duckonset(\"0.3:0.003\").duckattack(0.25)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "duckattack",
+    "tags": [
+      "amplitude",
+      "envelope",
+      "orbit",
+      "superdough"
+    ],
+    "synonyms": [
+      "duckatt",
+      "datt"
+    ],
+    "params": [
+      "{number | Pattern} time The attack time in seconds"
+    ],
+    "description": "The time required for the ducked signal(s) to return to their normal volume.\n\nCan vary across orbits with the ':' mininotation, e.g. `duckonset(\"0:0.003\")`.\nNote: this requires first applying the effect to multiple orbits with e.g. `duckorbit(\"2:3\")`.",
+    "examples": [
+      "sound: n(run(8)).scale(\"c:minor\").s(\"sawtooth\").delay(.7).orbit(2)\nducker: s(\"bd:4!4\").beat(\"0,4,8,11,14\",16).duckorbit(2).duckattack(\"<0.2 0 0.4>\").duckdepth(1)",
+      "moreduck: n(run(8)).scale(\"c:minor\").s(\"sawtooth\").delay(.7).orbit(2)\nlessduck: s(\"hh*16\").orbit(5)\nducker: s(\"bd:4!4\").beat(\"0,4,8,11,14\",16).duckorbit(\"2:5\").duckattack(\"0.4:0.1\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "byteBeatExpression",
+    "tags": [
+      "superdough"
+    ],
+    "synonyms": [
+      "bbexpr",
+      "bb"
+    ],
+    "params": [
+      "{number | Pattern} byteBeatExpression bitwise expression for creating bytebeat"
+    ],
+    "description": "Create byte beats with custom expressions",
+    "examples": [
+      "s(\"bytebeat\").bbexpr('t*(t>>15^t>>66)')"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "byteBeatStartTime",
+    "tags": [
+      "superdough"
+    ],
+    "synonyms": [
+      "bbst"
+    ],
+    "params": [
+      "{number | Pattern} byteBeatStartTime in samples (t)"
+    ],
+    "description": "Create byte beats with custom expressions",
+    "examples": [
+      "note(\"c3!8\".add(\"{0 0 12 0 7 5 3}%8\")).s(\"bytebeat:5\").bbst(\"<3 1>\".mul(10000))._scope()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "channels",
+    "tags": [
+      "external_io",
+      "superdough"
+    ],
+    "synonyms": [
+      "ch"
+    ],
+    "params": [
+      "{number | Pattern} channels pattern the output channels"
+    ],
+    "description": "Allows you to set the output channels on the interface",
+    "examples": [
+      "note(\"e a d b g\").channels(\"3:4\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "pw",
+    "tags": [
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} pulsewidth"
+    ],
+    "description": "Controls the pulsewidth of the pulse oscillator",
+    "examples": [
+      "note(\"{f a c e}%16\").s(\"pulse\").pw(\".8:1:.2\")",
+      "n(run(8)).scale(\"D:pentatonic\").s(\"pulse\").pw(\"0 .75 .5 1\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "pwrate",
+    "tags": [
+      "superdough",
+      "lfo"
+    ],
+    "synonyms": [
+      "pwr"
+    ],
+    "params": [
+      "{number | Pattern} rate"
+    ],
+    "description": "Controls the lfo rate for the pulsewidth of the pulse oscillator",
+    "examples": [
+      "n(run(8)).scale(\"D:pentatonic\").s(\"pulse\").pw(\"0.5\").pwrate(\"<5 .1 25>\").pwsweep(\"<0.3 .8>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "pwsweep",
+    "tags": [
+      "superdough",
+      "lfo"
+    ],
+    "synonyms": [
+      "pws"
+    ],
+    "params": [
+      "{number | Pattern} sweep"
+    ],
+    "description": "Controls the lfo sweep for the pulsewidth of the pulse oscillator",
+    "examples": [
+      "n(run(8)).scale(\"D:pentatonic\").s(\"pulse\").pw(\"0.5\").pwrate(\"<5 .1 25>\").pwsweep(\"<0.3 .8>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "phaser",
+    "tags": [
+      "superdough"
+    ],
+    "synonyms": [
+      "ph"
+    ],
+    "params": [
+      "{number | Pattern} speed speed of modulation"
+    ],
+    "description": "Phaser audio effect that approximates popular guitar pedals.",
+    "examples": [
+      "n(run(8)).scale(\"D:pentatonic\").s(\"sawtooth\").release(0.5)\n.phaser(\"<1 2 4 8>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "phasersweep",
+    "tags": [
+      "superdough",
+      "lfo"
+    ],
+    "synonyms": [
+      "phs"
+    ],
+    "params": [
+      "{number | Pattern} phasersweep most useful values are between 0 and 4000"
+    ],
+    "description": "The frequency sweep range of the lfo for the phaser effect. Defaults to 2000",
+    "examples": [
+      "n(run(8)).scale(\"D:pentatonic\").s(\"sawtooth\").release(0.5)\n.phaser(2).phasersweep(\"<800 2000 4000>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "phasercenter",
+    "tags": [
+      "superdough"
+    ],
+    "synonyms": [
+      "phc"
+    ],
+    "params": [
+      "{number | Pattern} centerfrequency in HZ"
+    ],
+    "description": "The center frequency of the phaser in HZ. Defaults to 1000",
+    "examples": [
+      "n(run(8)).scale(\"D:pentatonic\").s(\"sawtooth\").release(0.5)\n.phaser(2).phasercenter(\"<800 2000 4000>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "phaserdepth",
+    "tags": [
+      "superdough",
+      "superdirt"
+    ],
+    "synonyms": [
+      "phd",
+      "phasdp"
+    ],
+    "params": [
+      "{number | Pattern} depth number between 0 and 1"
+    ],
+    "description": "The amount the signal is affected by the phaser effect. Defaults to 0.75",
+    "examples": [
+      "n(run(8)).scale(\"D:pentatonic\").s(\"sawtooth\").release(0.5)\n.phaser(2).phaserdepth(\"<0 .5 .75 1>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "channel",
+    "tags": [
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} channel channel number"
+    ],
+    "description": "Choose the channel the pattern is sent to",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "cut",
+    "tags": [
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} group cut group number"
+    ],
+    "description": "In the style of classic drum-machines, `cut` will stop a playing sample as soon as another samples with in same cutgroup is to be played. An example would be an open hi-hat followed by a closed one, essentially muting the open.",
+    "examples": [
+      "s(\"[oh hh]*4\").cut(1)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "lpf",
+    "tags": [
+      "filter",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "cutoff",
+      "ctf",
+      "lp"
+    ],
+    "params": [
+      "{number | Pattern} frequency audible between 0 and 20000"
+    ],
+    "description": "Applies the cutoff frequency of the **l**ow-**p**ass **f**ilter.\n\nWhen using mininotation, you can also optionally add the 'lpq' parameter, separated by ':'.",
+    "examples": [
+      "s(\"bd sd [~ bd] sd,hh*6\").lpf(\"<4000 2000 1000 500 200 100>\")",
+      "s(\"bd*16\").lpf(\"1000:0 1000:10 1000:20 1000:30\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "lpenv",
+    "tags": [
+      "filter",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "lpe"
+    ],
+    "params": [
+      "{number | Pattern} modulation depth of the lowpass filter envelope between 0 and _n_"
+    ],
+    "description": "Sets the lowpass filter envelope modulation depth.",
+    "examples": [
+      "note(\"c2 e2 f2 g2\")\n.sound('sawtooth')\n.lpf(300)\n.lpa(.5)\n.lpenv(\"<4 2 1 0 -1 -2 -4>/4\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "hpenv",
+    "tags": [
+      "filter",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "hpe"
+    ],
+    "params": [
+      "{number | Pattern} modulation depth of the highpass filter envelope between 0 and _n_"
+    ],
+    "description": "Sets the highpass filter envelope modulation depth.",
+    "examples": [
+      "note(\"c2 e2 f2 g2\")\n.sound('sawtooth')\n.hpf(500)\n.hpa(.5)\n.hpenv(\"<4 2 1 0 -1 -2 -4>/4\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "bpenv",
+    "tags": [
+      "filter",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "bpe"
+    ],
+    "params": [
+      "{number | Pattern} modulation depth of the bandpass filter envelope between 0 and _n_"
+    ],
+    "description": "Sets the bandpass filter envelope modulation depth.",
+    "examples": [
+      "note(\"c2 e2 f2 g2\")\n.sound('sawtooth')\n.bpf(500)\n.bpa(.5)\n.bpenv(\"<4 2 1 0 -1 -2 -4>/4\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "lpattack",
+    "tags": [
+      "filter",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "lpa"
+    ],
+    "params": [
+      "{number | Pattern} attack time of the filter envelope"
+    ],
+    "description": "Sets the attack duration for the lowpass filter envelope.",
+    "examples": [
+      "note(\"c2 e2 f2 g2\")\n.sound('sawtooth')\n.lpf(300)\n.lpa(\"<.5 .25 .1 .01>/4\")\n.lpenv(4)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "hpattack",
+    "tags": [
+      "filter",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "hpa"
+    ],
+    "params": [
+      "{number | Pattern} attack time of the highpass filter envelope"
+    ],
+    "description": "Sets the attack duration for the highpass filter envelope.",
+    "examples": [
+      "note(\"c2 e2 f2 g2\")\n.sound('sawtooth')\n.hpf(500)\n.hpa(\"<.5 .25 .1 .01>/4\")\n.hpenv(4)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "bpattack",
+    "tags": [
+      "filter",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "bpa"
+    ],
+    "params": [
+      "{number | Pattern} attack time of the bandpass filter envelope"
+    ],
+    "description": "Sets the attack duration for the bandpass filter envelope.",
+    "examples": [
+      "note(\"c2 e2 f2 g2\")\n.sound('sawtooth')\n.bpf(500)\n.bpa(\"<.5 .25 .1 .01>/4\")\n.bpenv(4)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "lpdecay",
+    "tags": [
+      "filter",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "lpd"
+    ],
+    "params": [
+      "{number | Pattern} decay time of the filter envelope"
+    ],
+    "description": "Sets the decay duration for the lowpass filter envelope.",
+    "examples": [
+      "note(\"c2 e2 f2 g2\")\n.sound('sawtooth')\n.lpf(300)\n.lpd(\"<.5 .25 .1 0>/4\")\n.lpenv(4)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "hpdecay",
+    "tags": [
+      "filter",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "hpd"
+    ],
+    "params": [
+      "{number | Pattern} decay time of the highpass filter envelope"
+    ],
+    "description": "Sets the decay duration for the highpass filter envelope.",
+    "examples": [
+      "note(\"c2 e2 f2 g2\")\n.sound('sawtooth')\n.hpf(500)\n.hpd(\"<.5 .25 .1 0>/4\")\n.hps(0.2)\n.hpenv(4)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "bpdecay",
+    "tags": [
+      "filter",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "bpd"
+    ],
+    "params": [
+      "{number | Pattern} decay time of the bandpass filter envelope"
+    ],
+    "description": "Sets the decay duration for the bandpass filter envelope.",
+    "examples": [
+      "note(\"c2 e2 f2 g2\")\n.sound('sawtooth')\n.bpf(500)\n.bpd(\"<.5 .25 .1 0>/4\")\n.bps(0.2)\n.bpenv(4)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "lpsustain",
+    "tags": [
+      "filter",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "lps"
+    ],
+    "params": [
+      "{number | Pattern} sustain amplitude of the lowpass filter envelope"
+    ],
+    "description": "Sets the sustain amplitude for the lowpass filter envelope.",
+    "examples": [
+      "note(\"c2 e2 f2 g2\")\n.sound('sawtooth')\n.lpf(300)\n.lpd(.5)\n.lps(\"<0 .25 .5 1>/4\")\n.lpenv(4)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "hpsustain",
+    "tags": [
+      "filter",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "hps"
+    ],
+    "params": [
+      "{number | Pattern} sustain amplitude of the highpass filter envelope"
+    ],
+    "description": "Sets the sustain amplitude for the highpass filter envelope.",
+    "examples": [
+      "note(\"c2 e2 f2 g2\")\n.sound('sawtooth')\n.hpf(500)\n.hpd(.5)\n.hps(\"<0 .25 .5 1>/4\")\n.hpenv(4)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "bpsustain",
+    "tags": [
+      "filter",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "bps"
+    ],
+    "params": [
+      "{number | Pattern} sustain amplitude of the bandpass filter envelope"
+    ],
+    "description": "Sets the sustain amplitude for the bandpass filter envelope.",
+    "examples": [
+      "note(\"c2 e2 f2 g2\")\n.sound('sawtooth')\n.bpf(500)\n.bpd(.5)\n.bps(\"<0 .25 .5 1>/4\")\n.bpenv(4)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "lprelease",
+    "tags": [
+      "filter",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "lpr"
+    ],
+    "params": [
+      "{number | Pattern} release time of the filter envelope"
+    ],
+    "description": "Sets the release time for the lowpass filter envelope.",
+    "examples": [
+      "note(\"c2 e2 f2 g2\")\n.sound('sawtooth')\n.clip(.5)\n.lpf(300)\n.lpenv(4)\n.lpr(\"<.5 .25 .1 0>/4\")\n.release(.5)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "hprelease",
+    "tags": [
+      "filter",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "hpr"
+    ],
+    "params": [
+      "{number | Pattern} release time of the highpass filter envelope"
+    ],
+    "description": "Sets the release time for the highpass filter envelope.",
+    "examples": [
+      "note(\"c2 e2 f2 g2\")\n.sound('sawtooth')\n.clip(.5)\n.hpf(500)\n.hpenv(4)\n.hpr(\"<.5 .25 .1 0>/4\")\n.release(.5)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "bprelease",
+    "tags": [
+      "filter",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "bpr"
+    ],
+    "params": [
+      "{number | Pattern} release time of the bandpass filter envelope"
+    ],
+    "description": "Sets the release time for the bandpass filter envelope.",
+    "examples": [
+      "note(\"c2 e2 f2 g2\")\n.sound('sawtooth')\n.clip(.5)\n.bpf(500)\n.bpenv(4)\n.bpr(\"<.5 .25 .1 0>/4\")\n.release(.5)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "ftype",
+    "tags": [
+      "filter",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} type 12db (0), ladder (1), or 24db (2)"
+    ],
+    "description": "Sets the filter type. The ladder filter is more aggressive. More types might be added in the future.",
+    "examples": [
+      "note(\"{f g g c d a a#}%8\").s(\"sawtooth\").lpenv(4).lpf(500).ftype(\"<0 1 2>\").lpq(1)",
+      "note(\"c f g g a c d4\").fast(2)\n.sound('sawtooth')\n.lpf(200).fanchor(0)\n.lpenv(3).lpq(1)\n.ftype(\"<ladder 12db 24db>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "fanchor",
+    "tags": [
+      "filter",
+      "envelope",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} center 0 to 1"
+    ],
+    "description": "controls the center of the filter envelope. 0 is unipolar positive, .5 is bipolar, 1 is unipolar negative",
+    "examples": [
+      "note(\"{f g g c d a a#}%8\").s(\"sawtooth\").lpf(\"{1000}%2\")\n.lpenv(8).fanchor(\"<0 .5 1>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "hpf",
+    "tags": [
+      "filter",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "hp",
+      "hcutoff"
+    ],
+    "params": [
+      "{number | Pattern} frequency audible between 0 and 20000"
+    ],
+    "description": "Applies the cutoff frequency of the **h**igh-**p**ass **f**ilter.\n\nWhen using mininotation, you can also optionally add the 'hpq' parameter, separated by ':'.",
+    "examples": [
+      "s(\"bd sd [~ bd] sd,hh*8\").hpf(\"<4000 2000 1000 500 200 100>\")",
+      "s(\"bd sd [~ bd] sd,hh*8\").hpf(\"<2000 2000:25>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "lprate",
+    "tags": [
+      "filter",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} rate rate in hertz"
+    ],
+    "description": "Rate of the LFO for the lowpass filter",
+    "examples": [
+      "note(\"<c c c# c c c4>*16\").s(\"sawtooth\").lpf(600).lprate(\"<4 8 2 1>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "lpsync",
+    "tags": [
+      "filter",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} rate rate in cycles"
+    ],
+    "description": "Cycle-synced rate of the LFO for the lowpass filter",
+    "examples": [
+      "note(\"<c c c# c c c4>*16\").s(\"sawtooth\").lpf(600).lpsync(\"<4 8 2 1>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "lpdepth",
+    "tags": [
+      "filter",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} depth depth of modulation"
+    ],
+    "description": "Depth of the LFO for the lowpass filter",
+    "examples": [
+      "note(\"<c c c# c c c4>*16\").s(\"sawtooth\").lpf(600).lpdepth(\"<1 .5 1.8 0>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "lpdepthfrequency",
+    "tags": [
+      "filter",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [
+      "lpdepthfreq"
+    ],
+    "params": [
+      "{number | Pattern} depth depth of modulation"
+    ],
+    "description": "Depth of the LFO for the lowpass filter, in HZ",
+    "examples": [
+      "note(\"<c c c# c c c4>*16\").s(\"sawtooth\").lpf(600).lpdepthfrequency(\"<200 500 100 0>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "lpshape",
+    "tags": [
+      "filter",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} shape Shape of the lfo (0, 1, 2, ..)"
+    ],
+    "description": "Shape of the LFO for the lowpass filter",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "lpdc",
+    "tags": [
+      "filter",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} dcoffset dc offset. set to 0 for unipolar"
+    ],
+    "description": "DC offset of the LFO for the lowpass filter",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "lpskew",
+    "tags": [
+      "filter",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} skew How much to bend the LFO shape"
+    ],
+    "description": "Skew of the LFO for the lowpass filter",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "bprate",
+    "tags": [
+      "filter",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} rate rate in hertz"
+    ],
+    "description": "Rate of the LFO for the bandpass filter",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "bpsync",
+    "tags": [
+      "filter",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} rate rate in cycles"
+    ],
+    "description": "Cycle-synced rate of the LFO for the bandpass filter",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "bpdepth",
+    "tags": [
+      "filter",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} depth depth of modulation"
+    ],
+    "description": "Depth of the LFO for the bandpass filter",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "bpdepthfrequency",
+    "tags": [
+      "filter",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [
+      "bpdepthfreq"
+    ],
+    "params": [
+      "{number | Pattern} depth depth of modulation"
+    ],
+    "description": "Depth of the LFO for the bandpass filter, in HZ",
+    "examples": [
+      "note(\"<c c c# c c c4>*16\").s(\"sawtooth\").lpf(600).bpdepthfrequency(\"<200 500 100 0>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "bpshape",
+    "tags": [
+      "filter",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} shape Shape of the lfo (0, 1, 2, ..)"
+    ],
+    "description": "Shape of the LFO for the bandpass filter",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "bpdc",
+    "tags": [
+      "filter",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} dcoffset dc offset. set to 0 for unipolar"
+    ],
+    "description": "DC offset of the LFO for the bandpass filter",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "bpskew",
+    "tags": [
+      "filter",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} skew How much to bend the LFO shape"
+    ],
+    "description": "Skew of the LFO for the bandpass filter",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "hprate",
+    "tags": [
+      "filter",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} rate rate in hertz"
+    ],
+    "description": "Rate of the LFO for the highpass filter",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "hpsync",
+    "tags": [
+      "filter",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} rate rate in cycles"
+    ],
+    "description": "Cycle-synced rate of the LFO for the highpass filter",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "hpdepth",
+    "tags": [
+      "filter",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} depth depth of modulation"
+    ],
+    "description": "Depth of the LFO for the highpass filter",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "hpdepthfrequency",
+    "tags": [
+      "filter",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [
+      "hpdepthfreq"
+    ],
+    "params": [
+      "{number | Pattern} depth depth of modulation"
+    ],
+    "description": "Depth of the LFO for the hipass filter, in hz",
+    "examples": [
+      "note(\"<c c c# c c c4>*16\").s(\"sawtooth\").lpf(600).hpdepthfrequency(\"<200 500 100 0>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "hpshape",
+    "tags": [
+      "filter",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} shape Shape of the lfo (0, 1, 2, ..)"
+    ],
+    "description": "Shape of the LFO for the highpass filter",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "hpdc",
+    "tags": [
+      "filter",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} dcoffset dc offset. set to 0 for unipolar"
+    ],
+    "description": "DC offset of the LFO for the highpass filter",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "hpskew",
+    "tags": [
+      "filter",
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} skew How much to bend the LFO shape"
+    ],
+    "description": "Skew of the LFO for the highpass filter",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "vib",
+    "tags": [
+      "pitch",
+      "lfo",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "vibrato",
+      "v"
+    ],
+    "params": [
+      "{number | Pattern} frequency of the vibrato in hertz"
+    ],
+    "description": "Applies a vibrato to the frequency of the oscillator.",
+    "examples": [
+      "note(\"a e\")\n.vib(\"<.5 1 2 4 8 16>\")\n._scope()",
+      "// change the modulation depth with \":\"\nnote(\"a e\")\n.vib(\"<.5 1 2 4 8 16>:12\")\n._scope()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "noise",
+    "tags": [
+      "generators",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} wet wet amount"
+    ],
+    "description": "Adds pink noise to the mix",
+    "examples": [
+      "sound(\"<white pink brown>/2\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "vibmod",
+    "tags": [
+      "pitch",
+      "lfo",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "vmod"
+    ],
+    "params": [
+      "{number | Pattern} depth of vibrato (in semitones)"
+    ],
+    "description": "Sets the vibrato depth in semitones. Only has an effect if `vibrato` | `vib` | `v` is is also set",
+    "examples": [
+      "note(\"a e\").vib(4)\n.vibmod(\"<.25 .5 1 2 12>\")\n._scope()",
+      "// change the vibrato frequency with \":\"\nnote(\"a e\")\n.vibmod(\"<.25 .5 1 2 12>:8\")\n._scope()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "hpq",
+    "tags": [
+      "filter",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "hresonance"
+    ],
+    "params": [
+      "{number | Pattern} q resonance factor between 0 and 50"
+    ],
+    "description": "Controls the **h**igh-**p**ass **q**-value.",
+    "examples": [
+      "s(\"bd sd [~ bd] sd,hh*8\").hpf(2000).hpq(\"<0 10 20 30>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "lpq",
+    "tags": [
+      "filter",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "resonance"
+    ],
+    "params": [
+      "{number | Pattern} q resonance factor between 0 and 50"
+    ],
+    "description": "Controls the **l**ow-**p**ass **q**-value.",
+    "examples": [
+      "s(\"bd sd [~ bd] sd,hh*8\").lpf(2000).lpq(\"<0 10 20 30>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "djf",
+    "tags": [
+      "filter",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} cutoff below 0.5 is low pass filter, above is high pass filter"
+    ],
+    "description": "DJ filter, below 0.5 is low pass filter, above is high pass filter.",
+    "examples": [
+      "n(irand(16).seg(8)).scale(\"d:phrygian\").s(\"supersaw\").djf(\"<.5 .3 .2 .75>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "delay",
+    "tags": [
+      "orbit",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} level between 0 and 1"
+    ],
+    "description": "Sets the level of the delay signal.\n\nWhen using mininotation, you can also optionally add the 'delaytime' and 'delayfeedback' parameter,\nseparated by ':'.",
+    "examples": [
+      "s(\"bd bd\").delay(\"<0 .25 .5 1>\")",
+      "s(\"bd bd\").delay(\"0.65:0.25:0.9 0.65:0.125:0.7\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "delayfeedback",
+    "tags": [
+      "orbit",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "delayfb",
+      "dfb"
+    ],
+    "params": [
+      "{number | Pattern} feedback between 0 and 1"
+    ],
+    "description": "Sets the level of the signal that is fed back into the delay.\nCaution: Values >= 1 will result in a signal that gets louder and louder! Don't do it",
+    "examples": [
+      "s(\"bd\").delay(.25).delayfeedback(\"<.25 .5 .75 1>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "delayspeed",
+    "tags": [
+      "supradough"
+    ],
+    "synonyms": [
+      "delayt",
+      "dt"
+    ],
+    "params": [
+      "{number | Pattern} delayspeed controls the pitch of the delay feedback"
+    ],
+    "description": "Sets the time of the delay effect.",
+    "examples": [
+      "note(\"d d a# a\".fast(2)).s(\"sawtooth\").delay(.8).delaytime(1/2).delayspeed(\"<2 .5 -1 -2>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "delaytime",
+    "tags": [
+      "orbit",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "delayt",
+      "dt"
+    ],
+    "params": [
+      "{number | Pattern} delay in seconds"
+    ],
+    "description": "Sets the time of the delay effect in seconds.",
+    "examples": [
+      "note(\"d d a# a\".fast(2))\n.s(\"sawtooth\")\n.delay(.8)\n.delaytime(1/2)\n.delayspeed(\"<2 .5 -1 -2>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "delaysync",
+    "tags": [
+      "orbit",
+      "superdough"
+    ],
+    "synonyms": [
+      "delays",
+      "ds"
+    ],
+    "params": [
+      "{number | Pattern} cycles delay length in cycles"
+    ],
+    "description": "Sets the time of the delay effect in cycles.",
+    "examples": [
+      "s(\"bd bd\").delay(.25).delaysync(\"<1 2 3 5>\".div(8))"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "lock",
+    "tags": [
+      "superdirt"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} enable When set to 1, delaytime is a direct multiple of a cycle."
+    ],
+    "description": "Specifies whether delaytime is calculated relative to cps.",
+    "examples": [
+      "s(\"sd\").delay().lock(1).osc()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "detune",
+    "tags": [
+      "pitch",
+      "superdough"
+    ],
+    "synonyms": [
+      "det"
+    ],
+    "params": [
+      "{number | Pattern} amount"
+    ],
+    "description": "Set detune for stacked voices of supported oscillators.",
+    "examples": [
+      "note(\"d f a a# a d3\").fast(2).s(\"supersaw\").detune(\"<.1 .2 .5 24.1>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "unison",
+    "tags": [
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} numvoices"
+    ],
+    "description": "Set number of stacked voices for supported oscillators.",
+    "examples": [
+      "note(\"d f a a# a d3\").fast(2).s(\"supersaw\").unison(\"<1 2 7>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "spread",
+    "tags": [
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} spread between 0 and 1"
+    ],
+    "description": "Set the stereo pan spread for supported oscillators",
+    "examples": [
+      "note(\"d f a a# a d3\").fast(2).s(\"supersaw\").spread(\"<0 .3 1>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "dry",
+    "tags": [
+      "superdirt"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} dry 0 = wet, 1 = dry"
+    ],
+    "description": "Set dryness of reverb. See `room` and `size` for more information about reverb.",
+    "examples": [
+      "n(\"[0,3,7](3,8)\").s(\"superpiano\").room(.7).dry(\"<0 .5 .75 1>\").osc()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "fadeTime",
+    "tags": [
+      "superdirt"
+    ],
+    "synonyms": [
+      "fadeOutTime"
+    ],
+    "params": [
+      "{number | Pattern} time between 0 and 1"
+    ],
+    "description": "Used when using `begin`/`end` or `chop`/`striate` and friends, to change the fade out time of the 'grain' envelope.",
+    "examples": [
+      "s(\"oh*4\").end(.1).fadeTime(\"<0 .2 .4 .8>\").osc()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "freq",
+    "tags": [
+      "pitch",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} frequency in Hz. the audible range is between 20 and 20000 Hz"
+    ],
+    "description": "Set frequency of sound.",
+    "examples": [
+      "freq(\"220 110 440 110\").s(\"superzow\").osc()",
+      "freq(\"110\".mul.out(\".5 1.5 .6 [2 3]\")).s(\"superzow\").osc()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "pattack",
+    "tags": [
+      "pitch",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "patt"
+    ],
+    "params": [
+      "{number | Pattern} time time in seconds"
+    ],
+    "description": "Attack time of pitch envelope.",
+    "examples": [
+      "note(\"c eb g bb\").pattack(\"0 .1 .25 .5\").slow(2)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "pdecay",
+    "tags": [
+      "pitch",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "pdec"
+    ],
+    "params": [
+      "{number | Pattern} time time in seconds"
+    ],
+    "description": "Decay time of pitch envelope.",
+    "examples": [
+      "note(\"<c eb g bb>\").pdecay(\"<0 .1 .25 .5>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "prelease",
+    "tags": [
+      "pitch",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "prel"
+    ],
+    "params": [
+      "{number | Pattern} time time in seconds"
+    ],
+    "description": "Release time of pitch envelope",
+    "examples": [
+      "note(\"<c eb g bb> ~\")\n.release(.5) // to hear the pitch release\n.prelease(\"<0 .1 .25 .5>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "penv",
+    "tags": [
+      "pitch",
+      "envelope",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} semitones change in semitones"
+    ],
+    "description": "Amount of pitch envelope. Negative values will flip the envelope.\nIf you don't set other pitch envelope controls, `pattack:.2` will be the default.",
+    "examples": [
+      "note(\"c\")\n.penv(\"<12 7 1 .5 0 -1 -7 -12>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "pcurve",
+    "tags": [
+      "pitch",
+      "envelope",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} type 0 = linear, 1 = exponential"
+    ],
+    "description": "Curve of envelope. Defaults to linear. exponential is good for kicks",
+    "examples": [
+      "note(\"g1*4\")\n.s(\"sine\").pdec(.5)\n.penv(32)\n.pcurve(\"<0 1>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "panchor",
+    "tags": [
+      "pitch",
+      "envelope",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} anchor anchor offset"
+    ],
+    "description": "Sets the range anchor of the envelope:\n- anchor 0: range = [note, note + penv]\n- anchor 1: range = [note - penv, note]\nIf you don't set an anchor, the value will default to the psustain value.",
+    "examples": [
+      "note(\"c c4\").penv(12).panchor(\"<0 .5 1 .5>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "leslie",
+    "tags": [
+      "superdirt"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} wet between 0 and 1"
+    ],
+    "description": "Emulation of a Leslie speaker: speakers rotating in a wooden amplified cabinet.",
+    "examples": [
+      "n(\"0,4,7\").s(\"supersquare\").leslie(\"<0 .4 .6 1>\").osc()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "lrate",
+    "tags": [
+      "superdirt"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} rate 6.7 for fast, 0.7 for slow"
+    ],
+    "description": "Rate of modulation / rotation for leslie effect",
+    "examples": [
+      "n(\"0,4,7\").s(\"supersquare\").leslie(1).lrate(\"<1 2 4 8>\").osc()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "lsize",
+    "tags": [
+      "superdirt"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} meters somewhere between 0 and 1"
+    ],
+    "description": "Physical size of the cabinet in meters. Be careful, it might be slightly larger than your computer. Affects the Doppler amount (pitch warble)",
+    "examples": [
+      "n(\"0,4,7\").s(\"supersquare\").leslie(1).lrate(2).lsize(\"<.1 .5 1>\").osc()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "label",
+    "tags": [
+      "visualization"
+    ],
+    "synonyms": [],
+    "params": [
+      "{string} label text to display"
+    ],
+    "description": "Sets the displayed text for an event on the pianoroll",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "octave",
+    "tags": [
+      "superdirt"
+    ],
+    "synonyms": [
+      "oct"
+    ],
+    "params": [
+      "{number | Pattern} octave octave number"
+    ],
+    "description": "Sets the default octave of a synth.",
+    "examples": [
+      "n(\"0,4,7\").scale(\"F:minor\").s('supersaw').octave(\"<0 1 2 3>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "orbit",
+    "tags": [
+      "superdough"
+    ],
+    "synonyms": [
+      "o"
+    ],
+    "params": [
+      "{number | Pattern} number"
+    ],
+    "description": "An `orbit` is a global parameter context for patterns. Patterns with the same orbit will share the same global effects.",
+    "examples": [
+      "stack(\ns(\"hh*6\").delay(.5).delaytime(.25).orbit(1),\ns(\"~ sd ~ sd\").delay(.5).delaytime(.125).orbit(2)\n)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "bus",
+    "tags": [
+      "superdirt"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} number"
+    ],
+    "description": "A `bus` is a send which can be used for mixing patterns. It combines with..\ns(\"bus\") to play that bus through another pattern (for, say, applying non-linear\neffects like distortion to multiple signals)\n\notherPat.bmod(..) (to modulate another pattern with the bus)",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "busgain",
+    "tags": [
+      "superdirt"
+    ],
+    "synonyms": [
+      "bgain"
+    ],
+    "params": [
+      "{number | Pattern} number"
+    ],
+    "description": "Postgain multiplier prior to sending the signal to the audio bus.",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "pan",
+    "tags": [
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} pan between 0 and 1, from left to right (assuming stereo), once round a circle (assuming multichannel)"
+    ],
+    "description": "Sets position in stereo.",
+    "examples": [
+      "s(\"[bd hh]*2\").pan(\"<.5 1 .5 0>\")",
+      "s(\"bd rim sd rim bd ~ cp rim\").pan(sine.slow(2))"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "panspan",
+    "tags": [
+      "superdirt"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} span between -inf and inf, negative is backwards ordering"
+    ],
+    "description": "Controls how much multichannel output is fanned out",
+    "examples": [
+      "s(\"[bd hh]*2\").pan(\"<.5 1 .5 0>\").panspan(\"<0 .5 1>\").osc()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "pansplay",
+    "tags": [
+      "superdirt"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} spread between 0 and 1"
+    ],
+    "description": "Controls how much multichannel output is spread",
+    "examples": [
+      "s(\"[bd hh]*2\").pan(\"<.5 1 .5 0>\").pansplay(\"<0 .5 1>\").osc()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "chord",
+    "tags": [
+      "tonal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{string | Pattern} symbols chord symbols to voice e.g., C, Eb, Fm7, G7. The symbols can be defined via addVoicings"
+    ],
+    "description": "The chord to voice",
+    "examples": [
+      "chord(\"<Am C D F Am E Am E>\").voicing()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "dictionary",
+    "tags": [
+      "tonal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{string} dictionaryName which dictionary (having been defined with `addVoicings`) to use"
+    ],
+    "description": "Which dictionary to use for the voicings. This falls back to the default dictionary if not provided",
+    "examples": [
+      "addVoicings('house', {\n'': ['7 12 16', '0 7 16', '4 7 12'],\n'm': ['0 3 7']\n})\nchord(\"<Am C D F Am E Am E>\")\n.dict('house').anchor(66)\n.voicing().room(.5)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "anchor",
+    "tags": [
+      "tonal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{string | Pattern} anchorNote the note to align the voicing or scale to"
+    ],
+    "description": "The top note to align the voicing to. Defaults to c5",
+    "examples": [
+      "anchor(\"<c4 g4 c5 g5>\").chord(\"C\").voicing()",
+      "n(\"0 .. 7\").anchor(\"<c4 g4 c5 g5>\").scale(\"<C:major F:minor>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "offset",
+    "tags": [
+      "tonal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} shift the amount to shift the voicing up or down"
+    ],
+    "description": "Sets how the voicing is offset from the anchored position",
+    "examples": [
+      "chord(\"<Am C D F Am E Am E>\").offset(\"<0 1 2 3 4 5>\") // alter the voicing each time"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "octaves",
+    "tags": [
+      "tonal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} count the number of octaves"
+    ],
+    "description": "How many octaves are voicing steps spread apart, defaults to 1",
+    "examples": [
+      "chord(\"<Am C D F Am E Am E>\").octaves(\"<2 4>\").voicing()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "mode",
+    "tags": [
+      "tonal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{string | Pattern} modeName one of {below | above | duck | root | oldabove | oldroot}"
+    ],
+    "description": "How the voicing is aligned to the anchor\n- `below`: top note <= anchor\n- `duck`: top note <= anchor, anchor excluded\n- `above`: bottom note >= anchor\n- `root`: bottom note is the lowest root of the chord >= anchor\n\n- `oldabove` : old (buggy) behavior of above, kept for legacy reason\n- `oldroot` : old (buggy) behavior of root, kept for legacy reason",
+    "examples": [
+      "mode(\"<below above duck root>\").chord(\"C\").voicing()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "room",
+    "tags": [
+      "orbit",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} level between 0 and 1"
+    ],
+    "description": "Sets the level of reverb.\n\nWhen using mininotation, you can also optionally add the 'size' parameter, separated by ':'.",
+    "examples": [
+      "s(\"bd sd [~ bd] sd\").room(\"<0 .2 .4 .6 .8 1>\")",
+      "s(\"bd sd [~ bd] sd\").room(\"<0.9:1 0.9:4>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "roomlp",
+    "tags": [
+      "orbit",
+      "superdough"
+    ],
+    "synonyms": [
+      "rlp"
+    ],
+    "params": [
+      "{number} frequency between 0 and 20000hz"
+    ],
+    "description": "Reverb lowpass starting frequency (in hertz).\nWhen this property is changed, the reverb will be recaculated, so only change this sparsely..",
+    "examples": [
+      "s(\"bd sd [~ bd] sd\").room(0.5).rlp(10000)",
+      "s(\"bd sd [~ bd] sd\").room(0.5).rlp(5000)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "roomdim",
+    "tags": [
+      "orbit",
+      "superdough"
+    ],
+    "synonyms": [
+      "rdim"
+    ],
+    "params": [
+      "{number} frequency between 0 and 20000hz"
+    ],
+    "description": "Reverb lowpass frequency at -60dB (in hertz).\nWhen this property is changed, the reverb will be recaculated, so only change this sparsely..",
+    "examples": [
+      "s(\"bd sd [~ bd] sd\").room(0.5).rlp(10000).rdim(8000)",
+      "s(\"bd sd [~ bd] sd\").room(0.5).rlp(5000).rdim(400)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "roomfade",
+    "tags": [
+      "orbit",
+      "superdough"
+    ],
+    "synonyms": [
+      "rfade"
+    ],
+    "params": [
+      "{number} seconds for the reverb to fade"
+    ],
+    "description": "Reverb fade time (in seconds).\nWhen this property is changed, the reverb will be recaculated, so only change this sparsely..",
+    "examples": [
+      "s(\"bd sd [~ bd] sd\").room(0.5).rlp(10000).rfade(0.5)",
+      "s(\"bd sd [~ bd] sd\").room(0.5).rlp(5000).rfade(4)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "iresponse",
+    "tags": [
+      "orbit",
+      "superdough"
+    ],
+    "synonyms": [
+      "ir"
+    ],
+    "params": [
+      "{string | Pattern} sample to use as an impulse response"
+    ],
+    "description": "Sets the sample to use as an impulse response for the reverb.",
+    "examples": [
+      "s(\"bd sd [~ bd] sd\").room(.8).ir(\"<shaker_large:0 shaker_large:2>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "irspeed",
+    "tags": [
+      "orbit",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{string | Pattern} speed"
+    ],
+    "description": "Sets speed of the sample for the impulse response.",
+    "examples": [
+      "samples('github:switchangel/pad')\n$: s(\"brk/2\").fit().scrub(irand(16).div(16).seg(8)).ir(\"swpad:4\").room(.2).irspeed(\"<2 1 .5>/2\").irbegin(.5).roomsize(.5)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "irbegin",
+    "tags": [
+      "orbit",
+      "superdough"
+    ],
+    "synonyms": [
+      "ir"
+    ],
+    "params": [
+      "{string | Pattern} begin between 0 and 1"
+    ],
+    "description": "Sets the beginning of the IR response sample",
+    "examples": [
+      "samples('github:switchangel/pad')\n$: s(\"brk/2\").fit().scrub(irand(16).div(16).seg(8)).ir(\"swpad:4\").room(.65).irspeed(\"-2\").irbegin(\"<0 .5 .75>/2\").roomsize(.6)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "roomsize",
+    "tags": [
+      "orbit",
+      "superdough"
+    ],
+    "synonyms": [
+      "rsize",
+      "sz",
+      "size"
+    ],
+    "params": [
+      "{number | Pattern} size between 0 and 10"
+    ],
+    "description": "Sets the room size of the reverb, see `room`.\nWhen this property is changed, the reverb will be recaculated, so only change this sparsely..",
+    "examples": [
+      "s(\"bd sd [~ bd] sd\").room(.8).rsize(1)",
+      "s(\"bd sd [~ bd] sd\").room(.8).rsize(4)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "shape",
+    "tags": [
+      "distortion",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} distortion between 0 and 1"
+    ],
+    "description": "(Deprecated) Wave shaping distortion. WARNING: can suddenly get unpredictably loud.\nPlease use distort instead, which has a more predictable response curve\nsecond option in optional array syntax (ex: \".9:.5\") applies a postgain to the output",
+    "examples": [
+      "s(\"bd sd [~ bd] sd,hh*8\").shape(\"<0 .2 .4 .6 .8>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "distort",
+    "tags": [
+      "distortion",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "dist"
+    ],
+    "params": [
+      "{number | Pattern} distortion amount of distortion to apply",
+      "{number | Pattern} volume linear postgain of the distortion",
+      "{number | string | Pattern} type type of distortion to apply"
+    ],
+    "description": "Wave shaping distortion. CAUTION: it can get loud.\nSecond option in optional array syntax (ex: \".9:.5\") applies a postgain to the output. Third option sets the waveshaping type.\nMost useful values are usually between 0 and 10 (depending on source gain). If you are feeling adventurous, you can turn it up to 11 and beyond ;)",
+    "examples": [
+      "s(\"bd sd [~ bd] sd,hh*8\").distort(\"<0 2 3 10:.5>\")",
+      "note(\"d1!8\").s(\"sine\").penv(36).pdecay(.12).decay(.23).distort(\"8:.4\")",
+      "s(\"bd:4*4\").bank(\"tr808\").distort(\"3:0.5:diode\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "distortvol",
+    "tags": [
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "distortion",
+      "distvol"
+    ],
+    "params": [
+      "{number | Pattern} volume linear postgain of the distortion"
+    ],
+    "description": "Postgain for waveshaping distortion.",
+    "examples": [
+      "s(\"bd*4\").bank(\"tr909\").distort(2).distortvol(0.8)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "distorttype",
+    "tags": [
+      "distortion",
+      "superdough",
+      "supradough"
+    ],
+    "synonyms": [
+      "disttype"
+    ],
+    "params": [
+      "{number | string | Pattern} type type of distortion to apply"
+    ],
+    "description": "Type of waveshaping distortion to apply.",
+    "examples": [
+      "s(\"bd*4\").bank(\"tr909\").distort(2).distorttype(\"<0 1 2>\")",
+      "s(\"sine\").note(\"F1*2\").release(1)\n.penv(24).pdecay(0.05)\n.distort(rand.range(1, 8))\n.distorttype(\"<fold chebyshev scurve diode asym sinefold>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "compressor",
+    "tags": [
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Dynamics Compressor. The params are `compressor(\"threshold:ratio:knee:attack:release\")`\nMore info [here](https://developer.mozilla.org/en-US/docs/Web/API/DynamicsCompressorNode?retiredLocale=de#instance_properties)",
+    "examples": [
+      "s(\"bd sd [~ bd] sd,hh*8\")\n.compressor(\"-20:20:10:.002:.02\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "speed",
+    "tags": [
+      "pitch",
+      "samples"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} speed -inf to inf, negative numbers play the sample backwards."
+    ],
+    "description": "Changes the speed of sample playback, i.e. a cheap way of changing pitch.",
+    "examples": [
+      "s(\"bd*6\").speed(\"1 2 4 1 -2 -4\")",
+      "speed(\"1 1.5*2 [2 1.1]\").s(\"piano\").clip(1)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "stretch",
+    "tags": [
+      "pitch",
+      "samples"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} factor between `-4` and `inf`. Positive increases pitch, 0 does nothing, negative decreases the pitch."
+    ],
+    "description": "Changes the pitch of the sample without changing its speed.\nThe frequencies are multiplied by (factor + 1) for positive numbers\nand by max(factor / 4 + 1, 0) for negative numbers.\nSo tuning up by octaves can be done with 1, 3, 7, ...\nand tuning down by octaves with -2, -3, -3.5...",
+    "examples": [
+      "s(\"gm_flute\").stretch(\"<2 1 0 -2>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "unit",
+    "tags": [
+      "superdirt"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | string | Pattern} unit see description above"
+    ],
+    "description": "Used in conjunction with `speed`, accepts values of \"r\" (rate, default behavior), \"c\" (cycles), or \"s\" (seconds). Using `unit \"c\"` means `speed` will be interpreted in units of cycles, e.g. `speed \"1\"` means samples will be stretched to fill a cycle. Using `unit \"s\"` means the playback speed will be adjusted so that the duration is the number of seconds specified by `speed`.",
+    "examples": [
+      "speed(\"1 2 .5 3\").s(\"bd\").unit(\"c\").osc()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "squiz",
+    "tags": [
+      "superdirt"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} squiz Try passing multiples of 2 to it - 2, 4, 8 etc."
+    ],
+    "description": "Made by Calum Gunn. Reminiscent of some weird mixture of filter, ring-modulator and pitch-shifter. The SuperCollider manual defines Squiz as:\n\n\"A simplistic pitch-raising algorithm. It's not meant to sound natural; its sound is reminiscent of some weird mixture of filter, ring-modulator and pitch-shifter, depending on the input. The algorithm works by cutting the signal into fragments (delimited by upwards-going zero-crossings) and squeezing those fragments in the time domain (i.e. simply playing them back faster than they came in), leaving silences inbetween. All the parameters apart from memlen can be modulated.\"",
+    "examples": [
+      "squiz(\"2 4/2 6 [8 16]\").s(\"bd\").osc()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "vowel",
+    "tags": [
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{string | Pattern} vowel You can use a e i o u ae aa oe ue y uh un en an on, corresponding to [a] [e] [i] [o] [u] [æ] [ɑ] [ø] [y] [ɯ] [ʌ] [œ̃] [ɛ̃] [ɑ̃] [ɔ̃]. Aliases: aa = å = ɑ, oe = ø = ö, y = ı, ae = æ."
+    ],
+    "description": "Formant filter to make things sound like vowels.",
+    "examples": [
+      "note(\"[c2 <eb2 <g2 g1>>]*2\").s('sawtooth')\n.vowel(\"<a e i <o u>>\")",
+      "s(\"bd sd mt ht bd [~ cp] ht lt\").vowel(\"[a|e|i|o|u]\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "density",
+    "tags": [
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} density between 0 and x"
+    ],
+    "description": "crackle noise density",
+    "examples": [
+      "s(\"crackle*4\").density(\"<0.01 0.04 0.2 0.5>\".slow(4))"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "clip",
+    "tags": [
+      "superdough"
+    ],
+    "synonyms": [
+      "legato"
+    ],
+    "params": [
+      "{number | Pattern} factor >= 0"
+    ],
+    "description": "Multiplies the duration with the given number. Also cuts samples off at the end if they exceed the duration.",
+    "examples": [
+      "note(\"c a f e\").s(\"piano\").clip(\"<.5 1 2>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "duration",
+    "tags": [
+      "superdough"
+    ],
+    "synonyms": [
+      "dur"
+    ],
+    "params": [
+      "{number | Pattern} seconds >= 0"
+    ],
+    "description": "Sets the duration of the event in cycles. Similar to clip / legato, it also cuts samples off at the end if they exceed the duration.",
+    "examples": [
+      "note(\"c a f e\").s(\"piano\").dur(\"<.5 1 2>\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "color",
+    "tags": [
+      "visualization"
+    ],
+    "synonyms": [
+      "colour"
+    ],
+    "params": [
+      "{string} color Hexadecimal or CSS color name"
+    ],
+    "description": "Sets the color of the hap in visualizations like pianoroll or highlighting.",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "adsr",
+    "tags": [
+      "envelope",
+      "amplitude"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} time attack time in seconds",
+      "{number | Pattern} time decay time in seconds",
+      "{number | Pattern} gain sustain level (0 to 1)",
+      "{number | Pattern} time release time in seconds"
+    ],
+    "description": "ADSR envelope: Combination of Attack, Decay, Sustain, and Release.",
+    "examples": [
+      "note(\"[c3 bb2 f3 eb3]*2\").sound(\"sawtooth\").lpf(600).adsr(\".1:.1:.5:.2\")"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "midichan",
+    "tags": [
+      "external_io",
+      "midi"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} channel MIDI channel number (0-15)"
+    ],
+    "description": "MIDI channel: Sets the MIDI channel for the event.",
+    "examples": [
+      "note(\"c4\").midichan(1).midi()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "midiport",
+    "tags": [
+      "external_io",
+      "midi"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} port MIDI port"
+    ],
+    "description": "MIDI port: Sets the MIDI port for the event.",
+    "examples": [
+      "note(\"c a f e\").midiport(\"<0 1 2 3>\").midi()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "midicmd",
+    "tags": [
+      "external_io",
+      "midi"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} command MIDI command"
+    ],
+    "description": "MIDI command: Sends a MIDI command message.",
+    "examples": [
+      "midicmd(\"clock*48,<start stop>/2\").midi()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "control",
+    "tags": [
+      "external_io",
+      "midi"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern}  MIDI control number (0-127)",
+      "{number | Pattern}  MIDI controller value (0-127)"
+    ],
+    "description": "MIDI control: Sends a MIDI control change message.",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "ccn",
+    "tags": [
+      "external_io",
+      "midi"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern}  MIDI control number (0-127)"
+    ],
+    "description": "MIDI control number: Sends a MIDI control change message.",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "ccv",
+    "tags": [
+      "external_io",
+      "midi"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern}  MIDI control value (0-127)"
+    ],
+    "description": "MIDI control value: Sends a MIDI control change message.",
+    "examples": []
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "nrpnn",
+    "tags": [
+      "external_io",
+      "midi"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} nrpnn MIDI NRPN non-registered parameter number (0-127)"
+    ],
+    "description": "MIDI NRPN non-registered parameter number: Sends a MIDI NRPN non-registered parameter number message.",
+    "examples": [
+      "note(\"c4\").nrpnn(\"1:8\").nrpv(\"123\").midichan(1).midi()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "nrpv",
+    "tags": [
+      "external_io",
+      "midi"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} nrpv MIDI NRPN non-registered parameter value (0-127)"
+    ],
+    "description": "MIDI NRPN non-registered parameter value: Sends a MIDI NRPN non-registered parameter value message.",
+    "examples": [
+      "note(\"c4\").nrpnn(\"1:8\").nrpv(\"123\").midichan(1).midi()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "progNum",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} program MIDI program number (0-127)"
+    ],
+    "description": "MIDI program number: Sends a MIDI program change message.",
+    "examples": [
+      "note(\"c4\").progNum(10).midichan(1).midi()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "sysex",
+    "tags": [
+      "external_io",
+      "midi"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} id Sysex ID",
+      "{number | Pattern} data Sysex data"
+    ],
+    "description": "MIDI sysex: Sends a MIDI sysex message.",
+    "examples": [
+      "note(\"c4\").sysex([\"0x77\", \"0x01:0x02:0x03:0x04\"]).midichan(1).midi()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "sysexid",
+    "tags": [
+      "external_io",
+      "midi"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} id Sysex ID"
+    ],
+    "description": "MIDI sysex ID: Sends a MIDI sysex identifier message.",
+    "examples": [
+      "note(\"c4\").sysexid(\"0x77\").sysexdata(\"0x01:0x02:0x03:0x04\").midichan(1).midi()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "sysexdata",
+    "tags": [
+      "external_io",
+      "midi"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} data Sysex data"
+    ],
+    "description": "MIDI sysex data: Sends a MIDI sysex message.",
+    "examples": [
+      "note(\"c4\").sysexid(\"0x77\").sysexdata(\"0x01:0x02:0x03:0x04\").midichan(1).midi()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "midibend",
+    "tags": [
+      "external_io",
+      "midi"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} midibend MIDI pitch bend (-1 - 1)"
+    ],
+    "description": "MIDI pitch bend: Sends a MIDI pitch bend message.",
+    "examples": [
+      "note(\"c4\").midibend(sine.slow(4).range(-0.4,0.4)).midi()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "miditouch",
+    "tags": [
+      "external_io",
+      "midi"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} miditouch MIDI key after touch (0-1)"
+    ],
+    "description": "MIDI key after touch: Sends a MIDI key after touch message.",
+    "examples": [
+      "note(\"c4\").miditouch(sine.slow(4).range(0,1)).midi()"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "oschost",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [],
+    "params": [
+      "{string | Pattern} oschost e.g. 'localhost'"
+    ],
+    "description": "The host to send open sound control messages to. Requires running the OSC bridge.",
+    "examples": [
+      "note(\"c4\").oschost('127.0.0.1').oscport(57120).osc();"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "oscport",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} oscport e.g. 57120"
+    ],
+    "description": "The port to send open sound control messages to. Requires running the OSC bridge.",
+    "examples": [
+      "note(\"c4\").oschost('127.0.0.1').oscport(57120).osc();"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "as",
+    "tags": [
+      "combiners"
+    ],
+    "synonyms": [],
+    "params": [
+      "{String | Array} mapping the control names that are set"
+    ],
+    "description": "Sets properties in a batch.",
+    "examples": [
+      "\"c:.5 a:1 f:.25 e:.8\".as(\"note:clip\")",
+      "\"{0@2 0.25 0 0.5 .3 .5}%8\".as(\"begin\").s(\"sax_vib\").clip(1)"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "scrub",
+    "tags": [
+      "samples"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Allows you to scrub an audio file like a tape loop by passing values that represents the position in the audio file\nin the optional array syntax ex: \"0.5:2\", the second value controls the speed of playback",
+    "examples": [
+      "samples('github:switchangel/pad')\ns(\"swpad:0\").scrub(\"{0.1!2 .25@3 0.7!2 <0.8:1.5>}%8\")",
+      "samples('github:yaxu/clean-breaks/main');\ns(\"amen/4\").fit().scrub(\"{0@3 0@2 4@3}%8\".div(16))"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "lfo",
+    "tags": [
+      "lfo",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{Object} config LFO configuration.",
+      "{string | Pattern} [config.control] Node to modulate. Aliases: c",
+      "{string | Pattern} [config.subControl] Sub-control name to append to the control key. Aliases: sc",
+      "{number | Pattern} [config.rate] Modulation rate. Aliases: r",
+      "{number | Pattern} [config.sync] Tempo-synced modulation rate. Aliases: s",
+      "{number | Pattern} [config.depth] Relative modulation depth. Aliases: dep, dr",
+      "{number | Pattern} [config.depthabs] Absolute modulation depth. Aliases: da",
+      "{number | Pattern} [config.dcoffset] DC offset / bias for the waveform. Aliases: dc",
+      "{number | Pattern} [config.shape] Shape index. Aliases: sh",
+      "{number | Pattern} [config.skew] Skew amount. Aliases: sk",
+      "{number | Pattern} [config.curve] Exponential curve amount. Aliases: cu",
+      "{number | Pattern} [config.retrig] If > 0.5, the LFO will retrigger on each event. Aliases: rt",
+      "{number | Pattern} [config.fxi] FX index to target",
+      "{string | Pattern} id ID to use for this modulator"
+    ],
+    "description": "Configures an LFO. Can be called in sequence like pat.lfo(...).lfo(...) to set up multiple LFOs.\nThere are two ways to declare which control will be modulated:\n1. Explicitly put `control` in the config (e.g. `lfo({ c: \"lpf\" })`)\n2. If the control parameter is absent, the control _immediately before_ the `lfo` call will be used\n(e.g. `s(\"saw\").lpf(500).lfo()` to modulate `lpf`)\n\nModulators can be referred to by `id` so that they can be updated later e.g. inside\na `sometimes`. See example below.",
+    "examples": [
+      "s(\"saw\").note(\"F1\").lpf(500).lfo()",
+      "s(\"saw\").lfo().lpf(500).lfo({ s: 0.3 })",
+      "s(\"saw\").lpf(500).diode(0.3)\n.lfo({ c: \"lpf\" })",
+      "s(\"pulse\").lpf(500).lfo()\n.lfo({ c: \"s\" })\n.diode(0.3)\n.sometimes(x => x.lfo({ s: \"8\" }, 1)) // lfo #1 (0-indexed)",
+      "s(\"pulse\").lpf(500).lfo({ depth: 4 }, 'lpf_mod')\n.lfo({ c: \"s\" })\n.diode(0.3)\n.sometimes(x => x.lfo({ s: \"8\" }, 'lpf_mod'))"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "env",
+    "tags": [
+      "envelope",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{Object} config Envelope configuration.",
+      "{string | Pattern} [config.control] Node to modulate. Aliases: c",
+      "{string | Pattern} [config.subControl] Sub-control name to append to the control key. Aliases: sc",
+      "{number | Pattern} [config.depth] Relative modulation depth. Aliases: dep, dr",
+      "{number | Pattern} [config.depthabs] Absolute modulation depth. Aliases: da",
+      "{number | Pattern} [config.attack] Time to reach depth. Aliases: att, a",
+      "{number | Pattern} [config.decay] Time to reach sustain. Aliases: dec, d",
+      "{number | Pattern} [config.sustain] Sustain depth. Aliases: sus, s",
+      "{number | Pattern} [config.release] Time to return to nominal value. Aliases: rel, r",
+      "{number | Pattern} [config.acurve] Snappiness of attack curve (-1 = relaxed, 1 = snappy). Aliases: ac",
+      "{number | Pattern} [config.dcurve] Snappiness of decay curve (-1 = relaxed, 1 = snappy). Aliases: dc",
+      "{number | Pattern} [config.rcurve] Snappiness of release curve (-1 = relaxed, 1 = snappy). Aliases: rc",
+      "{number | Pattern} [config.fxi] FX index to target",
+      "{string | Pattern} id ID to use for this modulator"
+    ],
+    "description": "Configures an envelope. Can be called in sequence like pat.env(...).env(...) to set up multiple envelopes\nThere are two ways to declare which control will be modulated:\n1. Explicitly put `control` in the config (e.g. `env({ c: \"lpf\" })`)\n2. If the control parameter is absent, the control _immediately before_ the `env` call will be used\n(e.g. `s(\"saw\").lpf(500).env({ a: 1 })` to modulate `lpf`)\n\nModulators can be referred to by `id` so that they can be updated later e.g. inside\na `sometimes`. See example below.",
+    "examples": [
+      "s(\"saw\").note(\"F1\").lpf(500).env({ a: 1 })",
+      "s(\"saw\").env({ d: 1 }).note(\"F1\")\n.lpq(4).lpf(50)\n.env({ a: 0.1, d: 1, ac: 0.8, dc: 0.3, depth: 50 })",
+      "s(\"saw\").lpf(500).diode(0.3)\n.env({ c: \"lpf\", a: 0.5, d: 0.5 })",
+      "s(\"pulse\").lpf(500).env({ a: 1 })\n.env({ c: \"s\", a: 1 })\n.diode(0.3)\n.sometimes(x => x.env({ a: \"0.5\" }, 1)) // envelope #1 (0-indexed)",
+      "s(\"pulse\").lpf(500).env({ a: 1 }, 'lpf_mod')\n.env({ c: \"s\", a: 1 })\n.diode(0.3)\n.sometimes(x => x.env({ a: \"0.5\" }, 'lpf_mod'))"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "bmod",
+    "tags": [
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{Object} config Bus modulation configuration.",
+      "{string | Pattern} [config.bus] Bus to get modulation signal from",
+      "{string | Pattern} [config.control] Node to modulate. Aliases: c",
+      "{string | Pattern} [config.subControl] Sub-control name to append to the control key. Aliases: sc",
+      "{number | Pattern} [config.depth] Relative modulation depth. Aliases: dep, dr",
+      "{number | Pattern} [config.depthabs] Absolute modulation depth. Aliases: da",
+      "{number | Pattern} [config.dc] DC offset prior to application",
+      "{number | Pattern} [config.fxi] FX index to target",
+      "{string | Pattern} id ID to use for this modulator"
+    ],
+    "description": "Modulates with the output from a given `bus`.\nCan be called in sequence like pat.bmod(...).bmod(...) to set up multiple modulators\n\nSend to an audio bus with `otherPat.bus(..)`.\n\nThere are two ways to declare which control will be modulated:\n1. Explicitly put `control` in the config (e.g. `bmod({ id: 2, c: \"lpf\" })`)\n2. If the control parameter is absent, the control _immediately before_ the `bmod` call will be used\n(e.g. `s(\"saw\").lpf(500).bmod({ id: 2 })` to modulate `lpf`)\n\nModulators can be referred to by `id` so that they can be updated later e.g. inside\na `sometimes`. See example below.",
+    "examples": [
+      "modulator: s(\"one\").seg(64).gain(slider(0, 0, 1)).bus(1).dry(0)\ncarrier: s(\"saw\").bmod({ b: 1 })"
+    ]
+  },
+  {
+    "path": "packages/core/controls.mjs",
+    "name": "transient",
+    "tags": [
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} attack Emphasis on transients; between -1 (deaccentuate) and 1 (accentuate)",
+      "{number | Pattern} sustain Emphasis on the sustains; between -1 (deaccentuate) and 1 (accentuate)"
+    ],
+    "description": "Transient shaper. Gives independent control over the emphasis on transients\nand sustains",
+    "examples": [
+      "s(\"bd\").transient(\"<-1 -0.5 0 0.5 1>\")",
+      "s(\"hh*16\").bank(\"tr909\").transient(\"<-1:1 1:-1>\")"
+    ]
+  },
+  {
+    "path": "packages/core/euclid.mjs",
+    "name": "euclid",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} pulses the number of onsets/beats",
+      "{number} steps the number of steps to fill"
+    ],
+    "description": "Changes the structure of the pattern to form an Euclidean rhythm.\nEuclidean rhythms are rhythms obtained using the greatest common\ndivisor of two numbers.  They were described in 2004 by Godfried\nToussaint, a Canadian computer scientist.  Euclidean rhythms are\nreally useful for computer/algorithmic music because they can\ndescribe a large number of rhythms with a couple of numbers.",
+    "examples": [
+      "// The Cuban tresillo pattern.\nnote(\"c3\").euclid(3,8)"
+    ]
+  },
+  {
+    "path": "packages/core/euclid.mjs",
+    "name": "euclidRot",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} pulses the number of onsets/beats",
+      "{number} steps the number of steps to fill",
+      "{number} rotation offset in steps"
+    ],
+    "description": "Like `euclid`, but has an additional parameter for 'rotating' the resulting sequence.",
+    "examples": [
+      "// A Samba rhythm necklace from Brazil\nnote(\"c3\").euclidRot(3,16,14)"
+    ]
+  },
+  {
+    "path": "packages/core/euclid.mjs",
+    "name": "euclidLegato",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} pulses the number of onsets/beats",
+      "{number} steps the number of steps to fill",
+      "rotation offset in steps",
+      "pat"
+    ],
+    "description": "Similar to `euclid`, but each pulse is held until the next pulse,\nso there will be no gaps.",
+    "examples": [
+      "note(\"c3\").euclidLegato(3,8)"
+    ]
+  },
+  {
+    "path": "packages/core/euclid.mjs",
+    "name": "euclidLegatoRot",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} pulses the number of onsets/beats",
+      "{number} steps the number of steps to fill",
+      "{number} rotation offset in steps"
+    ],
+    "description": "Similar to `euclid`, but each pulse is held until the next pulse,\nso there will be no gaps, and has an additional parameter for 'rotating'\nthe resulting sequence",
+    "examples": [
+      "note(\"c3\").euclidLegatoRot(3,5,2)"
+    ]
+  },
+  {
+    "path": "packages/core/euclid.mjs",
+    "name": "euclidish",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [
+      "eish"
+    ],
+    "params": [
+      "{number} pulses the number of onsets",
+      "{number} steps the number of steps to fill",
+      "{number} groove exists between the extremes of 0 (straight euclidian) and 1 (straight pulse)"
+    ],
+    "description": "A 'euclid' variant with an additional parameter that morphs the resulting\nrhythm from 0 (no morphing) to 1 (completely 'even'). For example\n`sound(\"bd\").euclidish(3,8,0)` would be the same as\n`sound(\"bd\").euclid(3,8)`, and `sound(\"bd\").euclidish(3,8,1)` would be the\nsame as `sound(\"bd bd bd\")`. `sound(\"bd\").euclidish(3,8,0.5)` would have a\ngroove somewhere between.\nInspired by the work of Malcom Braff.",
+    "examples": [
+      "sound(\"hh\").euclidish(7,12,sine.slow(8))\n.pan(sine.slow(8))"
+    ]
+  },
+  {
+    "path": "packages/core/evaluate.mjs",
+    "name": "clearScope",
+    "tags": [],
+    "synonyms": [],
+    "params": [],
+    "description": "Clears all user-defined variables and functions from the scope.\nThis removes variables created during block-based evaluation.",
+    "examples": [
+      "// After defining variables in blocks:\n// let myVar = 5\n// function myFunc() { return 10; }\nclearScope() // removes myVar and myFunc from scope"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "layer",
+    "tags": [
+      "combiners"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Layers the result of the given function(s). Like `superimpose`, but without the original pattern:",
+    "examples": [
+      "\"<0 2 4 6 ~ 4 ~ 2 0!3 ~!5>*8\"\n.layer(x=>x.add(\"0,2\"))\n.scale('C minor').note()"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "superimpose",
+    "tags": [
+      "combiners"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Superimposes the result of the given function(s) on top of the original pattern:",
+    "examples": [
+      "\"<0 2 4 6 ~ 4 ~ 2 0!3 ~!5>*8\"\n.superimpose(x=>x.add(2))\n.scale('C minor').note()"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "log",
+    "tags": [
+      "visualization"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Writes the content of the current event to the console (visible in the side menu).",
+    "examples": [
+      "s(\"bd sd\").log()"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "logValues",
+    "tags": [
+      "visualization"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "A simplified version of `log` which writes all \"values\" (various configurable parameters)\nwithin the event to the console (visible in the side menu).",
+    "examples": [
+      "s(\"bd sd\").gain(\"0.25 0.5 1\").n(\"2 1 0\").logValues()"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "into",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Breaks a pattern into pieces according to the structure of a given pattern.\nTrue values in the given pattern cause the corresponding subcycle of the\nsource pattern to be looped, and for an (optional) given function to be\napplied. False values result in the corresponding part of the source pattern\nto be played unchanged.",
+    "examples": [
+      "sound(\"bd sd ht lt\").into(\"1 0\", hurry(2))"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "set",
+    "tags": [
+      "internal",
+      "combiners"
+    ],
+    "synonyms": [],
+    "params": [
+      "{Pattern} pat"
+    ],
+    "description": "When called on a pattern `a`, with a input pattern `b` (`a.set(b)`),\ncombines `a` and `b` such that anything defined in `b`\nand anything defined in `a` that is *not* defined in `b`\nwill be in the resulting pattern.\n\nThe structure is maintained from `a`,\nbecause the default pattern alignment is `in`,\nsee the section on `Pattern Alignment`\nin the technical manual in the docs\n\nThis is the inverse of `keep`\n\nSee examples below",
+    "examples": [
+      "// because input pattern has `s` set,\n// it overrides the \"sine\" declared earlier\nnote(\"c a f e\").s(\"sine\").set(s(\"triangle\"))"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "keep",
+    "tags": [
+      "internal",
+      "combiners"
+    ],
+    "synonyms": [],
+    "params": [
+      "{Pattern} pat"
+    ],
+    "description": "When called on a pattern `a`, with a input pattern `b` (`a.keep(b)`),\ncombines `a` and `b` such that anything defined in `a`,\nand anything defined in `b` that is *not* defined in `a`\nwill be in the resulting pattern\n\nThe structure is maintained from `a`,\nbecause the default pattern alignment is `in`,\nsee the section on `Pattern Alignment`\nin the technical manual in the docs\n\nThis is the inverse of `set`\n\nSee examples below",
+    "examples": [
+      "// notes, already defined, will stay \"c a f e\",\n// while \"s\", not defined, will be set to \"piano\"\nnote(\"c a f e\").keep(note(\"e f a c\").s(\"piano\"))"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "add",
+    "tags": [
+      "math"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Assumes a pattern of numbers. Adds the given number to each item in the pattern.",
+    "examples": [
+      "// Here, the triad 0, 2, 4 is shifted by different amounts\nn(\"0 2 4\".add(\"<0 3 4 0>\")).scale(\"C:major\")\n// Without add, the equivalent would be:\n// n(\"<[0 2 4] [3 5 7] [4 6 8] [0 2 4]>\").scale(\"C:major\")",
+      "// You can also use add with notes:\nnote(\"c3 e3 g3\".add(\"<0 5 7 0>\"))\n// Behind the scenes, the notes are converted to midi numbers:\n// note(\"48 52 55\".add(\"<0 5 7 0>\"))"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "sub",
+    "tags": [
+      "math"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Like add, but the given numbers are subtracted.",
+    "examples": [
+      "n(\"0 2 4\".sub(\"<0 1 2 3>\")).scale(\"C4:minor\")\n// See add for more information."
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "mul",
+    "tags": [
+      "math"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Multiplies each number by the given factor.",
+    "examples": [
+      "\"<1 1.5 [1.66, <2 2.33>]>*4\".mul(150).freq()"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "div",
+    "tags": [
+      "math"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Divides each number by the given factor.",
+    "examples": []
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "gap",
+    "tags": [
+      "generators"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} steps"
+    ],
+    "description": "Does absolutely nothing, but with a given metrical 'steps'",
+    "examples": [
+      "gap(3) // \"~@3\""
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "silence",
+    "tags": [
+      "generators"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Does absolutely nothing..",
+    "examples": [
+      "silence // \"~\""
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "sequence",
+    "tags": [
+      "combiners"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "See `fastcat`",
+    "examples": []
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "round",
+    "tags": [
+      "math"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Assumes a numerical pattern. Returns a new pattern with all values rounded\nto the nearest integer.",
+    "examples": [
+      "n(\"0.5 1.5 2.5\".round()).scale(\"C:major\")"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "floor",
+    "tags": [
+      "math"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Assumes a numerical pattern. Returns a new pattern with all values set to\ntheir mathematical floor. E.g. `3.7` replaced with to `3`, and `-4.2`\nreplaced with `-5`.",
+    "examples": [
+      "note(\"42 42.1 42.5 43\".floor())"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "ceil",
+    "tags": [
+      "math"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Assumes a numerical pattern. Returns a new pattern with all values set to\ntheir mathematical ceiling. E.g. `3.2` replaced with `4`, and `-4.2`\nreplaced with `-4`.",
+    "examples": [
+      "note(\"42 42.1 42.5 43\".ceil())"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "range",
+    "tags": [
+      "math"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Assumes a numerical pattern, containing unipolar values in the range 0 .. 1.\nReturns a new pattern with values scaled to the given min/max range.\nMost useful in combination with continuous patterns.",
+    "examples": [
+      "s(\"[bd sd]*2,hh*8\")\n.cutoff(sine.range(500,4000))"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "rangex",
+    "tags": [
+      "math"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Assumes a numerical pattern, containing unipolar values in the range 0 .. 1\nReturns a new pattern with values scaled to the given min/max range,\nfollowing an exponential curve.",
+    "examples": [
+      "s(\"[bd sd]*2,hh*8\")\n.cutoff(sine.rangex(500,4000))"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "range2",
+    "tags": [
+      "math"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Assumes a numerical pattern, containing bipolar values in the range -1 .. 1\nReturns a new pattern with values scaled to the given min/max range.",
+    "examples": [
+      "s(\"[bd sd]*2,hh*8\")\n.cutoff(sine2.range2(500,4000))"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "ratio",
+    "tags": [
+      "math"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Allows dividing numbers via list notation using \":\".\nReturns a new pattern with just numbers.",
+    "examples": [
+      "ratio(\"1, 5:4, 3:2\").mul(110)\n.freq().s(\"piano\")"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "fastGap",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [
+      "fastgap"
+    ],
+    "params": [],
+    "description": "speeds up a pattern like fast, but rather than it playing multiple times as fast would it instead leaves a gap in the remaining space of the cycle. For example, the following will play the sound pattern \"bd sn\" only once but compressed into the first half of the cycle, i.e. twice as fast.",
+    "examples": [
+      "s(\"bd sd\").fastGap(2)"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "fast",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [
+      "density"
+    ],
+    "params": [
+      "{number | Pattern} factor speed up factor"
+    ],
+    "description": "Speed up a pattern by the given factor. Used by \"*\" in mini notation.",
+    "examples": [
+      "s(\"bd hh sd hh\").fast(2) // s(\"[bd hh sd hh]*2\")"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "slow",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [
+      "sparsity"
+    ],
+    "params": [
+      "{number | Pattern} factor slow down factor"
+    ],
+    "description": "Slow down a pattern over the given number of cycles. Like the \"/\" operator in mini notation.",
+    "examples": [
+      "s(\"bd hh sd hh\").slow(2) // s(\"[bd hh sd hh]/2\")"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "lastOf",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} n how many cycles",
+      "{function} func function to apply"
+    ],
+    "description": "Applies the given function every n cycles, starting from the last cycle.",
+    "examples": [
+      "note(\"c3 d3 e3 g3\").lastOf(4, x=>x.rev())"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "firstOf",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} n how many cycles",
+      "{function} func function to apply"
+    ],
+    "description": "Applies the given function every n cycles, starting from the first cycle.",
+    "examples": [
+      "note(\"c3 d3 e3 g3\").firstOf(4, x=>x.rev())"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "every",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} n how many cycles",
+      "{function} func function to apply"
+    ],
+    "description": "An alias for `firstOf`",
+    "examples": [
+      "note(\"c3 d3 e3 g3\").every(4, x=>x.rev())"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "apply",
+    "tags": [
+      "combiners"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Applies the given function to the pattern. Like layer, but with a single function:",
+    "examples": [
+      "\"<c3 eb3 g3>\".scale('C minor').apply(scaleTranspose(\"0,2,4\")).note()"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "early",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} cycles number of cycles to nudge left"
+    ],
+    "description": "Nudge a pattern to start earlier in time. Equivalent of Tidal's <~ operator",
+    "examples": [
+      "\"bd ~\".stack(\"hh ~\".early(.1)).s()"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "late",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} cycles number of cycles to nudge right"
+    ],
+    "description": "Nudge a pattern to start later in time. Equivalent of Tidal's ~> operator",
+    "examples": [
+      "\"bd ~\".stack(\"hh ~\".late(.1)).s()"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "segment",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [
+      "seg"
+    ],
+    "params": [
+      "{number} segments number of segments per cycle"
+    ],
+    "description": "Samples the pattern at a rate of n events per cycle. Useful for turning a continuous pattern into a discrete one.",
+    "examples": [
+      "note(saw.range(40,52).segment(24))"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "invert",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [
+      "inv"
+    ],
+    "params": [],
+    "description": "Swaps 1s and 0s in a binary pattern.",
+    "examples": [
+      "s(\"bd\").struct(\"1 0 0 1 0 0 1 0\".lastOf(4, invert))"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "when",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{Pattern} binary_pat",
+      "{function} func"
+    ],
+    "description": "Applies the given function whenever the given pattern is in a true state.",
+    "examples": [
+      "\"c3 eb3 g3\".when(\"<0 1>/2\", x=>x.sub(\"5\")).note()"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "off",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{Pattern | number} time offset time",
+      "{function} func function to apply"
+    ],
+    "description": "Superimposes the function result on top of the original pattern, delayed by the given time.",
+    "examples": [
+      "\"c3 eb3 g3\".off(1/8, x=>x.add(7)).note()"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "rev",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Reverse all cycles in a pattern. See also `revv` for reversing a whole pattern.",
+    "examples": [
+      "note(\"c d e g\").rev()"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "revv",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Reverse a whole pattern. See also `rev` for reversing each cycle.",
+    "examples": [
+      "// This is the same as `<[g e] [d c]>`. If `rev()` is used, you get\n// the same as `<[d c] [g e]>`, where each cycle reverses, but the order of\n// cycles stays the same.\nnote(\"<[c d] [e g]>\").revv()"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "juxBy",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [
+      "juxby"
+    ],
+    "params": [],
+    "description": "Jux with adjustable stereo width. 0 = mono, 1 = full stereo.",
+    "examples": [
+      "s(\"bd lt [~ ht] mt cp ~ bd hh\").juxBy(\"<0 .5 1>/2\", rev)"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "juxFlipBy",
+    "tags": [],
+    "synonyms": [
+      "juxflipby",
+      "fluxBy",
+      "fluxby"
+    ],
+    "params": [],
+    "description": "Like juxBy, except it flips the ears each cycle.",
+    "examples": [
+      "s(\"bd lt [~ ht] mt cp ~ bd hh\").juxFlipBy(\".8\", rev)"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "juxFlip",
+    "tags": [],
+    "synonyms": [
+      "juxflip",
+      "flux"
+    ],
+    "params": [],
+    "description": "Like jux, but flips the ears each cycle.",
+    "examples": [
+      "s(\"bd lt [~ ht] mt cp ~ bd hh\").juxFlip(rev)",
+      "s(\"bd lt [~ ht] mt cp ~ bd hh\").juxFlip(press)",
+      "s(\"bd lt [~ ht] mt cp ~ bd hh\").juxFlip(iter(4))"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "echoWith",
+    "tags": [
+      "temporal",
+      "functional"
+    ],
+    "synonyms": [
+      "echowith",
+      "stutWith",
+      "stutwith"
+    ],
+    "params": [
+      "{number} times how many times to repeat",
+      "{number} time cycle offset between iterations",
+      "{function} func function to apply, given the pattern and the iteration index"
+    ],
+    "description": "Superimpose and offset multiple times, applying the given function each time.",
+    "examples": [
+      "\"<0 [2 4]>\"\n.echoWith(4, 1/8, (p,n) => p.add(n*2))\n.scale(\"C:minor\").note()"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "echo",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} times how many times to repeat",
+      "{number} time cycle offset between iterations",
+      "{number} feedback velocity multiplicator for each iteration"
+    ],
+    "description": "Superimpose and offset multiple times, gradually decreasing the velocity",
+    "examples": [
+      "s(\"bd sd\").echo(3, 1/6, .8)"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "stut",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} times how many times to repeat",
+      "{number} feedback velocity multiplicator for each iteration",
+      "{number} time cycle offset between iterations"
+    ],
+    "description": "Deprecated. Like echo, but the last 2 parameters are flipped.",
+    "examples": [
+      "s(\"bd sd\").stut(3, .8, 1/6)"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "plyWith",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [
+      "plywith"
+    ],
+    "params": [
+      "{number} factor how many times to repeat",
+      "{function} func function to apply, given the pattern"
+    ],
+    "description": "The plyWith function repeats each event the given number of times, applying the given function to each event.\\n",
+    "examples": [
+      "\"<0 [2 4]>\"\n.plyWith(4, (p) => p.add(2))\n.scale(\"C:minor\").note()"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "plyForEach",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [
+      "plyforeach"
+    ],
+    "params": [
+      "{number} factor how many times to repeat",
+      "{function} func function to apply, given the pattern and the iteration index"
+    ],
+    "description": "The plyForEach function repeats each event the given number of times, applying the given function to each event.\nThis version of ply uses the iteration index as an argument to the function, similar to echoWith.",
+    "examples": [
+      "\"<0 [2 4]>\"\n.plyForEach(4, (p,n) => p.add(n*2))\n.scale(\"C:minor\").note()"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "iter",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Divides a pattern into a given number of subdivisions, plays the subdivisions in order, but increments the starting subdivision each cycle. The pattern wraps to the first subdivision after the last subdivision is played.",
+    "examples": [
+      "note(\"0 1 2 3\".scale('A minor')).iter(4)"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "iterBack",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [
+      "iterback"
+    ],
+    "params": [],
+    "description": "Like `iter`, but plays the subdivisions in reverse order. Known as iter' in tidalcycles",
+    "examples": [
+      "note(\"0 1 2 3\".scale('A minor')).iterBack(4)"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "repeatCycles",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Repeats each cycle the given number of times.",
+    "examples": [
+      "note(irand(12).add(34)).segment(4).repeatCycles(2).s(\"gm_acoustic_guitar_nylon\")"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "chunk",
+    "tags": [
+      "temporal",
+      "functional"
+    ],
+    "synonyms": [
+      "slowChunk",
+      "slowchunk"
+    ],
+    "params": [],
+    "description": "Divides a pattern into a given number of parts, then cycles through those parts in turn, applying the given function to each part in turn (one part per cycle).",
+    "examples": [
+      "\"0 1 2 3\".chunk(4, x=>x.add(7))\n.scale(\"A:minor\").note()"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "chunkBack",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [
+      "chunkback"
+    ],
+    "params": [],
+    "description": "Like `chunk`, but cycles through the parts in reverse order. Known as chunk' in tidalcycles",
+    "examples": [
+      "\"0 1 2 3\".chunkBack(4, x=>x.add(7))\n.scale(\"A:minor\").note()"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "fastChunk",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [
+      "fastchunk"
+    ],
+    "params": [],
+    "description": "Like `chunk`, but the cycles of the source pattern aren't repeated\nfor each set of chunks.",
+    "examples": [
+      "\"<0 8> 1 2 3 4 5 6 7\"\n.scale(\"C2:major\").note()\n.fastChunk(4, x => x.color('red')).slow(2)"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "chunkInto",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [
+      "chunkinto"
+    ],
+    "params": [],
+    "description": "Like `chunk`, but the function is applied to a looped subcycle of the source pattern.",
+    "examples": [
+      "sound(\"bd sd ht lt bd - cp lt\").chunkInto(4, hurry(2))\n.bank(\"tr909\")"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "chunkBackInto",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [
+      "chunkbackinto"
+    ],
+    "params": [],
+    "description": "Like `chunkInto`, but moves backwards through the chunks.",
+    "examples": [
+      "sound(\"bd sd ht lt bd - cp lt\").chunkInto(4, hurry(2))\n.bank(\"tr909\")"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "ribbon",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [
+      "rib"
+    ],
+    "params": [
+      "{number} offset start point of loop in cycles",
+      "{number} cycles loop length in cycles"
+    ],
+    "description": "Loops the pattern inside an `offset` for `cycles`.\nIf you think of the entire span of time in cycles as a ribbon, you can cut a single piece and loop it.",
+    "examples": [
+      "note(\"<c d e f>\").ribbon(1, 2)",
+      "// Looping a portion of randomness\nn(irand(8).segment(4)).scale(\"c:pentatonic\").ribbon(1337, 2)",
+      "// rhythm generator\ns(\"bd!16?\").ribbon(29,.5)"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "tag",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{string} tag anything unique"
+    ],
+    "description": "Tags each Hap with an identifier. Good for filtering. The function populates Hap.context.tags (Array).",
+    "examples": [
+      "s(\"saw!16\").note(\"F1\")\n.lpf(tri.range(40, 80).slow(4)).lpenv(5).lpq(4).lpd(0.15)\n.when(rand.late(0.1).gte(0.5), x => x.transpose(\"12\").tag('altered'))\n.when(rand.late(0.2).gte(0.5), x => x.s(\"square\").tag('altered'))\n.when(\"<0 1>\", x => x.filter((hap) => hap.hasTag('altered')))"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "filter",
+    "tags": [
+      "temporal",
+      "functional"
+    ],
+    "synonyms": [],
+    "params": [
+      "{Function} test function to test Hap"
+    ],
+    "description": "Filters haps using the given function",
+    "examples": [
+      "s(\"hh!7 oh\").filter(hap => hap.value.s === 'hh')"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "filterWhen",
+    "tags": [
+      "temporal",
+      "functional"
+    ],
+    "synonyms": [],
+    "params": [
+      "{Function} test function to test Hap.whole.begin"
+    ],
+    "description": "Filters haps by their begin time",
+    "examples": [
+      "oneCycle: s(\"bd*4\").filterWhen((t) => t < 1)"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "within",
+    "tags": [
+      "temporal",
+      "functional"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} start start within cycle (0 - 1)",
+      "{number} end end within cycle (0 - 1). Must be > start",
+      "{Function} func function to be applied to the sub-pattern"
+    ],
+    "description": "Use within to apply a function to only a part of a pattern.",
+    "examples": []
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "stepcat",
+    "tags": [
+      "stepwise"
+    ],
+    "synonyms": [
+      "timeCat",
+      "timecat"
+    ],
+    "params": [],
+    "description": "'Concatenates' patterns like `fastcat`, but proportional to a number of steps per cycle.\nThe steps can either be inferred from the pattern, or provided as a [length, pattern] pair.\nHas the alias `timecat`.",
+    "examples": [
+      "stepcat([3,\"e3\"],[1, \"g3\"]).note()\n// the same as \"e3@3 g3\".note()",
+      "stepcat(\"bd sd cp\",\"hh hh\").sound()\n// the same as \"bd sd cp hh hh\".sound()"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "chop",
+    "tags": [
+      "samples"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Cuts each sample into the given number of parts, allowing you to explore a technique known as 'granular synthesis'.\nIt turns a pattern of samples into a pattern of parts of samples.",
+    "examples": [
+      "samples({ rhodes: 'https://cdn.freesound.org/previews/132/132051_316502-lq.mp3' })\ns(\"rhodes\")\n.chop(4)\n.rev() // reverse order of chops\n.loopAt(2) // fit sample into 2 cycles"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "striate",
+    "tags": [
+      "samples"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Cuts each sample into the given number of parts, triggering progressive portions of each sample at each loop.",
+    "examples": [
+      "s(\"numbers:0 numbers:1 numbers:2\").striate(6).slow(3)"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "loopAt",
+    "tags": [
+      "samples",
+      "pitch"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Makes the sample fit the given number of cycles by changing the speed.",
+    "examples": [
+      "samples({ rhodes: 'https://cdn.freesound.org/previews/132/132051_316502-lq.mp3' })\ns(\"rhodes\").loopAt(2)"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "slice",
+    "tags": [
+      "samples"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Chops samples into the given number of slices, triggering those slices with a given pattern of slice numbers.\nInstead of a number, it also accepts a list of numbers from 0 to 1 to slice at specific points.",
+    "examples": [
+      "samples('github:tidalcycles/dirt-samples')\ns(\"breaks165\").slice(8, \"0 1 <2 2*2> 3 [4 0] 5 6 7\".every(3, rev)).slow(0.75)",
+      "samples('github:tidalcycles/dirt-samples')\ns(\"breaks125\").fit().slice([0,.25,.5,.75], \"0 1 1 <2 3>\")"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "onTriggerTime",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "make something happen on event time\nuses browser timeout which is innacurate for audio tasks",
+    "examples": [
+      "s(\"bd!8\").onTriggerTime((hap) => {console.log(hap)})"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "splice",
+    "tags": [
+      "samples",
+      "pitch"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Works the same as slice, but changes the playback speed of each slice to match the duration of its step.",
+    "examples": [
+      "samples('github:tidalcycles/dirt-samples')\ns(\"breaks165\")\n.splice(8,  \"0 1 [2 3 0]@2 3 0@2 7\")"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "fit",
+    "tags": [
+      "samples",
+      "pitch"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Makes the sample fit its event duration. Good for rhythmical loops like drum breaks.\nSimilar to `loopAt`.",
+    "examples": [
+      "samples({ rhodes: 'https://cdn.freesound.org/previews/132/132051_316502-lq.mp3' })\ns(\"rhodes/2\").fit()"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "loopAtCps",
+    "tags": [
+      "samples",
+      "pitch"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Makes the sample fit the given number of cycles and cps value, by\nchanging the speed. deprecated: use loopAt or fit instead, together with setCps / setCpm.",
+    "examples": [
+      "samples({ rhodes: 'https://cdn.freesound.org/previews/132/132051_316502-lq.mp3' })\ns(\"rhodes\").loopAtCps(4,1.5).cps(1.5)"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "xfade",
+    "tags": [
+      "amplitude"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Cross-fades between left and right from 0 to 1:\n- 0 = (full left, no right)\n- .5 = (both equal)\n- 1 = (no left, full right)",
+    "examples": [
+      "xfade(s(\"bd*2\"), \"<0 .25 .5 .75 1>\", s(\"hh*8\"))"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "beat",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "creates a structure pattern from divisions of a cycle\nespecially useful for creating rhythms",
+    "examples": [
+      "s(\"bd\").beat(\"0,7,10\", 16)",
+      "s(\"sd\").beat(\"4,12\", 16)"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "soft",
+    "tags": [
+      "distortion",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} distortion amount of distortion to apply",
+      "{number | Pattern} volume linear postgain of the distortion"
+    ],
+    "description": "Soft-clipping distortion",
+    "examples": []
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "hard",
+    "tags": [
+      "distortion",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} distortion amount of distortion to apply",
+      "{number | Pattern} volume linear postgain of the distortion"
+    ],
+    "description": "Hard-clipping distortion",
+    "examples": []
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "cubic",
+    "tags": [
+      "distortion",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} distortion amount of distortion to apply",
+      "{number | Pattern} volume linear postgain of the distortion"
+    ],
+    "description": "Cubic polynomial distortion",
+    "examples": []
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "diode",
+    "tags": [
+      "distortion",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} distortion amount of distortion to apply",
+      "{number | Pattern} volume linear postgain of the distortion"
+    ],
+    "description": "Diode-emulating distortion",
+    "examples": []
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "asym",
+    "tags": [
+      "distortion",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} distortion amount of distortion to apply",
+      "{number | Pattern} volume linear postgain of the distortion"
+    ],
+    "description": "Asymmetrical diode distortion",
+    "examples": []
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "fold",
+    "tags": [
+      "distortion",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} distortion amount of distortion to apply",
+      "{number | Pattern} volume linear postgain of the distortion"
+    ],
+    "description": "Wavefolding distortion",
+    "examples": []
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "sinefold",
+    "tags": [
+      "distortion",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} distortion amount of distortion to apply",
+      "{number | Pattern} volume linear postgain of the distortion"
+    ],
+    "description": "Wavefolding distortion composed with sinusoid",
+    "examples": []
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "chebyshev",
+    "tags": [
+      "distortion",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} distortion amount of distortion to apply",
+      "{number | Pattern} volume linear postgain of the distortion"
+    ],
+    "description": "Distortion via Chebyshev polynomials",
+    "examples": []
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "parray",
+    "tags": [
+      "combiners"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Turns a list of patterns into a single pattern which outputs list-values",
+    "examples": []
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "partials",
+    "tags": [
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number[] | Pattern} magnitudes List of [0, 1] magnitudes for partials. 0th entry is the fundamental harmonic (i.e. DC offset is skipped)"
+    ],
+    "description": "Scale the magnitude of the harmonics of one of the core synths ('sine', 'tri', 'saw', ..)\n\nCan also be used to create a new synth via `s('user').partials(...)`",
+    "examples": [
+      "s(\"user\").seg(16).n(irand(8)).scale(\"A:major\")\n.partials([1, 0, 1, 0, 0, 1])",
+      "s(\"saw\").seg(8).n(irand(12)).scale(\"G#:minor\")\n.partials(binaryL(irand(256).add(\"1\")))"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "phases",
+    "tags": [
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number[] | Pattern} phases List of [0, 1) phases for partials. 0th entry is the fundamental phase (i.e. DC offset is skipped)"
+    ],
+    "description": "Rotates the harmonics of one of the core synths ('sine', 'tri', 'saw', 'user', ..) by a list of phases",
+    "examples": [
+      "// Phase cancellation\ns(\"saw\").seg(8).n(irand(12)).scale(\"G#1:minor\")\n.partials(partials([1, 1, 1]))\n.superimpose(x => x.phases([0.5, 0.5, 0.5]))"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "FX",
+    "tags": [
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Establishes an FX chain. Can be called by chaining .FX(fx1).FX(fx2)..\ncalls and/or in a single .FX(fx1, fx2, ..) call. The fx1, .. are _patterns_ which\nestablish the controls of the given effect. See examples.",
+    "examples": [
+      "$: s(\"[sbd <hh [bd | lt | oh]>]*4\").dec(.4)\n.FX(\nphaser(0.5).gain(2),\nbpf(800),\ndistort(1.3),\nroom(0.2),\ndelay(0.5).gain(1.25),\ndistort(0.3),\n).fxr(1.7) // sets release time of effects (like delay)",
+      "$: s(\"saw\").fm(0.5)\n.delay(0.3) // outer effects are applied *last*\n.FX(coarse(4)) // first coarse\n.FX(lpf(500).lpe(4).lpa(1).lpd(2)) // then lpf\n.FX(distort(1)) // then distort"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "K",
+    "tags": [
+      "generators",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{KabelsalatExpression | Function} expr Kabelsalat graph definition"
+    ],
+    "description": "Produces a [Kabelsalat](https://kabel.salat.dev/) modular sound engine.\nThis can be used as either an effect (by including `audioin()` at the beginning\nof your kabel expression) or as a sound source (via any expression which doesn't\nstart with `audioin()`).\n\nSome helpers you have available to you:\n* Strudel mini notation works fine in K(..) via \"\" or ``\n* More complex Strudel expressions (like \"0 1 2\".fast(4) or irand(24)) can be\nwritten by wrapping them in `S(..)` inside your Kabel code\n* We expose Strudel's note frequency under `sFreq` and Strudel's gate\ninformation under `sGate`\n* You can use more complex multi-line expressions (like `let x = a; let y = b; x.lpf(y);`)\nby wrapping them inside a function in K (see example).",
+    "examples": [
+      "note(\"A c e\".fast(4)).transpose(\"<0 2 4 6 8>\")\n.scale(\"F:minor\").transpose(\"12\")\n.s(\"saw\")\n.K(\n// audioin().mul(sGate.adsr(0.001, 0.3, 0, 0.2)) // as effect\nsaw(saw(sFreq / \"2!3 16\").mul(8).add(sFreq).lag(\"0!3 0.1\")).mul(0.3) // as source\n.mul(sGate.adsr(0, 0.15, 0.5, \"0.1!3 1\"))\n.lpf(sGate.adsr(0, 0.2, 0.3, 0.2).mul(1).add(0))\n.add(x => x.delay(S(\"0.3 0.2\".fast(2))).mul(0.7))\n.add(x => x.delay(\"0.03 [0.08 0.01] 0.01 0.013\").mul(0.77)).mul(0.7)\n.add(x => x.delay(.13).mul(0.7))\n.out()\n)",
+      "n(\"<0 1 <2 3 2 4>>*16\")\n.scale(\"G#2:minor\").sometimes(x => x.transpose(\"12 | 24\"))\n.K(() => {\nconst att = S(rand.range(0, 0.05))\nconst dec = S(rand.range(0.05, 0.2))\nlet f = n(sFreq);\nconst mod = sine(f).mul(\"0.1 | 0.2 | 0.3\")\n.add(\"[[1.5 1] | 1 | 2 | 4 | [6 4@3]]*2\")\nsaw(f.mul(mod))\n.mul(sGate.ad(att, dec))\n.add(x => x.delay(0.4).mul(0.3))\n.out()\n}).fxr(1).room(0.3)"
+    ]
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "worklet",
+    "tags": [],
+    "synonyms": [],
+    "params": [
+      "{string} src Source code of the worklet update function",
+      "{...number | ...Pattern} inputs Worklet inputs"
+    ],
+    "description": "Creates a worklet effect. Typically derived by writing K(...) in the REPL which will parse\nKabelsalat code.",
+    "examples": []
+  },
+  {
+    "path": "packages/core/pattern.mjs",
+    "name": "base",
+    "tags": [
+      "generators"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} n - number to convert (can be a pattern or array)",
+      "{number} b - base to convert to (defaults to 10) (can be a pattern)",
+      "{number} d - max number of digits to produce for each n (defaults to 0 for all) (can be a pattern)"
+    ],
+    "description": "Creates a pattern of numbers in base b from a number or pattern of numbers\nlimited to d digits long from the right",
+    "examples": [
+      "$: note(base(\"7175 543\", 10, 3)).scale(\"c:major\").s(\"saw\")\n// $: note(\"1 7 5 5 4 3\").scale(\"c:major\").s(\"saw\")"
+    ]
+  },
+  {
+    "path": "packages/core/pick.mjs",
+    "name": "inhabit",
+    "tags": [
+      "combiners"
+    ],
+    "synonyms": [
+      "pickSqueeze"
+    ],
+    "params": [
+      "{Pattern} pat",
+      "{*} xs"
+    ],
+    "description": "Picks patterns (or plain values) either from a list (by index) or a lookup table (by name).\nSimilar to `pick`, but cycles are squeezed into the target ('inhabited') pattern.",
+    "examples": [
+      "let a = s(\"bd(3,8)\")\nlet b = s(\"cp sd\")\n\"<a b [a,b]>\".inhabit({ a, b })",
+      "s(\"a@2 [a b] a\"\n.inhabit({a: \"bd(3,8)\", b: \"sd sd\"}))\n.slow(4)"
+    ]
+  },
+  {
+    "path": "packages/core/pick.mjs",
+    "name": "inhabitmod",
+    "tags": [
+      "combiners"
+    ],
+    "synonyms": [
+      "pickmodSqueeze"
+    ],
+    "params": [
+      "{Pattern} pat",
+      "{*} xs"
+    ],
+    "description": "The same as `inhabit`, but if you pick a number greater than the size of the list,\nit wraps around, rather than sticking at the maximum value.\nFor example, if you pick the fifth pattern of a list of three, you'll get the\nsecond one.",
+    "examples": []
+  },
+  {
+    "path": "packages/core/repl.mjs",
+    "name": "setcpm",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} cpm cycles per minute"
+    ],
+    "description": "Changes the global tempo to the given cycles per minute",
+    "examples": [
+      "setcpm(140/4) // =140 bpm in 4/4\n$: s(\"bd*4,[- sd]*2\").bank('tr707')"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "mousex",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "The mouse's x position value ranges from 0 to 1.",
+    "examples": [
+      "n(mousex.segment(4).range(0,7)).scale(\"C:minor\")"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "mousey",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "The mouse's y position value ranges from 0 to 1.",
+    "examples": [
+      "n(mousey.segment(4).range(0,7)).scale(\"C:minor\")"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "useRNG",
+    "tags": [
+      "generators",
+      "math"
+    ],
+    "synonyms": [],
+    "params": [
+      "{string} mod - Mode. One of 'legacy', 'precise'"
+    ],
+    "description": "Sets which random number generator to use. Historically Strudel would\nuse `useRNG('legacy')`, which remains the default. To use a new more statistically\nprecise RNG, try `useRNG('precise')`.",
+    "examples": [
+      "useRNG('legacy')\n// Repeats every 300 cycles\n$: n(irand(50)).seg(16).scale(\"C:minor\").ribbon(88, 32)\n$: n(irand(50)).seg(16).scale(\"C:minor\").ribbon(388, 32)"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "binary",
+    "tags": [
+      "generators"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} n - input number to convert to binary"
+    ],
+    "description": "Creates a binary pattern from a number.",
+    "examples": [
+      "\"hh\".s().struct(binary(5))\n// \"hh\".s().struct(\"1 0 1\")"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "binaryN",
+    "tags": [
+      "generators"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} n - input number to convert to binary",
+      "{number} nBits - pattern length, defaults to 16"
+    ],
+    "description": "Creates a binary pattern from a number, padded to n bits long.",
+    "examples": [
+      "\"hh\".s().struct(binaryN(55532, 16))\n// \"hh\".s().struct(\"1 1 0 1 1 0 0 0 1 1 1 0 1 1 0 0\")"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "binaryL",
+    "tags": [
+      "generators"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} n - input number to convert to binary\ns(\"saw\").seg(8)\n.partials(binaryL(irand(4096).add(1)))"
+    ],
+    "description": "Creates a binary list pattern from a number.",
+    "examples": []
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "binaryNL",
+    "tags": [
+      "generators"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} n - input number to convert to binary",
+      "{number} nBits - pattern length, defaults to 16"
+    ],
+    "description": "Creates a binary list pattern from a number, padded to n bits long.",
+    "examples": []
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "randL",
+    "tags": [
+      "generators"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} n Number of random numbers to sample"
+    ],
+    "description": "Creates a list of random numbers of the given length",
+    "examples": [
+      "s(\"saw\").seg(16).n(irand(12)).scale(\"F1:minor\")\n.partials(randL(8))"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "shuffle",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Slices a pattern into the given number of parts, then plays those parts in random order.\nEach part will be played exactly once per cycle.",
+    "examples": [
+      "note(\"c d e f\").sound(\"piano\").shuffle(4)",
+      "seq(\"c d e f\".shuffle(4), \"g\").note().sound(\"piano\")"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "scramble",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Slices a pattern into the given number of parts, then plays those parts at random. Similar to `shuffle`,\nbut parts might be played more than once, or not at all, per cycle.",
+    "examples": [
+      "note(\"c d e f\").sound(\"piano\").scramble(4)",
+      "seq(\"c d e f\".scramble(4), \"g\").note().sound(\"piano\")"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "seed",
+    "tags": [
+      "math"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} n A new seed. Can be any number."
+    ],
+    "description": "Change the seed for random signals. Normally, random signals depend on time,\nso two patterns at the same time will have the same random values. Specifying\na new seed changes the signal output by `rand`. This also affects other functions\nthat use randomness, like `shuffle` and `sometimes`.",
+    "examples": [
+      "$: s(\"hh*4\").degrade();\n$: s(\"bd*4\").degrade().seed(1); // Will degrade different events from the hi-hat"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "rand",
+    "tags": [
+      "generators"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "A continuous pattern of random numbers, between 0 and 1.",
+    "examples": [
+      "// randomly change the cutoff\ns(\"bd*4,hh*8\").cutoff(rand.range(500,8000))"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "brandBy",
+    "tags": [
+      "generators"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} probability - a number between 0 and 1"
+    ],
+    "description": "A continuous pattern of 0 or 1 (binary random), with a probability for the value being 1",
+    "examples": [
+      "s(\"hh*10\").pan(brandBy(0.2))"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "brand",
+    "tags": [
+      "generators"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "A continuous pattern of 0 or 1 (binary random)",
+    "examples": [
+      "s(\"hh*10\").pan(brand)"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "irand",
+    "tags": [
+      "generators"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} n max value (exclusive)"
+    ],
+    "description": "A continuous pattern of random integers, between 0 and n-1.",
+    "examples": [
+      "// randomly select scale notes from 0 - 7 (= C to C)\nn(irand(8)).struct(\"x x*2 x x*3\").scale(\"C:minor\")"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "perlin",
+    "tags": [
+      "generators"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Generates a continuous pattern of [perlin noise](https://en.wikipedia.org/wiki/Perlin_noise), in the range 0..1.",
+    "examples": [
+      "// randomly change the cutoff\ns(\"bd*4,hh*8\").cutoff(perlin.range(500,8000))"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "berlin",
+    "tags": [
+      "generators"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Generates a continuous pattern of [berlin noise](conceived by Jame Coyne and Jade Rowland as a joke but turned out to be surprisingly cool and useful,\nlike perlin noise but with sawtooth waves), in the range 0..1.",
+    "examples": [
+      "// ascending arpeggios\nn(\"0!16\".add(berlin.fast(4).mul(14))).scale(\"d:minor\")"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "degradeBy",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} amount - a number between 0 and 1"
+    ],
+    "description": "Randomly removes events from the pattern by a given amount.\n0 = 0% chance of removal\n1 = 100% chance of removal",
+    "examples": [
+      "s(\"hh*8\").degradeBy(0.2)",
+      "s(\"[hh?0.2]*8\")",
+      "//beat generator\ns(\"bd\").segment(16).degradeBy(.5).ribbon(16,1)"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "degrade",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Randomly removes 50% of events from the pattern. Shorthand for `.degradeBy(0.5)`",
+    "examples": [
+      "s(\"hh*8\").degrade()",
+      "s(\"[hh?]*8\")"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "undegradeBy",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} amount - a number between 0 and 1"
+    ],
+    "description": "Inverse of `degradeBy`: Randomly removes events from the pattern by a given amount.\n0 = 100% chance of removal\n1 = 0% chance of removal\nEvents that would be removed by degradeBy are let through by undegradeBy and vice versa (see second example).",
+    "examples": [
+      "s(\"hh*8\").undegradeBy(0.2)",
+      "s(\"hh*10\").layer(\nx => x.degradeBy(0.2).pan(0),\nx => x.undegradeBy(0.8).pan(1)\n)"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "undegrade",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Inverse of `degrade`: Randomly removes 50% of events from the pattern. Shorthand for `.undegradeBy(0.5)`\nEvents that would be removed by degrade are let through by undegrade and vice versa (see second example).",
+    "examples": [
+      "s(\"hh*8\").undegrade()",
+      "s(\"hh*10\").layer(\nx => x.degrade().pan(0),\nx => x.undegrade().pan(1)\n)"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "sometimesBy",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} probability - a number between 0 and 1",
+      "{function} function - the transformation to apply"
+    ],
+    "description": "Randomly applies the given function by the given probability.\nSimilar to `someCyclesBy`",
+    "examples": [
+      "s(\"hh*8\").sometimesBy(.4, x=>x.speed(\"0.5\"))"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "sometimes",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{function} function - the transformation to apply"
+    ],
+    "description": "Applies the given function with a 50% chance",
+    "examples": [
+      "s(\"hh*8\").sometimes(x=>x.speed(\"0.5\"))"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "someCyclesBy",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number | Pattern} probability - a number between 0 and 1",
+      "{function} function - the transformation to apply"
+    ],
+    "description": "Randomly applies the given function by the given probability on a cycle by cycle basis.\nSimilar to `sometimesBy`",
+    "examples": [
+      "s(\"bd,hh*8\").someCyclesBy(.3, x=>x.speed(\"0.5\"))"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "someCycles",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Shorthand for `.someCyclesBy(0.5, fn)`",
+    "examples": [
+      "s(\"bd,hh*8\").someCycles(x=>x.speed(\"0.5\"))"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "often",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Shorthand for `.sometimesBy(0.75, fn)`",
+    "examples": [
+      "s(\"hh*8\").often(x=>x.speed(\"0.5\"))"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "rarely",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Shorthand for `.sometimesBy(0.25, fn)`",
+    "examples": [
+      "s(\"hh*8\").rarely(x=>x.speed(\"0.5\"))"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "almostNever",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Shorthand for `.sometimesBy(0.1, fn)`",
+    "examples": [
+      "s(\"hh*8\").almostNever(x=>x.speed(\"0.5\"))"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "almostAlways",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Shorthand for `.sometimesBy(0.9, fn)`",
+    "examples": [
+      "s(\"hh*8\").almostAlways(x=>x.speed(\"0.5\"))"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "never",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Shorthand for `.sometimesBy(0, fn)` (never calls fn)",
+    "examples": [
+      "s(\"hh*8\").never(x=>x.speed(\"0.5\"))"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "always",
+    "tags": [
+      "temporal"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Shorthand for `.sometimesBy(1, fn)` (always calls fn)",
+    "examples": [
+      "s(\"hh*8\").always(x=>x.speed(\"0.5\"))"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "whenKey",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Do something on a keypress, or array of keypresses\n[Key name reference](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values)",
+    "examples": [
+      "s(\"bd(5,8)\").whenKey(\"Control:j\", x => x.segment(16).color(\"red\")).whenKey(\"Control:i\", x => x.fast(2).color(\"blue\"))"
+    ]
+  },
+  {
+    "path": "packages/core/signal.mjs",
+    "name": "keyDown",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "returns true when a key or array of keys is held\n[Key name reference](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values)",
+    "examples": [
+      "keyDown(\"Control:j\").pick([s(\"bd(5,8)\"), s(\"cp(3,8)\")])"
+    ]
+  },
+  {
+    "path": "packages/dough/dough.mjs",
+    "name": "initDough",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "initializes dough ahead of time. you don't need to use this, but if you do, you can await it, so dough is ready before the pattern starts.",
+    "examples": [
+      "await initDough()\n$: chord(\"<Dm9 Dm11 Dm7>\").offset(\"<-1 0 1 0>\").voicing()\n.phaser(3).fm(1.4).fmh(1.01)\n.dough()"
+    ]
+  },
+  {
+    "path": "packages/dough/dough.mjs",
+    "name": "dough",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Uses dough as the audio engine. more info at https://dough.strudel.cc",
+    "examples": [
+      "$: chord(\"<Dm9 Dm11 Dm7>\").offset(\"<-1 0 1 0>\").voicing()\n.phaser(3).fm(1.4).fmh(1.01)\n.dough()"
+    ]
+  },
+  {
+    "path": "packages/draw/pianoroll.mjs",
+    "name": "pianoroll",
+    "tags": [
+      "visualization"
+    ],
+    "synonyms": [
+      "punchcard"
+    ],
+    "params": [
+      "{Object} options Object containing all the optional following parameters as key value pairs:",
+      "{integer} cycles number of cycles to be displayed at the same time - defaults to 4",
+      "{number} playhead location of the active notes on the time axis - 0 to 1, defaults to 0.5",
+      "{boolean} vertical displays the roll vertically - 0 by default",
+      "{boolean} labels displays labels on individual notes (see the label function) - 0 by default",
+      "{boolean} flipTime reverse the direction of the roll - 0 by default",
+      "{boolean} flipValues reverse the relative location of notes on the value axis - 0 by default",
+      "{number} overscan lookup X cycles outside of the cycles window to display notes in advance - 1 by default",
+      "{boolean} hideNegative hide notes with negative time (before starting playing the pattern) - 0 by default",
+      "{boolean} smear notes leave a solid trace - 0 by default",
+      "{boolean} fold notes takes the full value axis width - 0 by default",
+      "{string} active hexadecimal or CSS color of the active notes - defaults to #FFCA28",
+      "{string} inactive hexadecimal or CSS color of the inactive notes - defaults to #7491D2",
+      "{string} background hexadecimal or CSS color of the background - defaults to transparent",
+      "{string} playheadColor hexadecimal or CSS color of the line representing the play head - defaults to white",
+      "{boolean} fill notes are filled with color (otherwise only the label is displayed) - 0 by default",
+      "{boolean} fillActive active notes are filled with color - 0 by default",
+      "{boolean} stroke notes are shown with colored borders - 0 by default",
+      "{boolean} strokeActive active notes are shown with colored borders - 0 by default",
+      "{boolean} hideInactive only active notes are shown - 0 by default",
+      "{boolean} colorizeInactive use note color for inactive notes - 1 by default",
+      "{string} fontFamily define the font used by notes labels - defaults to 'monospace'",
+      "{integer} minMidi minimum note value to display on the value axis - defaults to 10",
+      "{integer} maxMidi maximum note value to display on the value axis - defaults to 90",
+      "{boolean} autorange automatically calculate the minMidi and maxMidi parameters - 0 by default"
+    ],
+    "description": "Visualises a pattern as a scrolling 'pianoroll', displayed in the background of the editor. To show a pianoroll for all running patterns, use `all(pianoroll)`. To have a pianoroll appear below\na pattern instead, prefix with `_`, e.g.: `sound(\"bd sd\")._pianoroll()`.",
+    "examples": [
+      "note(\"c2 a2 eb2\")\n.euclid(5,8)\n.s('sawtooth')\n.lpenv(4).lpf(300)\n.pianoroll({ labels: 1 })"
+    ]
+  },
+  {
+    "path": "packages/draw/pianoroll.mjs",
+    "name": "wordfall",
+    "tags": [
+      "visualization"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Displays a vertical pianoroll with event labels.\nSupports all the same options as pianoroll.",
+    "examples": []
+  },
+  {
+    "path": "packages/draw/pitchwheel.mjs",
+    "name": "pitchwheel",
+    "tags": [
+      "visualization"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} hapcircles",
+      "{number} circle",
+      "{number} edo",
+      "{string} root",
+      "{number} thickness",
+      "{number} hapRadius",
+      "{string} mode",
+      "{number} margin"
+    ],
+    "description": "Renders a pitch circle to visualize frequencies within one octave",
+    "examples": [
+      "n(\"0 .. 12\").scale(\"C:chromatic\")\n.s(\"sawtooth\")\n.lpf(500)\n._pitchwheel()"
+    ]
+  },
+  {
+    "path": "packages/draw/spiral.mjs",
+    "name": "spiral",
+    "tags": [
+      "visualization"
+    ],
+    "synonyms": [],
+    "params": [
+      "{Object} options Object containing all the optional following parameters as key value pairs:",
+      "{number} stretch controls the rotations per cycle ratio, where 1 = 1 cycle / 360 degrees",
+      "{number} size the diameter of the spiral",
+      "{number} thickness line thickness",
+      "{string} cap style of line ends: butt (default), round, square",
+      "{string} inset number of rotations before spiral starts (default 3)",
+      "{string} playheadColor color of playhead, defaults to white",
+      "{number} playheadLength length of playhead in rotations, defaults to 0.02",
+      "{number} playheadThickness thickness of playheadrotations, defaults to thickness",
+      "{number} padding space around spiral",
+      "{number} steady steadyness of spiral vs playhead. 1 = spiral doesn't move, playhead does.",
+      "{number} activeColor color of active segment. defaults to foreground of theme",
+      "{number} inactiveColor color of inactive segments. defaults to gutterForeground of theme",
+      "{boolean} colorizeInactive wether or not to colorize inactive segments, defaults to 0",
+      "{boolean} fade wether or not past and future should fade out. defaults to 1",
+      "{boolean} logSpiral wether or not the spiral should be logarithmic. defaults to 0"
+    ],
+    "description": "Displays a spiral visual.",
+    "examples": [
+      "note(\"c2 a2 eb2\")\n.euclid(5,8)\n.s('sawtooth')\n.lpenv(4).lpf(300)\n._spiral({ steady: .96 })"
+    ]
+  },
+  {
+    "path": "packages/edo/edo.mjs",
+    "name": "edoScale",
+    "tags": [],
+    "synonyms": [],
+    "params": [
+      "{string} scale Definition of EDO scale."
+    ],
+    "description": "Turns numbers into notes in the given EDO scale (zero indexed).\n\nAn EDO scale definition looks like this:\n\ne.g. C:LLsLLLs:2:1 <- this is the C major scale, 12 EDO\n\ne.g. C:LLsLLL:3:1 <- this is the Gorgo 6 note scale, 16 EDO\n\nAn EDO scale, e.g. C:LLsLLLs:2:1, consists of a root note (e.g. C)\nfollowed by semicolon (':')\nand then a [Large/small step notation sequence](https://en.xen.wiki/w/MOS_scale)\n(e.g. LLsLLLs)\nfollowed by semicolon, then the large step size (e.g. 2)\nfollowed by semicolon, then the small step size (e.g. 1).\n\nThe number of divisions of the octave is calculated as the sum\nof the steps in the EDO scale definition.\n\ne.g. C:LLsLLLs:2:1 is 2+2+1+2+2+2+1 = 12 EDO, 7 note scale\n\ne.g. C:LLsLLL:3:1 is 3+3+1+3+3+3 = 16 EDO, 6 note scale\n\nThe root note defaults to octave 3, if no octave number is given.",
+    "examples": [
+      "n(\"0 2 4 6 4 2\").edoScale(\"C:LLsLLLs:2:1\")",
+      "n(\"[0,7] 4 [2,7] 4\")\n.edoScale(\"G2:<LLsLLL LLLLsL>:3:1\")\n.s(\"piano\")._pitchwheel()",
+      "n(rand.range(0,5).segment(6))\n.edoScale(\"<G2 C3>:LLsLL:3:1\")\n.s(\"piano\")._pitchwheel()"
+    ]
+  },
+  {
+    "path": "packages/midi/midi.mjs",
+    "name": "midin",
+    "tags": [
+      "external_io",
+      "midi"
+    ],
+    "synonyms": [],
+    "params": [
+      "{string | number} input MIDI device name or index defaulting to 0"
+    ],
+    "description": "MIDI input: Opens a MIDI input port to receive MIDI control change messages.\n\nThe output is a function that accepts a midi cc value to query as well as (optionally) a midi channel",
+    "examples": [
+      "const cc = await midin('IAC Driver Bus 1')\nnote(\"c a f e\").lpf(cc(0).range(0, 1000)).lpq(cc(1).range(0, 10)).sound(\"sawtooth\")",
+      "const allCC = await midin('IAC Driver Bus 1')\nconst cc = (ccNum) => allCC(ccNum, 2) // just channel 2\nnote(\"c a f e\").s(\"saw\")\n.when(cc(0).gt(0), x => x.postgain(0))"
+    ]
+  },
+  {
+    "path": "packages/midi/midi.mjs",
+    "name": "midikeys",
+    "tags": [
+      "external_io",
+      "midi"
+    ],
+    "synonyms": [],
+    "params": [
+      "{string | number} input MIDI device name or index defaulting to 0"
+    ],
+    "description": "MIDI keyboard: Opens a MIDI input port to receive MIDI keyboard messages.\n\nThe note length is fixed as Superdough is not currently set up for undetermined\nnote durations\n\nThe 'midichan' control value contains the number of the channel the note is coming from\nso it could be filtered or manipulated further in the chain.",
+    "examples": [
+      "const kb = await midikeys('Arturia KeyStep 32')\nkb().s(\"tri\").lpf(80).lpe(6).lpd(0.1).room(2).delay(0.35)",
+      "const kb = await midikeys('Arturia KeyStep 32')\nkb(\"0.5 1\")\n.s(\"saw\")\n.add(note(rand.mul(0.3)))\n.lpf(1000).lpe(2).room(0.5)",
+      "// discard all notes not coming out from midi channel 2\nconst kb = await midikeys('Arturia KeyStep 32')\nkb().filterValues(v=>v.midichan==2).s(\"tri\")"
+    ]
+  },
+  {
+    "path": "packages/motion/motion.mjs",
+    "name": "accelerationX",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [
+      "accX"
+    ],
+    "params": [],
+    "description": "The accelerometer's x-axis value ranges from 0 to 1.",
+    "examples": [
+      "n(accelerationX.segment(4).range(0,7)).scale(\"C:minor\")"
+    ]
+  },
+  {
+    "path": "packages/motion/motion.mjs",
+    "name": "accelerationY",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [
+      "accY"
+    ],
+    "params": [],
+    "description": "The accelerometer's y-axis value ranges from 0 to 1.",
+    "examples": [
+      "n(accelerationY.segment(4).range(0,7)).scale(\"C:minor\")"
+    ]
+  },
+  {
+    "path": "packages/motion/motion.mjs",
+    "name": "accelerationZ",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [
+      "accZ"
+    ],
+    "params": [],
+    "description": "The accelerometer's z-axis value ranges from 0 to 1.",
+    "examples": [
+      "n(accelerationZ.segment(4).range(0,7)).scale(\"C:minor\")"
+    ]
+  },
+  {
+    "path": "packages/motion/motion.mjs",
+    "name": "gravityX",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [
+      "gravX"
+    ],
+    "params": [],
+    "description": "The device's gravity x-axis value ranges from 0 to 1.",
+    "examples": [
+      "n(gravityX.segment(4).range(0,7)).scale(\"C:minor\")"
+    ]
+  },
+  {
+    "path": "packages/motion/motion.mjs",
+    "name": "gravityY",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [
+      "gravY"
+    ],
+    "params": [],
+    "description": "The device's gravity y-axis value ranges from 0 to 1.",
+    "examples": [
+      "n(gravityY.segment(4).range(0,7)).scale(\"C:minor\")"
+    ]
+  },
+  {
+    "path": "packages/motion/motion.mjs",
+    "name": "gravityZ",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [
+      "gravZ"
+    ],
+    "params": [],
+    "description": "The device's gravity z-axis value ranges from 0 to 1.",
+    "examples": [
+      "n(gravityZ.segment(4).range(0,7)).scale(\"C:minor\")"
+    ]
+  },
+  {
+    "path": "packages/motion/motion.mjs",
+    "name": "rotationAlpha",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [
+      "rotA",
+      "rotZ",
+      "rotationZ"
+    ],
+    "params": [],
+    "description": "The device's rotation around the alpha-axis value ranges from 0 to 1.",
+    "examples": [
+      "n(rotationAlpha.segment(4).range(0,7)).scale(\"C:minor\")"
+    ]
+  },
+  {
+    "path": "packages/motion/motion.mjs",
+    "name": "rotationBeta",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [
+      "rotB",
+      "rotX",
+      "rotationX"
+    ],
+    "params": [],
+    "description": "The device's rotation around the beta-axis value ranges from 0 to 1.",
+    "examples": [
+      "n(rotationBeta.segment(4).range(0,7)).scale(\"C:minor\")"
+    ]
+  },
+  {
+    "path": "packages/motion/motion.mjs",
+    "name": "rotationGamma",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [
+      "rotG",
+      "rotY",
+      "rotationY"
+    ],
+    "params": [],
+    "description": "The device's rotation around the gamma-axis value ranges from 0 to 1.",
+    "examples": [
+      "n(rotationGamma.segment(4).range(0,7)).scale(\"C:minor\")"
+    ]
+  },
+  {
+    "path": "packages/motion/motion.mjs",
+    "name": "orientationAlpha",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [
+      "oriA",
+      "oriZ",
+      "orientationZ"
+    ],
+    "params": [],
+    "description": "The device's orientation alpha value ranges from 0 to 1.",
+    "examples": [
+      "n(orientationAlpha.segment(4).range(0,7)).scale(\"C:minor\")"
+    ]
+  },
+  {
+    "path": "packages/motion/motion.mjs",
+    "name": "orientationBeta",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [
+      "oriB",
+      "oriX",
+      "orientationX"
+    ],
+    "params": [],
+    "description": "The device's orientation beta value ranges from 0 to 1.",
+    "examples": [
+      "n(orientationBeta.segment(4).range(0,7)).scale(\"C:minor\")"
+    ]
+  },
+  {
+    "path": "packages/motion/motion.mjs",
+    "name": "orientationGamma",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [
+      "oriG",
+      "oriY",
+      "orientationY"
+    ],
+    "params": [],
+    "description": "The device's orientation gamma value ranges from 0 to 1.",
+    "examples": [
+      "n(orientationGamma.segment(4).range(0,7)).scale(\"C:minor\")"
+    ]
+  },
+  {
+    "path": "packages/motion/motion.mjs",
+    "name": "absoluteOrientationAlpha",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [
+      "absOriA",
+      "absOriZ",
+      "absoluteOrientationZ"
+    ],
+    "params": [],
+    "description": "The device's absolute orientation alpha value ranges from 0 to 1.",
+    "examples": [
+      "n(absoluteOrientationAlpha.segment(4).range(0,7)).scale(\"C:minor\")"
+    ]
+  },
+  {
+    "path": "packages/motion/motion.mjs",
+    "name": "absoluteOrientationBeta",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [
+      "absOriB",
+      "absOriX",
+      "absoluteOrientationX"
+    ],
+    "params": [],
+    "description": "The device's absolute orientation beta value ranges from 0 to 1.",
+    "examples": [
+      "n(absoluteOrientationBeta.segment(4).range(0,7)).scale(\"C:minor\")"
+    ]
+  },
+  {
+    "path": "packages/motion/motion.mjs",
+    "name": "absoluteOrientationGamma",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [
+      "absOriG",
+      "absOriY",
+      "absoluteOrientationY"
+    ],
+    "params": [],
+    "description": "The device's absolute orientation gamma value ranges from 0 to 1.",
+    "examples": [
+      "n(absoluteOrientationGamma.segment(4).range(0,7)).scale(\"C:minor\")"
+    ]
+  },
+  {
+    "path": "packages/osc/osc.mjs",
+    "name": "osc",
+    "tags": [
+      "external_io"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Sends each hap as an OSC message, which can be picked up by SuperCollider or any other OSC-enabled software.\nFor more info, read [MIDI & OSC in the docs](https://strudel.cc/learn/input-output/)",
+    "examples": []
+  },
+  {
+    "path": "packages/superdough/sampler.mjs",
+    "name": "getDuration,getDur",
+    "tags": [],
+    "synonyms": [],
+    "params": [
+      "{string} sampleName",
+      "{number} (optional) n"
+    ],
+    "description": "Returns the duration, in seconds, of the given sample.\nHas optional param `n` (for instance, the `2` in `s(\"casio:2\")`)\n\nNote: `must` be called with await, otherwise you'll get a pending Promise object.",
+    "examples": [
+      "// Set a patterns cycle length to exactly the length of the sample\nsamples('github:tidalcycles/dirt-samples')\nlet k = await getDuration('sax')\ns(\"sax\").cps(1/k)"
+    ]
+  },
+  {
+    "path": "packages/superdough/superdough.mjs",
+    "name": "setMaxPolyphony",
+    "tags": [
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} Max polyphony. Defaults to 128"
+    ],
+    "description": "Set the max polyphony. If notes are ringing out via `release` then they will\nstart to die out in first-in-first-out order once the max polyphony has been hit",
+    "examples": [
+      "setMaxPolyphony(4)\nn(irand(24).seg(8)).scale(\"C#3:minor\").room(1).release(4).gain(0.5)"
+    ]
+  },
+  {
+    "path": "packages/superdough/superdough.mjs",
+    "name": "setGainCurve",
+    "tags": [
+      "amplitude",
+      "superdough"
+    ],
+    "synonyms": [],
+    "params": [
+      "{Function} function to apply to all gain values"
+    ],
+    "description": "Apply a function to all gains provided in patterns. Can be used to rescale gain to be\nquadratic, exponential, etc. rather than linear",
+    "examples": [
+      "setGainCurve((x) => x * x) // quadratic gain\ns(\"bd*4\").gain(0.5) // equivalent to 0.25 gain normally"
+    ]
+  },
+  {
+    "path": "packages/superdough/wavetable.mjs",
+    "name": "tables",
+    "tags": [
+      "wavetable"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Loads a collection of wavetables to use with `s`",
+    "examples": []
+  },
+  {
+    "path": "packages/tonal/tonal.mjs",
+    "name": "transpose",
+    "tags": [
+      "tonal"
+    ],
+    "synonyms": [
+      "trans"
+    ],
+    "params": [
+      "{string | number} amount Either number of semitones or interval string."
+    ],
+    "description": "Change the pitch of each value by the given amount. Expects numbers or note strings as values.\nThe amount can be given as a number of semitones or as a string in interval short notation.\nIf you don't care about enharmonic correctness, just use numbers. Otherwise, pass the interval of\nthe form: ST where S is the degree number and T the type of interval with\n\n- M = major\n- m = minor\n- P = perfect\n- A = augmented\n- d = diminished\n\nExamples intervals:\n\n- 1P = unison\n- 3M = major third\n- 3m = minor third\n- 4P = perfect fourth\n- 4A = augmented fourth\n- 5P = perfect fifth\n- 5d = diminished fifth",
+    "examples": [
+      "\"c2 c3\".fast(2).transpose(\"<0 -2 5 3>\".slow(2)).note()",
+      "\"c2 c3\".fast(2).transpose(\"<1P -2M 4P 3m>\".slow(2)).note()"
+    ]
+  },
+  {
+    "path": "packages/tonal/tonal.mjs",
+    "name": "scaleTranspose",
+    "tags": [
+      "tonal"
+    ],
+    "synonyms": [
+      "scaleTrans",
+      "strans"
+    ],
+    "params": [
+      "{offset} offset number of steps inside the scale"
+    ],
+    "description": "Transposes notes inside the scale by the number of steps.\nExpected to be called on a Pattern which already has a {@link Pattern#scale}",
+    "examples": [
+      "\"-8 [2,4,6]\"\n.scale('C4 bebop major')\n.scaleTranspose(\"<0 -1 -2 -3 -4 -5 -6 -4>\")\n.note()"
+    ]
+  },
+  {
+    "path": "packages/tonal/tonal.mjs",
+    "name": "scale",
+    "tags": [
+      "tonal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{string} scale Name of scale"
+    ],
+    "description": "Turns numbers into notes in the scale (zero indexed) or quantizes notes to a scale.\n\nWhen describing notes via numbers, note that negative numbers can be used to wrap backwards\nin the scale as well as sharps or flats to produce notes outside of the scale.\n\nAlso sets scale for other scale operations, like {@link Pattern#scaleTranspose}.\n\nA scale consists of a root note (e.g. `c4`, `c`, `f#`, `bb4`) followed by semicolon (':') and then a [scale type](https://github.com/tonaljs/tonal/blob/main/packages/scale-type/data.ts).\n\nThe scale name must be written without spaces (because it would be interpreted as a multi-step pattern otherwise).\nIf your scale name includes spaces, replace them with colons.\n\nThe root note defaults to octave 3, if no octave number is given.",
+    "examples": [
+      "n(\"0 2 4 6 4 2\").scale(\"C:major\")",
+      "n(\"[0,7] 4 [2,7] 4\")\n.scale(\"C:<major minor>/2\")\n.s(\"piano\")",
+      "n(rand.range(0,12).segment(8))\n.scale(\"C:ritusen\")\n.s(\"piano\")",
+      "n(\"<[0,7b] [-4# -4] [-2,7##] 4 [0,7] [-4# -4b] [-2,7###] 4b>*4\")\n.scale(\"C:<major minor>/2\")\n.s(\"piano\")",
+      "note(\"C1*16\").transpose(irand(36)).scale('Cb2 major').scaleTranspose(3)",
+      "n(\"[0 0] [1 2] [3 4] [5 6]\").scale(\"C:major:blues\")"
+    ]
+  },
+  {
+    "path": "packages/tonal/voicings.mjs",
+    "name": "addVoicings",
+    "tags": [
+      "tonal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{string} name identifier for the voicing dictionary",
+      "{Object} dictionary maps chord symbol to possible voicings",
+      "{Array} range min, max note"
+    ],
+    "description": "Adds a new custom voicing dictionary.",
+    "examples": [
+      "addVoicings('cookie', {\n7: ['3M 7m 9M 12P 15P', '7m 10M 13M 16M 19P'],\n'^7': ['3M 6M 9M 12P 14M', '7M 10M 13M 16M 19P'],\nm7: ['8P 11P 14m 17m 19P', '5P 8P 11P 14m 17m'],\nm7b5: ['3m 5d 8P 11P 14m', '5d 8P 11P 14m 17m'],\no7: ['3m 6M 9M 11A 15P'],\n'7alt': ['3M 7m 10m 13m 15P'],\n'7#11': ['7m 10m 13m 15P 17m'],\n}, ['C3', 'C6'])\n\"<C^7 A7 Dm7 G7>\".voicings('cookie').note()"
+    ]
+  },
+  {
+    "path": "packages/tonal/voicings.mjs",
+    "name": "voicings",
+    "tags": [
+      "tonal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{string} dictionary which voicing dictionary to use."
+    ],
+    "description": "DEPRECATED: still works, but it is recommended you use .voicing instead (without s).\nTurns chord symbols into voicings, using the smoothest voice leading possible.\nUses [chord-voicings package](https://github.com/felixroos/chord-voicings#chord-voicings).",
+    "examples": [
+      "stack(\"<C^7 A7 Dm7 G7>\".voicings('lefthand'), \"<C3 A2 D3 G2>\").note()"
+    ]
+  },
+  {
+    "path": "packages/tonal/voicings.mjs",
+    "name": "rootNotes",
+    "tags": [
+      "tonal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{octave} octave octave to use"
+    ],
+    "description": "Maps the chords of the incoming pattern to root notes in the given octave.",
+    "examples": [
+      "\"<C^7 A7 Dm7 G7>\".rootNotes(2).note()"
+    ]
+  },
+  {
+    "path": "packages/tonal/voicings.mjs",
+    "name": "voicing",
+    "tags": [
+      "tonal"
+    ],
+    "synonyms": [],
+    "params": [],
+    "description": "Turns chord symbols into voicings. You can use the following control params:\n\n- `chord`: Note, followed by chord symbol, e.g. C Am G7 Bb^7\n- `dict`: voicing dictionary to use, falls back to default dictionary\n- `anchor`: the note that is used to align the chord\n- `mode`: how the voicing is aligned to the anchor\n- `below`: top note <= anchor\n- `duck`: top note <= anchor, anchor excluded\n- `above`: bottom note >= anchor\n- `root`: bottom note is the lowest root of the chord >= anchor\n- `oldabove` : old (buggy) behavior of above, kept for legacy reason\n- `oldroot` : old (buggy) behavior of root, kept for legacy reason\n- `offset`: whole number that shifts the voicing up or down to the next voicing\n- `n`: if set, the voicing is played like a scale. Overshooting numbers will be octaved\n\nAll of the above controls are optional, except `chord`.\nIf you pass a pattern of strings to voicing, they will be interpreted as chords.",
+    "examples": [
+      "n(\"0 1 2 3\").chord(\"<C Am F G>\").voicing()"
+    ]
+  },
+  {
+    "path": "packages/webaudio/scope.mjs",
+    "name": "fscope",
+    "tags": [
+      "visualization"
+    ],
+    "synonyms": [],
+    "params": [
+      "{string} color line color as hex or color name. defaults to white.",
+      "{number} scale scales the y-axis. Defaults to 0.25",
+      "{number} pos y-position relative to screen height. 0 = top, 1 = bottom of screen",
+      "{number} lean y-axis alignment where 0 = top and 1 = bottom",
+      "{number} min min value",
+      "{number} max max value"
+    ],
+    "description": "Renders an oscilloscope for the frequency domain of the audio signal.",
+    "examples": [
+      "s(\"sawtooth\").fscope()"
+    ]
+  },
+  {
+    "path": "packages/webaudio/scope.mjs",
+    "name": "scope",
+    "tags": [
+      "visualization"
+    ],
+    "synonyms": [
+      "tscope"
+    ],
+    "params": [
+      "{object} config optional config with options:",
+      "{boolean} align if 1, the scope will be aligned to the first zero crossing. defaults to 1",
+      "{string} color line color as hex or color name. defaults to white.",
+      "{number} thickness line thickness. defaults to 3",
+      "{number} scale scales the y-axis. Defaults to 0.25",
+      "{number} pos y-position relative to screen height. 0 = top, 1 = bottom of screen",
+      "{number} trigger amplitude value that is used to align the scope. defaults to 0."
+    ],
+    "description": "Renders an oscilloscope for the time domain of the audio signal.",
+    "examples": [
+      "s(\"sawtooth\")._scope()"
+    ]
+  },
+  {
+    "path": "packages/webaudio/spectrum.mjs",
+    "name": "spectrum",
+    "tags": [
+      "visualization"
+    ],
+    "synonyms": [],
+    "params": [
+      "{object} config optional config with options:",
+      "{integer} thickness line thickness in px (default 3)",
+      "{integer} speed scroll speed (default 1)",
+      "{integer} min min db (default -80)",
+      "{integer} max max db (default 0)"
+    ],
+    "description": "Renders a spectrum analyzer for the incoming audio signal.",
+    "examples": [
+      "n(\"<0 4 <2 3> 1>*3\")\n.off(1/8, add(n(5)))\n.off(1/5, add(n(7)))\n.scale(\"d3:minor:pentatonic\")\n.s('sine')\n.dec(.3).room(.5)\n._spectrum()"
+    ]
+  },
+  {
+    "path": "packages/xen/tune.mjs",
+    "name": "tune",
+    "tags": [
+      "tonal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{(string | number[] )} scale"
+    ],
+    "description": "Assumes pattern contains numerical scale degrees on the `i` control (see examples below). Accepts a scale name or list of frequencies (see all available names at the link on the reference). Returns a new pattern with all values mapped to a frequency ratio. Similar to `xen`.",
+    "examples": [
+      "i(\"0 1 2 3 4 5\").tune(\"hexany15\").mul(\"220\").freq()",
+      "// You can set your root to be a\n// particular note with getFreq:\ni(\"4 8 9 10 - - 5 7 9 11 - -\").tune(\"tranh3\")\n.mul(getFreq('c3'))\n.freq().clip(.5).room(1)",
+      "// You can also give tune a list of\n// frequencies to use as the scale:\ni(\"0 1 2 3 4\").tune([\n261.6255653006,\n302.72962012827,\n350.29154279212,\n405.32593044476,\n469.00678383895,\n523.2511306012\n]).mul(220).freq();"
+    ]
+  },
+  {
+    "path": "packages/xen/xen.mjs",
+    "name": "xen",
+    "tags": [
+      "tonal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{(string | number[] )} scaleNameOrRatios"
+    ],
+    "description": "Assumes a numerical pattern of scale steps, and a scale. Scales accepted are all preset scale names of `tune`, arbitrary edos such as 31edo, or an array of frequency ratios. Assumes scales repeat at octave (2/1). Returns a new pattern with all values mapped to their associated frequency, assuming a base frequency of 220hz.",
+    "examples": [
+      "// A minor triad in 31edo:\ni(\"0 8 18\").xen(\"31edo\").piano()",
+      "// You can also use xen with frequency ratios.\n// This is equivalent to the above:\ni(\"0 1 2\").xen([\nMath.pow(2, 0/31),\nMath.pow(2, 8/31),\nMath.pow(2, 18/31),\n]).piano()",
+      "// xen also supports all scale names that\n// tune does:\ni(\"0 1 2 3 4 5\").xen(\"hexany15\")\n// equiv to:\n// \"0 1 2 3 4 5\".tune(\"hexany15\").mul(\"220\").freq()",
+      "i(\"0 1 2 3 4 5 6 7\").xen(\"<5edo 10edo 15edo hexany15>\")"
+    ]
+  },
+  {
+    "path": "packages/xen/xen.mjs",
+    "name": "withBase",
+    "tags": [
+      "tonal"
+    ],
+    "synonyms": [],
+    "params": [
+      "{number} base",
+      "{number} (optional) originalBase"
+    ],
+    "description": "Assumes pattern of frequencies tuned to some `base` frequency, such as the output of `xen`\nBecause `xen` defaults to `220Hz`, so will `withBase`.\nbut you can specify a different original base with the standard optional array syntax '`:`'",
+    "examples": [
+      "i(\"[0 1 2 3] [3 4] [4 3 2 1]\").xen(\"hexany23\").withBase(\"<220 [300 200]>\")",
+      "mini([1 / 1, 16 / 15, 9 / 8, 6 / 5, 5 / 4].join(' ')).withBase(\"220:1\")\n// mini([1 / 1, 16 / 15, 9 / 8, 6 / 5, 5 / 4].join(' ')).mul(220).freq()"
+    ]
+  },
+  {
+    "path": "packages/xen/xen.mjs",
+    "name": "ftranspose",
+    "tags": [
+      "tonal"
+    ],
+    "synonyms": [
+      "ftrans",
+      "fTrans",
+      "ftranspose",
+      "fTranspose"
+    ],
+    "params": [
+      "{number} amt",
+      "{number} edoSize (optional)"
+    ],
+    "description": "Frequency transpose. Assumes pattern either has `freq` set, or has values that can be interpreted as frequencies\namt has optional `edoSize` param, defaults to 12.\nIf haps have edoSize param set, such as from the output of `xen(\"31edo\")`,\n`ftrans` will fallback to that instead of 12 as the default.\n\nTransposes the frequency by `amt` edoSteps",
+    "examples": [
+      "i(\"0 1 2\").xen(\"12edo\").ftrans(\"7\")\n// n(\"0 1 2\").scale(\"A:chromatic\").trans(\"7\")",
+      "i(\"0 8 18\").xen(\"31edo\").ftrans(\"<8 -8>\")",
+      "// to transpose by steps of an edo, use \"step:edo\" :\ni(\"0 7 8 18\").xen(\"31edo\").ftrans(\"<0 1:31 1:12>\")",
+      "// it can also work with frequency values directly\nfreq(\"200 300 400\").ftrans(\"<0 7:31 7>\")"
+    ]
+  }
+]

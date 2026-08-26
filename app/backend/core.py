@@ -1,7 +1,7 @@
 import json
 import os
 from pathlib import Path
-from typing import Any, Dict, List, cast
+from typing import Any, Dict, List, Optional, cast
 
 from dotenv import load_dotenv
 from langchain.agents import create_agent
@@ -98,13 +98,18 @@ def retrieve_context(query: str):
     return serialized, retrieved_docs
 
 
-def run_llm(query: str) -> Dict[str, Any]:
+def run_llm(query: str, chat_history: Optional[List[Dict[str, str]]] = None) -> Dict[str, Any]:
     """
     Run the RAG pipeline to answer a query using retrieved documentation.
-    
+
     Args:
         query: The user's question
-        
+        chat_history: Prior turns as [{"role": "user"|"assistant", "content": ...}, ...],
+            oldest first, NOT including `query` itself. Lets the agent resolve
+            follow-ups ("and how do I add reverb to that?") against what was
+            already discussed - without it every question was answered in
+            isolation, so the retriever had no way to know what "that" referred to.
+
     Returns:
         Dictionary containing:
             - answer: The generated answer
@@ -112,20 +117,52 @@ def run_llm(query: str) -> Dict[str, Any]:
     """
     # Create the agent with retrieval tool
     system_prompt = (
-        "You are a helpful AI assistant that answers questions about Strudel REPL documentation. "
-        "You have access to a tool that retrieves relevant documentation. "
-        "Use the tool to find relevant information before answering questions. "
-        "Always cite the sources you use in your answers. "
-        "If you cannot find the answer in the retrieved documentation, say so."
+        "You are a knowledgeable assistant for Strudel (https://strudel.cc), a JavaScript live-coding "
+        "environment for algorithmic music (a port of TidalCycles). Users ask how to write, fix, or "
+        "understand Strudel patterns, and what specific functions do.\n\n"
+        "The `retrieve_context` tool searches a documentation index built from two different sources, "
+        "which the `Source:` field of each retrieved chunk lets you tell apart:\n"
+        "1. Tutorial/concept pages (strudel.cc/workshop, /learn, /recipes) - prose explanations of "
+        "concepts such as mini-notation, effect chains, or arrangement.\n"
+        "2. API reference entries - one per Strudel function (e.g. `lpf`, `euclid`, `room`), each with "
+        "its description, parameters, synonyms, and runnable examples, extracted directly from that "
+        "function's JSDoc comment in the Strudel source code (codeberg.org/uzu/strudel). These are the "
+        "ground truth for exact syntax, parameter types, and synonyms (e.g. `cutoff`/`ctf`/`lp` are all "
+        "synonyms of `lpf`) - trust them over your own prior knowledge of Strudel/TidalCycles, which may "
+        "be outdated or refer to a different version.\n\n"
+        "You handle two kinds of requests:\n"
+        "- Questions/explanations (\"what does lpf do?\", \"how does mini-notation work?\") -> answer in "
+        "prose, citing sources.\n"
+        "- Code creation or refinement (\"give me a techno bassline\", \"add a reverb to this\", or a "
+        "message that includes the user's current pattern and asks to change it) -> retrieve context for "
+        "every function/effect you intend to use, then reply with the COMPLETE resulting pattern in a "
+        "single fenced code block (not a diff or fragment, so it can be copy-pasted straight into the "
+        "Strudel REPL), followed by a short bullet list of what you changed or why you wrote it that way. "
+        "If the user supplied their own pattern, preserve everything they didn't ask you to change.\n\n"
+        "Rules:\n"
+        "- Always call `retrieve_context` before answering any question about Strudel syntax, functions, "
+        "or concepts, and before writing or modifying any pattern - never rely on memory alone.\n"
+        "- If the first retrieval doesn't clearly answer the question, call the tool again with a "
+        "rephrased query, a likely function name, or a synonym, before giving up.\n"
+        "- Use only functions and syntax that appear in the retrieved documentation, written as valid "
+        "Strudel mini-notation. Never invent a function name, parameter, or syntax you haven't seen "
+        "retrieved - if you're not sure something exists, search for it first.\n"
+        "- Always cite the sources you used, listing the `Source:` URL(s) from the retrieved context at "
+        "the end of your answer.\n"
+        "- If the retrieved documentation doesn't cover the request, say so explicitly rather than "
+        "guessing or inventing function names or parameters.\n"
+        "- Keep answers concise and practical, favoring a runnable example over a long explanation."
     )
     
     # A fresh agent per call. In production build it once at module level - this
     # rebuilds the graph on every request.
     agent = create_agent(model, tools=[retrieve_context], system_prompt=system_prompt)
     
-    # No history is passed: this app is stateless, every question stands alone.
-    # Build messages list
-    messages = [{"role": "user", "content": query}]
+    # Prior turns first (only role/content survive - the UI-only "sources" key
+    # main.py stores alongside each message must not leak into the agent
+    # input), then the current question last.
+    messages = [{"role": m["role"], "content": m["content"]} for m in (chat_history or [])]
+    messages.append({"role": "user", "content": query})
     
     # Invoke the agent
     response = agent.invoke(cast(Any, {"messages": messages}))
