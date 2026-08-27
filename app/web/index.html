@@ -51,11 +51,24 @@
       autocapitalize="off" autocorrect="off" aria-label="Strudel code"></textarea>
   </div>
 
+  <!-- Strudel's draw helpers look for #test-canvas before creating their own.
+       Providing it here gives pianoroll/punchcard/scope a visible home instead
+       of a full-screen canvas buried under the interface. -->
+  <div class="display" id="editorDisplay" hidden>
+    <span class="micro display__label">Display</span>
+    <canvas id="test-canvas" class="display__canvas"></canvas>
+  </div>
+
   <div class="editor-panel__foot">
     <button class="btn btn--send" id="editorRun" type="button">Run</button>
     <button class="btn btn--ghost" id="editorStop" type="button" disabled>Stop</button>
     <span class="editor-panel__hint" id="editorHint"></span>
   </div>
+
+  <!-- Drag to resize. Moves --editor-w, which the panel, the body offset and
+       the composer all read, so both columns resize together. -->
+  <div class="editor-panel__grip" id="editorGrip" role="separator"
+    aria-orientation="vertical" aria-label="Editor width" tabindex="0"></div>
 </aside>
 
 <div class="editor-backdrop" id="editorBackdrop"></div>

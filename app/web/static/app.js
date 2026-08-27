@@ -29,6 +29,9 @@ const editorHint = $("editorHint");
 const editorToggle = $("editorToggle");
 const editorClose = $("editorClose");
 const editorBackdrop = $("editorBackdrop");
+const editorGrip = $("editorGrip");
+const editorDisplay = $("editorDisplay");
+const drawCanvas = $("test-canvas");
 
 const STEPS = 16; // 4 beats of 4 - the subdivision the lane is marked in
 const audioAvailable = typeof window.initStrudel === "function";
@@ -137,8 +140,12 @@ document.addEventListener("strudel.log", (ev) => {
   const detail = ev.detail || {};
   const message = String(detail.message || "");
   if (detail.type === "error" || /\berror\b/i.test(message)) {
+    // The rail only has room for a fragment, so the whole thing goes to the
+    // console and to the tooltip - a truncated error is not a debuggable one.
+    console.error("[strudel]", message, detail.data ?? "");
     readout.dataset.state = "error";
     readout.textContent = message.length > 46 ? message.slice(0, 46) + "…" : message;
+    readout.title = message;
     errorUntil = performance.now() + 5000;
     if (activeBtn) note(activeBtn, "Error");
   }
@@ -149,6 +156,7 @@ function frame() {
   if (errorUntil && now >= errorUntil) {
     errorUntil = 0;
     readout.dataset.state = playing ? "live" : "idle";
+    readout.title = "";
   }
   if (playing && !errorUntil) {
     const cycle = cyclePosition();
@@ -162,6 +170,51 @@ function frame() {
 }
 requestAnimationFrame(frame);
 
+/* Strudel's visualisers are Pattern methods - `.pianoroll()`, not a standalone
+   pianoroll(). They capture a drawing context the moment the code is evaluated,
+   so the canvas has to be on screen and correctly sized *before* that happens. */
+const DRAW_METHODS = ["pianoroll", "punchcard", "wordfall", "spiral", "scope"];
+
+const DRAWS = new RegExp("\\.\\s*_?(" + DRAW_METHODS.join("|") + ")\\s*\\(");
+
+/* On strudel.cc the underscore form - `sound("bd sd")._pianoroll()` - draws the
+   roll inline under the line of code. That underscore is not part of the
+   pattern API: it is a transpiler plugin plus a CodeMirror widget, and
+   @strudel/web ships neither, so `_pianoroll` simply does not exist here.
+   Strudel's own documentation recommends the underscore form (and it is in the
+   indexed corpus, so the assistant repeats it), so accept it as a synonym and
+   draw into the display panel instead of inline. */
+function aliasUnderscoreVisualisers() {
+  const proto = window.strudel && window.strudel.Pattern && window.strudel.Pattern.prototype;
+  if (!proto) return;
+  DRAW_METHODS.forEach((name) => {
+    if (typeof proto[name] === "function" && typeof proto["_" + name] !== "function") {
+      proto["_" + name] = proto[name];
+    }
+  });
+}
+
+if (audioAvailable) aliasUnderscoreVisualisers();
+
+function sizeDrawCanvas() {
+  const dpr = window.devicePixelRatio || 1;
+  const rect = drawCanvas.getBoundingClientRect();
+  if (!rect.width || !rect.height) return;
+  // Strudel draws in backing-store pixels and never scales the context, so the
+  // backing store carries the ratio and the CSS box stays at layout size.
+  const w = Math.round(rect.width * dpr);
+  const h = Math.round(rect.height * dpr);
+  if (drawCanvas.width !== w) drawCanvas.width = w;
+  if (drawCanvas.height !== h) drawCanvas.height = h;
+}
+
+function prepareDisplay(code) {
+  if (!DRAWS.test(code)) return;
+  openEditor();                 // the screen lives on the panel
+  editorDisplay.hidden = false;
+  sizeDrawCanvas();             // forces layout, so the context is captured sized
+}
+
 async function playPattern(code, btn) {
   const isEditor = btn === editorRun;
   const label = isEditor ? "Run" : "Play";
@@ -169,6 +222,7 @@ async function playPattern(code, btn) {
   btn.disabled = true;
   try {
     const r = await ensureStrudel();
+    prepareDisplay(code);
     await r.evaluate(code, true);   // while playing this hot-swaps the pattern
     btn.disabled = false;
     if (isEditor) btn.textContent = label;
@@ -190,6 +244,7 @@ function stopAll() {
   } catch (err) { console.error(err); }
   setActive(null);
   setTransport(false);
+  editorDisplay.hidden = true;   // give the space back to the code
 }
 
 stopBtn.addEventListener("click", stopAll);
@@ -382,14 +437,29 @@ function addAnswer(html, sources) {
   scrollDown();
 }
 
-function addError(message) {
+function addError(message, trace) {
   const el = document.createElement("div");
   el.className = "msg msg--bot msg--error";
   el.innerHTML = '<span class="micro">Failed</span>';
+
   const p = document.createElement("p");
-  p.style.margin = "8px 0 0";
+  p.className = "error__message";
   p.textContent = message;
   el.appendChild(p);
+
+  // Only present when the server runs with STRUDEL_DEBUG=1; the terminal has
+  // the same trace either way.
+  if (trace) {
+    const details = document.createElement("details");
+    details.className = "trace";
+    details.innerHTML = '<summary class="micro trace__summary">Traceback</summary>';
+    const pre = document.createElement("pre");
+    pre.className = "trace__body";
+    pre.textContent = trace;
+    details.appendChild(pre);
+    el.appendChild(details);
+  }
+
   feed.appendChild(el);
   scrollDown();
 }
@@ -424,7 +494,10 @@ async function ask(text) {
     thinking.remove();
 
     if (!res.ok || data.error) {
-      addError(data.error || `The server returned ${res.status}. Check the terminal running the app.`);
+      addError(
+        data.error || `The server returned ${res.status}. Check the terminal running the app.`,
+        data.trace
+      );
     } else {
       addAnswer(data.answer_html, data.sources);
       history.push({ role: "user", content: text });
@@ -531,6 +604,92 @@ function setEditorOpen(open, remember) {
 function openEditor() { setEditorOpen(true, false); }
 function closeEditor() { setEditorOpen(false, false); }
 
+/* ---- resizing -----------------------------------------------------------
+   Everything on both sides of the split reads --editor-w: the panel's own
+   width, the body's padding-left that shifts the conversation, and the
+   composer's left edge. Moving that one custom property resizes both columns
+   in the same frame, so there is nothing to keep in sync by hand. */
+
+const WIDTH_KEY = "strudel-assistant:editor-width";
+const MIN_EDITOR_W = 280;   // below this the code wraps into soup
+const CHAT_FLOOR = 420;     // the conversation never gets squeezed past this
+
+// What the reader last asked for, which is not always what fits: a narrow
+// window clamps the applied width, and widening it again restores the ask.
+let preferredWidth = 400;
+
+const maxEditorW = () =>
+  Math.max(MIN_EDITOR_W, Math.min(680, window.innerWidth - CHAT_FLOOR));
+
+const clampEditorWidth = (px) =>
+  Math.round(Math.min(Math.max(px, MIN_EDITOR_W), maxEditorW()));
+
+function applyEditorWidth(px, remember) {
+  preferredWidth = px;
+  const width = clampEditorWidth(px);
+  document.documentElement.style.setProperty("--editor-w", width + "px");
+
+  editorGrip.setAttribute("aria-valuenow", String(width));
+  editorGrip.setAttribute("aria-valuemin", String(MIN_EDITOR_W));
+  editorGrip.setAttribute("aria-valuemax", String(maxEditorW()));
+
+  // The visualiser draws into a fixed backing store, so a narrower panel has to
+  // re-size it or the picture stretches.
+  sizeDrawCanvas();
+
+  // Store the width that was actually applied, never the raw pointer position -
+  // dragging past the edge should not persist a number the reader never saw.
+  if (remember) {
+    try { localStorage.setItem(WIDTH_KEY, String(width)); } catch (_) { /* private mode */ }
+  }
+}
+
+let resizing = false;
+
+editorGrip.addEventListener("pointerdown", (ev) => {
+  if (!wideQuery.matches) return;
+  resizing = true;
+  // Capture so the drag survives the pointer outrunning the 7px grip.
+  editorGrip.setPointerCapture(ev.pointerId);
+  document.body.classList.add("is-resizing");
+  ev.preventDefault();
+});
+
+// The panel is anchored at left: 0, so its width is just the pointer's x.
+editorGrip.addEventListener("pointermove", (ev) => {
+  if (resizing) applyEditorWidth(ev.clientX, false);
+});
+
+function endResize(ev) {
+  if (!resizing) return;
+  resizing = false;
+  document.body.classList.remove("is-resizing");
+  try { editorGrip.releasePointerCapture(ev.pointerId); } catch (_) { /* already gone */ }
+  // Settle on the achievable width, so an overshoot doesn't linger as the ask.
+  applyEditorWidth(clampEditorWidth(preferredWidth), true);
+}
+
+editorGrip.addEventListener("pointerup", endResize);
+editorGrip.addEventListener("pointercancel", endResize);
+
+editorGrip.addEventListener("keydown", (ev) => {
+  if (!wideQuery.matches) return;
+  const step = ev.shiftKey ? 64 : 16;
+  const keys = {
+    ArrowLeft: () => preferredWidth - step,
+    ArrowRight: () => preferredWidth + step,
+    Home: () => MIN_EDITOR_W,
+    End: () => maxEditorW(),
+  };
+  if (!keys[ev.key]) return;
+  ev.preventDefault();
+  applyEditorWidth(keys[ev.key](), true);
+});
+
+// A narrower window may no longer fit the chosen width; re-clamp the ask
+// rather than the applied value, so widening restores what was asked for.
+window.addEventListener("resize", () => applyEditorWidth(preferredWidth, false));
+
 function runEditor() {
   if (!editorInput.value.trim()) {
     note(editorRun, "Empty");
@@ -579,6 +738,10 @@ function initEditor() {
   try { saved = localStorage.getItem(BUFFER_KEY); } catch (_) { /* private mode */ }
   editorInput.value = saved || DEMO;
   syncHighlight();
+
+  let storedWidth = null;
+  try { storedWidth = parseFloat(localStorage.getItem(WIDTH_KEY)); } catch (_) { /* private mode */ }
+  applyEditorWidth(Number.isFinite(storedWidth) ? storedWidth : preferredWidth, false);
 
   if (!audioAvailable) {
     editorRun.disabled = true;
@@ -636,3 +799,10 @@ function renderStart() {
 initEditor();
 renderStart();
 input.focus();
+
+// Arm the layout transitions only once the first frame has been painted with
+// the panel already in place, so nothing slides on load. Two frames: one for
+// the styles above to land, one for the browser to paint them.
+requestAnimationFrame(() => {
+  requestAnimationFrame(() => document.body.classList.add("ready"));
+});

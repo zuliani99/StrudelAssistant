@@ -54,8 +54,11 @@ body {
     radial-gradient(900px 380px at 50% -140px, rgba(242, 160, 61, 0.10), transparent 70%),
     var(--ink);
   -webkit-font-smoothing: antialiased;
-  transition: padding-left 260ms cubic-bezier(0.2, 0.7, 0.3, 1);
 }
+
+/* Layout transitions are armed only after the first paint (JS adds `ready`),
+   otherwise the conversation visibly slides into place on every load. */
+body.ready { transition: padding-left 260ms cubic-bezier(0.2, 0.7, 0.3, 1); }
 
 :focus-visible {
   outline: 2px solid var(--amber);
@@ -252,8 +255,8 @@ body {
   border-right: 1px solid var(--edge);
   box-shadow: 12px 0 34px rgba(0, 0, 0, 0.4);
   transform: translateX(-100%);
-  transition: transform 260ms cubic-bezier(0.2, 0.7, 0.3, 1);
 }
+body.ready .editor-panel { transition: transform 260ms cubic-bezier(0.2, 0.7, 0.3, 1); }
 body[data-editor="open"] .editor-panel { transform: translateX(0); }
 
 /* With no explicit choice stored, `data-editor` is absent and width decides -
@@ -287,6 +290,27 @@ body[data-editor="open"] .editor-panel { transform: translateX(0); }
 }
 
 .editor-panel__close { margin-left: auto; }
+
+/* Where Strudel's visualisers draw. Reads as a small screen on the panel, and
+   only appears when the running code actually asks to draw something. */
+.display {
+  position: relative;
+  flex: none;
+  height: 132px;
+  background: var(--ink);
+  border-top: 1px solid var(--edge-soft);
+}
+.display[hidden] { display: none; }
+
+.display__label {
+  position: absolute;
+  top: 8px;
+  left: 13px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.display__canvas { display: block; width: 100%; height: 100%; }
 
 .editor-panel__foot {
   display: flex;
@@ -349,6 +373,44 @@ body[data-editor="open"] .editor-panel { transform: translateX(0); }
   caret-color: var(--amber);
 }
 .editor textarea::selection { background: rgba(242, 160, 61, 0.28); }
+
+/* Resize grip. Sits on the panel's right edge; the amber hairline only appears
+   on hover, focus or while dragging, so at rest the edge stays quiet. */
+.editor-panel__grip {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -3px;
+  width: 7px;
+  z-index: 2;
+  cursor: col-resize;
+  touch-action: none;   /* the pointer drag owns this gesture, not the scroller */
+}
+.editor-panel__grip::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 3px;
+  width: 1px;
+  background: transparent;
+  transition: background 140ms ease;
+}
+.editor-panel__grip:hover::after,
+.editor-panel__grip:focus-visible::after,
+body.is-resizing .editor-panel__grip::after { background: var(--amber); }
+.editor-panel__grip:focus-visible { outline: none; }
+
+/* Dragging must track the pointer exactly, so nothing on the axis may ease. */
+body.is-resizing,
+body.is-resizing .editor-panel,
+body.is-resizing .composer { transition: none; }
+body.is-resizing { cursor: col-resize; user-select: none; }
+
+/* Only the docked panel is resizable - a slide-over is sized to the viewport. */
+@media (max-width: 1023px) {
+  .editor-panel__grip { display: none; }
+}
 
 .editor-backdrop {
   position: fixed;
@@ -415,6 +477,36 @@ body[data-editor="open"] .editor-backdrop { opacity: 1; pointer-events: auto; }
   color: var(--cream);
 }
 .msg--error .micro { color: var(--peak); }
+
+.error__message { margin: 8px 0 0; }
+
+/* Server traceback, shown when the app runs with STRUDEL_DEBUG=1. */
+.trace { margin-top: 12px; }
+
+.trace__summary {
+  cursor: pointer;
+  width: fit-content;
+  list-style: none;
+}
+.trace__summary::-webkit-details-marker { display: none; }
+.trace__summary::before { content: "› "; color: var(--peak); }
+.trace[open] .trace__summary::before { content: "⌄ "; }
+.trace__summary:hover { color: var(--cream-2); }
+
+.trace__body {
+  margin: 10px 0 0;
+  padding: 12px 14px;
+  max-height: 320px;
+  overflow: auto;
+  border: 1px solid var(--edge-soft);
+  border-radius: var(--radius);
+  background: var(--ink-2);
+  font-family: var(--f-mono);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--cream-2);
+  white-space: pre;
+}
 
 /* ============================ answer prose =============================== */
 

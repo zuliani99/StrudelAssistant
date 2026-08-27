@@ -8,7 +8,7 @@ A documentation assistant for [Strudel](https://strudel.cc), the JavaScript live
 - **The agent** (`gpt-4o-mini` via LangChain `create_agent`) decides when to call the `retrieve_context` tool, and may search more than once before answering. The raw `Document` objects ride back to the UI on the tool message's `artifact`, which is how sources are cited without re-parsing the prompt.
 - **The corpus** is built from two sources: tutorial/concept pages (`strudel.cc/workshop`, `/learn`, `/recipes`) and API reference entries extracted from each function's JSDoc in the Strudel source (`codeberg.org/uzu/strudel`).
 - **Playback** uses `@strudel/web` loaded from a CDN — the same engine as the official REPL. Every fenced code block in an answer becomes a pattern module with Play, Edit and Copy, and the lane in the top rail sweeps once per cycle, driven by the repl's own scheduler clock.
-- **The editor** is a buffer of your own, docked to the left on a wide screen and a slide-over below that. Edit on any answer sends that pattern into it; `⌘/Ctrl+Enter` re-runs the buffer, swapping the pattern live without stopping the transport. Its contents persist in `localStorage`.
+- **The editor** is a buffer of your own, docked to the left on a wide screen and a slide-over below that. Edit on any answer sends that pattern into it; `⌘/Ctrl+Enter` re-runs the buffer, swapping the pattern live without stopping the transport. Drag its right edge to resize — the conversation reflows to match. Contents and width persist in `localStorage`.
 
 ## Setup
 
@@ -59,6 +59,13 @@ app/
     static/app.js      # transport, pattern panels, chat
 data/chunks.json       # chunk dump that backs BM25
 ```
+
+## Documentation
+
+- [docs/architecture.md](docs/architecture.md) — how the pieces fit, the request
+  lifecycle, the ingestion pipeline, and the invariants that will bite you.
+- [docs/extending.md](docs/extending.md) — recipes for changing things: model,
+  retrieval, prompt, corpus, interface.
 
 ## Stack
 

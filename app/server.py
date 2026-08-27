@@ -21,6 +21,7 @@ from __future__ import annotations
 import os
 import sys
 import threading
+import traceback
 from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional
@@ -36,6 +37,10 @@ from markdown_it import MarkdownIt  # noqa: E402
 from pydantic import BaseModel, Field  # noqa: E402
 
 WEB_DIR = APP_DIR / "web"
+
+# STRUDEL_DEBUG=1 also sends the traceback to the browser, where the failed
+# message renders it in a collapsible block. The terminal always gets it.
+DEBUG = os.environ.get("STRUDEL_DEBUG", "").lower() in ("1", "true", "yes")
 
 # html=False: the answer is model output, so raw HTML in it is escaped rather
 # than rendered. Tables stay enabled because API reference answers use them.
@@ -68,6 +73,7 @@ def _prewarm() -> None:
         _get_run_llm()
     except Exception as exc:  # surfaced properly on the first real request
         print(f"[server] retriever not ready: {type(exc).__name__}: {exc}")
+        traceback.print_exc()
 
 
 @asynccontextmanager
@@ -141,7 +147,13 @@ def chat(request: ChatRequest) -> Any:
         ]
         result: Dict[str, Any] = run_llm(question, chat_history=history)
     except Exception as exc:
-        return JSONResponse({"error": _explain(exc)}, status_code=500)
+        # print_exc rather than logging: it lands on stderr regardless of how
+        # uvicorn's log config is set up, so the trace is never silently lost.
+        traceback.print_exc()
+        payload: Dict[str, Any] = {"error": _explain(exc)}
+        if DEBUG:
+            payload["trace"] = traceback.format_exc()
+        return JSONResponse(payload, status_code=500)
 
     answer = str(result.get("answer", "")).strip() or "No answer came back."
     return {

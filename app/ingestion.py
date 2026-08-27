@@ -1,11 +1,15 @@
 """
-Lesson 6 / ingestion - Crawl python.langchain.com and index it into Pinecone.
+Lesson 6 / ingestion - Build the Strudel documentation corpus and index it.
 
-Production-shaped ingestion pipeline:
-    CRAWL   TavilyCrawl over the docs site      -> raw markdown per page
+Two sources are combined (see docs/architecture.md):
+    CRAWL   TavilyCrawl over strudel.cc         -> raw markdown per page
     WRAP    each page                           -> Document(+ source URL metadata)
     SPLIT   RecursiveCharacterTextSplitter      -> 4000-char chunks, 200 overlap
+    JSDOC   packages/**/*.mjs from the repo     -> one Document per function
     INDEX   asyncio.gather over batches of 500  -> concurrent upserts to Pinecone
+
+Also writes data/chunks.json, which core.py reads to build the BM25 half of the
+hybrid retriever - keep that file and the Pinecone index in step.
 
 Long-running and paid (crawling + embedding thousands of chunks). Run once.
 Python puts this file's own directory on sys.path[0], so the sibling `logger`
