@@ -4,8 +4,8 @@
     {
       "name": "strudel-assistant-dev",
       "runtimeExecutable": "uv",
-      "runtimeArgs": ["run", "app.py"],
-      "port": 5000,
+      "runtimeArgs": ["run", "python", "app/server.py"],
+      "port": 8000,
       "autoPort": true
     }
   ]

@@ -1,0 +1,678 @@
+/* ==========================================================================
+   Strudel Assistant
+
+   Visual direction: studio hardware. Strudel patterns are signal chains
+   (.lpf().room().gain()) and sequencer content, so the interface borrows the
+   vernacular of the rack it belongs next to - a warm dark panel, cream
+   silkscreen labels, one amber indicator lamp, and a transport bar. The
+   signature element is the cycle lane in the rail: one sweep = one Strudel
+   cycle, driven by the repl's own clock.
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  /* Warm dark: the panel under dim studio light, not a blue-black terminal. */
+  --ink:        #14100D;
+  --ink-2:      #1A1512;
+  --panel:      #1F1915;
+  --panel-hi:   #2A2320;
+
+  --edge:       rgba(239, 230, 214, 0.11);
+  --edge-soft:  rgba(239, 230, 214, 0.06);
+
+  --cream:      #EFE6D6;  /* silkscreen white */
+  --cream-2:    #B4A99B;  /* secondary prose */
+  --cream-3:    #7C7268;  /* micro labels */
+
+  --amber:      #F2A03D;  /* the one accent: power lamp, transport, strings */
+  --amber-dim:  #A8702C;
+  --amber-wash: rgba(242, 160, 61, 0.13);
+
+  --mint:       #7FD1AE;  /* numbers + source links, nowhere else */
+  --peak:       #E2604A;  /* VU peak: errors only */
+
+  --f-label: "IBM Plex Sans Condensed", "Arial Narrow", sans-serif;
+  --f-body:  "IBM Plex Sans", system-ui, sans-serif;
+  --f-mono:  "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --rail-h: 60px;
+  --wrap: 860px;
+  --editor-w: 400px;
+  --radius: 5px;   /* hardware corners are tight, not pillowy */
+}
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--f-body);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--cream);
+  background:
+    radial-gradient(900px 380px at 50% -140px, rgba(242, 160, 61, 0.10), transparent 70%),
+    var(--ink);
+  -webkit-font-smoothing: antialiased;
+  transition: padding-left 260ms cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Shared micro-label voice: condensed, uppercase, widely tracked - the way a
+   value gets screen-printed next to a jack. */
+.micro {
+  font-family: var(--f-label);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  color: var(--cream-3);
+}
+
+/* ============================ transport rail ============================= */
+
+.rail {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 10;
+  height: var(--rail-h);
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 0 20px;
+  background: linear-gradient(180deg, var(--panel), var(--ink-2));
+  border-bottom: 1px solid var(--edge);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+.rail__brand { display: flex; align-items: center; gap: 11px; flex: none; }
+
+/* Power lamp. Dark and inert until something is actually playing. */
+.led {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  flex: none;
+  background: #46362A;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5);
+  transition: background 160ms ease, box-shadow 160ms ease;
+}
+.led[data-state="live"] {
+  background: var(--amber);
+  box-shadow: 0 0 10px rgba(242, 160, 61, 0.85), 0 0 22px rgba(242, 160, 61, 0.35);
+  animation: pulse 1.9s ease-in-out infinite;
+}
+.led[data-state="busy"] {
+  background: var(--amber-dim);
+  box-shadow: 0 0 8px rgba(242, 160, 61, 0.4);
+  animation: pulse 900ms ease-in-out infinite;
+}
+
+@keyframes pulse { 50% { opacity: 0.45; } }
+
+.wordmark {
+  font-family: var(--f-label);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cream);
+  white-space: nowrap;
+}
+/* `~` is a rest in Strudel's mini-notation - the product's own notation used
+   as the mark, rather than a decorative separator. */
+.wordmark i { color: var(--amber); font-style: normal; margin: 0 3px; }
+.wordmark span { color: var(--cream-3); font-weight: 600; }
+
+/* --- the cycle lane ------------------------------------------------------ */
+
+.lane {
+  position: relative;
+  flex: 1 1 auto;
+  height: 22px;
+  min-width: 80px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.lane__ticks {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tick {
+  width: 1px;
+  height: 6px;
+  background: rgba(239, 230, 214, 0.16);
+  transition: background 200ms ease, height 200ms ease;
+}
+/* Every fourth step is a beat marker: the lane shows 4 beats of 4. */
+.tick[data-beat="1"] { height: 12px; background: rgba(239, 230, 214, 0.3); }
+
+.lane[data-state="live"] .tick { background: rgba(242, 160, 61, 0.3); }
+.lane[data-state="live"] .tick[data-beat="1"] { background: rgba(242, 160, 61, 0.55); }
+
+.lane__head {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0;
+  width: 2px;
+  background: var(--amber);
+  box-shadow: 0 0 12px rgba(242, 160, 61, 0.9);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+.lane__head::before {  /* the trail the playhead drags behind it */
+  content: "";
+  position: absolute;
+  right: 2px; top: 0; bottom: 0;
+  width: 62px;
+  background: linear-gradient(90deg, transparent, rgba(242, 160, 61, 0.22));
+  pointer-events: none;
+}
+.lane[data-state="live"] .lane__head { opacity: 1; }
+
+.rail__toggle { margin-left: 4px; flex: none; }
+.rail__toggle[data-state="open"] { color: var(--amber); border-color: rgba(242, 160, 61, 0.42); }
+
+.rail__transport { display: flex; align-items: center; gap: 12px; flex: none; }
+
+.readout {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--cream-3);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.readout[data-state="live"] { color: var(--amber); }
+.readout[data-state="error"] { color: var(--peak); }
+
+/* ================================ buttons =============================== */
+
+.btn {
+  font-family: var(--f-label);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cream-2);
+  background: var(--panel-hi);
+  border: 1px solid var(--edge);
+  border-radius: 3px;
+  padding: 6px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 140ms ease, background 140ms ease, border-color 140ms ease;
+}
+.btn:hover:not(:disabled) { color: var(--cream); border-color: rgba(239, 230, 214, 0.26); }
+.btn:disabled { opacity: 0.34; cursor: default; }
+
+.btn--ghost { background: transparent; }
+
+.btn--send {
+  color: var(--ink);
+  background: var(--amber);
+  border-color: var(--amber);
+  padding: 9px 20px;
+}
+.btn--send:hover:not(:disabled) { color: var(--ink); background: #FFB25A; border-color: #FFB25A; }
+
+/* Transport button on a pattern panel, lit while that pattern is the one playing. */
+.btn--play[data-state="live"] {
+  color: var(--ink);
+  background: var(--amber);
+  border-color: var(--amber);
+}
+
+/* =============================== editor ================================= */
+
+/* Docked beside the conversation on a wide screen, a slide-over below that.
+   The rail spans the full width above it, so the transport stays reachable
+   whether the panel is open or not. */
+.editor-panel {
+  position: fixed;
+  top: var(--rail-h);
+  left: 0;
+  bottom: 0;
+  z-index: 20;
+  width: var(--editor-w);
+  max-width: 88vw;
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+  border-right: 1px solid var(--edge);
+  box-shadow: 12px 0 34px rgba(0, 0, 0, 0.4);
+  transform: translateX(-100%);
+  transition: transform 260ms cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+body[data-editor="open"] .editor-panel { transform: translateX(0); }
+
+/* With no explicit choice stored, `data-editor` is absent and width decides -
+   in CSS, so the layout keeps answering to the real viewport as it changes. */
+@media (min-width: 1024px) {
+  body:not([data-editor]) .editor-panel { transform: translateX(0); }
+}
+
+.editor-panel__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 12px 12px 16px;
+  background: linear-gradient(180deg, var(--panel-hi), var(--panel));
+  border-bottom: 1px solid var(--edge-soft);
+}
+
+/* Lit while the editor's buffer is the thing playing. */
+.editor-panel__lamp {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #46362A;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5);
+  transition: background 160ms ease, box-shadow 160ms ease;
+}
+.editor-panel__lamp[data-state="live"] {
+  background: var(--amber);
+  box-shadow: 0 0 9px rgba(242, 160, 61, 0.8);
+  animation: pulse 1.9s ease-in-out infinite;
+}
+
+.editor-panel__close { margin-left: auto; }
+
+.editor-panel__foot {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 14px;
+  background: var(--panel);
+  border-top: 1px solid var(--edge-soft);
+}
+
+.editor-panel__hint {
+  margin-left: auto;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  color: var(--cream-3);
+  white-space: nowrap;
+}
+
+/* The buffer itself: a transparent textarea sitting exactly on top of a
+   highlighted copy of the same text, so editing stays native while the
+   mini-notation still gets coloured. Every metric below must match in both. */
+.editor {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.editor__hl,
+.editor textarea {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  border: 0;
+  padding: 16px;
+  font-family: var(--f-mono);
+  font-size: 13px;
+  line-height: 1.75;
+  letter-spacing: 0;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: normal;
+  tab-size: 2;
+}
+
+.editor__hl {
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--ink-2);
+  color: var(--cream-2);
+}
+.editor__hl code { font: inherit; color: inherit; background: none; padding: 0; }
+
+.editor textarea {
+  overflow-y: auto;
+  resize: none;
+  outline: none;
+  background: transparent;
+  color: transparent;
+  caret-color: var(--amber);
+}
+.editor textarea::selection { background: rgba(242, 160, 61, 0.28); }
+
+.editor-backdrop {
+  position: fixed;
+  inset: var(--rail-h) 0 0 0;
+  z-index: 15;
+  background: rgba(10, 8, 6, 0.62);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+body[data-editor="open"] .editor-backdrop { opacity: 1; pointer-events: auto; }
+
+/* Wide enough to hold both: dock the panel and move the conversation over. */
+@media (min-width: 1024px) {
+  body[data-editor="open"],
+  body:not([data-editor]) { padding-left: var(--editor-w); }
+
+  body[data-editor="open"] .composer,
+  body:not([data-editor]) .composer { left: var(--editor-w); }
+
+  .editor-backdrop { display: none; }
+}
+
+/* ================================= feed ================================== */
+
+.feed {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: calc(var(--rail-h) + 34px) 20px 190px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.msg { animation: rise 320ms cubic-bezier(0.2, 0.7, 0.3, 1) both; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(8px); }
+}
+
+/* What you typed: compact, indented, clearly the input side. */
+.msg--user {
+  align-self: flex-end;
+  max-width: 76%;
+  padding: 11px 15px;
+  border-radius: var(--radius);
+  background: var(--panel-hi);
+  border: 1px solid var(--edge-soft);
+  color: var(--cream);
+}
+
+/* What the device answered: full width, spined in amber. */
+.msg--bot {
+  padding: 18px 22px 16px;
+  border-radius: var(--radius);
+  background: var(--panel);
+  border: 1px solid var(--edge-soft);
+  border-left: 2px solid var(--amber);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.msg--error {
+  border-left-color: var(--peak);
+  color: var(--cream);
+}
+.msg--error .micro { color: var(--peak); }
+
+/* ============================ answer prose =============================== */
+
+.prose > *:first-child { margin-top: 0; }
+.prose > *:last-child { margin-bottom: 0; }
+.prose p { margin: 0 0 0.9em; }
+.prose ul, .prose ol { margin: 0 0 0.9em; padding-left: 1.25em; }
+.prose li { margin: 0.25em 0; }
+.prose li::marker { color: var(--amber-dim); }
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  font-family: var(--f-label);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--cream);
+  margin: 1.4em 0 0.5em;
+  line-height: 1.3;
+}
+.prose h1 { font-size: 20px; }
+.prose h2 { font-size: 17px; }
+.prose h3, .prose h4 { font-size: 15px; }
+
+.prose strong { color: var(--cream); font-weight: 500; }
+.prose em { color: var(--cream-2); }
+
+.prose a { color: var(--mint); text-decoration: none; border-bottom: 1px solid rgba(127, 209, 174, 0.32); }
+.prose a:hover { border-bottom-color: var(--mint); }
+
+/* Inline code reads as a part name, not a block of program text. */
+.prose :not(pre) > code {
+  font-family: var(--f-mono);
+  font-size: 0.87em;
+  color: var(--amber);
+  background: var(--amber-wash);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.prose blockquote {
+  margin: 0 0 0.9em;
+  padding-left: 14px;
+  border-left: 2px solid var(--edge);
+  color: var(--cream-2);
+}
+
+.prose table { border-collapse: collapse; width: 100%; margin: 0 0 1em; font-size: 14px; }
+.prose th, .prose td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--edge-soft); }
+.prose th { font-family: var(--f-label); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream-3); }
+
+.prose hr { border: 0; border-top: 1px solid var(--edge-soft); margin: 1.4em 0; }
+
+/* ============================ pattern panel ============================== */
+
+/* Every fenced code block becomes a playable module: label, transport, code. */
+.patch {
+  margin: 1.1em 0;
+  border: 1px solid var(--edge);
+  border-radius: var(--radius);
+  background: var(--ink-2);
+  overflow: hidden;
+}
+
+.patch__head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 7px 10px 7px 13px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--edge-soft);
+}
+
+.patch__label { margin-right: auto; }
+
+.patch__code {
+  margin: 0;
+  padding: 14px 16px;
+  overflow-x: auto;
+  font-family: var(--f-mono);
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--cream-2);
+  tab-size: 2;
+}
+.patch__code code { font: inherit; color: inherit; background: none; padding: 0; }
+
+/* Pattern syntax. Strings carry the mini-notation, so they get the accent;
+   the operators inside them are dimmed so the note names stay readable. */
+.t-str  { color: var(--amber); }
+.t-mini { color: var(--amber-dim); }   /* ~ * < > [ ] , / ! @ ? inside a string */
+.t-num  { color: var(--mint); }
+.t-fn   { color: var(--cream); font-weight: 500; }
+.t-punc { color: var(--cream-3); }
+.t-com  { color: #5D554D; font-style: italic; }
+
+/* ================================ sources =============================== */
+
+.sources { margin-top: 14px; border-top: 1px solid var(--edge-soft); padding-top: 12px; }
+
+.sources__summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  list-style: none;
+  width: fit-content;
+}
+.sources__summary::-webkit-details-marker { display: none; }
+.sources__summary:hover { color: var(--cream-2); }
+
+.sources__chev { transition: transform 180ms ease; color: var(--amber-dim); }
+.sources[open] .sources__chev { transform: rotate(90deg); }
+
+.sources__list { margin: 11px 0 0; padding: 0; list-style: none; display: grid; gap: 7px; }
+
+.sources__list a {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  color: var(--mint);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.sources__list a:hover { text-decoration: underline; }
+.sources__list li::before { content: "~ "; color: var(--amber-dim); font-family: var(--f-mono); }
+
+/* ============================== empty state ============================== */
+
+.start { animation: rise 480ms cubic-bezier(0.2, 0.7, 0.3, 1) both; }
+
+.start__title {
+  font-family: var(--f-label);
+  font-weight: 700;
+  font-size: clamp(30px, 6vw, 44px);
+  line-height: 1.08;
+  letter-spacing: -0.005em;
+  margin: 6px 0 12px;
+  color: var(--cream);
+}
+.start__title em { font-style: normal; color: var(--amber); }
+
+.start__lede { color: var(--cream-2); max-width: 52ch; margin: 0 0 26px; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 30px; }
+
+.chip {
+  font-family: var(--f-body);
+  font-size: 13.5px;
+  color: var(--cream-2);
+  background: var(--panel);
+  border: 1px solid var(--edge);
+  border-radius: 999px;
+  padding: 7px 15px;
+  cursor: pointer;
+  text-align: left;
+  transition: color 140ms ease, border-color 140ms ease, background 140ms ease;
+}
+.chip:hover { color: var(--cream); border-color: rgba(242, 160, 61, 0.45); background: var(--panel-hi); }
+
+/* =============================== thinking =============================== */
+
+.thinking { display: flex; align-items: center; gap: 14px; }
+
+/* The retrieval wait reuses the lane's language: a sweep across steps. */
+.thinking__bar {
+  position: relative;
+  flex: 1;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(239, 230, 214, 0.08);
+  overflow: hidden;
+}
+.thinking__bar::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 32%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, var(--amber), transparent);
+  animation: sweep 1.25s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+@keyframes sweep {
+  from { transform: translateX(-110%); }
+  to   { transform: translateX(420%); }
+}
+
+/* =============================== composer =============================== */
+
+.composer {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 10;
+  padding: 0 20px 18px;
+  background: linear-gradient(180deg, transparent, var(--ink) 26%);
+}
+
+.composer__box {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 10px 10px 10px 16px;
+  background: var(--panel);
+  border: 1px solid var(--edge);
+  border-radius: var(--radius);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 14px 34px rgba(0, 0, 0, 0.5);
+  transition: border-color 160ms ease;
+}
+.composer__box:focus-within { border-color: rgba(242, 160, 61, 0.5); }
+
+.composer textarea {
+  flex: 1;
+  border: 0;
+  outline: 0;
+  resize: none;
+  background: transparent;
+  color: var(--cream);
+  font-family: var(--f-body);
+  font-size: 15px;
+  line-height: 1.55;
+  padding: 7px 0;
+  max-height: 168px;
+}
+.composer textarea::placeholder { color: var(--cream-3); }
+
+.composer__hint {
+  max-width: var(--wrap);
+  margin: 9px auto 0;
+  font-family: var(--f-label);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: #635A52;
+  text-align: center;
+}
+
+/* ============================== responsive ============================== */
+
+@media (max-width: 720px) {
+  .rail { gap: 14px; padding: 0 14px; }
+  .wordmark span { display: none; }   /* keep "Strudel ~" only */
+  .readout { display: none; }
+  .feed { padding: calc(var(--rail-h) + 24px) 14px 178px; gap: 16px; }
+  .msg--user { max-width: 88%; }
+  .msg--bot { padding: 16px 16px 14px; }
+  .composer { padding: 0 14px 14px; }
+}
+
+@media (max-width: 480px) {
+  .lane { display: none; }   /* the rail keeps the lamp; the lane needs room */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

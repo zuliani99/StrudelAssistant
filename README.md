@@ -1,79 +1,68 @@
 # StrudelAssistant
 
-An AI app for creating and modifying [Strudel](https://strudel.cc) patterns (live coding music, house/techno) through natural language chat, with audio playback directly in the browser.
+A documentation assistant for [Strudel](https://strudel.cc), the JavaScript live-coding environment for algorithmic music. Ask what a function does or describe a pattern you want; answers are grounded in the Strudel documentation, cite the pages they came from, and come back **playable in the browser**.
 
 ## How it works
 
-- **Pattern editor** (left): shows the current Strudel code, with play/stop.
-- **Chat** (right): type requests like "more bass", "add an intro", or conceptual questions ("what does `lpf` do?").
-- The backend (Flask) uses **OpenAI** with *function calling*: the model decides on its own whether the request implies rewriting the pattern (in which case it calls the `update_pattern` tool and the code updates both in the editor and in the message) or whether it's just a question (text answer, no code).
-- Before answering, the backend does **retrieval** over the Strudel documentation (`content/strudel-docs/`) to give the model relevant context on functions/syntax (RAG).
-- If configured, the model also has access to a second tool, **`search_web`** (Tavily), for information not covered by the local documentation (news, general music production topics).
-- All OpenAI calls (and RAG retrieval) are traced with **LangSmith**, if configured, for debugging/observability (prompts, retrieval, tool calls, latency).
-- Audio playback uses `@strudel/web` (`evaluate()`/`hush()`), the same engine as the official REPL, loaded via CDN directly on the page (no bundler needed).
+- **Retrieval** is hybrid: BM25 (lexical) over a local chunk dump plus Pinecone (semantic) vector search, merged by LangChain's `EnsembleRetriever`. BM25 catches exact function names (`lpf`, `euclid`); the vector side catches paraphrases. Without `data/chunks.json` it falls back to vector-only.
+- **The agent** (`gpt-4o-mini` via LangChain `create_agent`) decides when to call the `retrieve_context` tool, and may search more than once before answering. The raw `Document` objects ride back to the UI on the tool message's `artifact`, which is how sources are cited without re-parsing the prompt.
+- **The corpus** is built from two sources: tutorial/concept pages (`strudel.cc/workshop`, `/learn`, `/recipes`) and API reference entries extracted from each function's JSDoc in the Strudel source (`codeberg.org/uzu/strudel`).
+- **Playback** uses `@strudel/web` loaded from a CDN — the same engine as the official REPL. Every fenced code block in an answer becomes a pattern module with Play, Edit and Copy, and the lane in the top rail sweeps once per cycle, driven by the repl's own scheduler clock.
+- **The editor** is a buffer of your own, docked to the left on a wide screen and a slide-over below that. Edit on any answer sends that pattern into it; `⌘/Ctrl+Enter` re-runs the buffer, swapping the pattern live without stopping the transport. Its contents persist in `localStorage`.
 
 ## Setup
 
-Requires [uv](https://docs.astral.sh/uv/) as the package/environment manager.
+Requires [uv](https://docs.astral.sh/uv/).
 
 ```bash
 uv sync
-cp .env.example .env
 ```
 
-Open `.env` and add your `OPENAI_API_KEY` (required). `TAVILY_API_KEY` and the `LANGSMITH_*` variables are optional: without them the app works the same, just without web search and without tracing. Then:
+Create a `.env` with:
+
+| Variable | Required | Used for |
+| --- | --- | --- |
+| `OPENAI_API_KEY` | yes | chat model + embeddings |
+| `PINECONE_API_KEY` | yes | vector index (`strudel-doc-index`) |
+| `TAVILY_API_KEY` | ingestion only | crawling the docs site |
+| `LANGSMITH_TRACING`, `LANGSMITH_API_KEY`, `LANGSMITH_PROJECT` | no | tracing on [smith.langchain.com](https://smith.langchain.com) |
+
+Then run the app:
 
 ```bash
-uv run app.py
+uv run python app/server.py
 ```
 
-Open http://localhost:5000. On the first Play click, `@strudel/web` downloads the drum samples from GitHub (`dirt-samples`): the first playback may take a few seconds.
+Open http://localhost:8000. On the first Play, `@strudel/web` downloads the drum samples from GitHub, so the first playback takes a few seconds.
 
-## RAG: two modes
+## Building the index
 
-Retrieval also works **without embeddings**, with a lexical fallback (shared-word counting), so the app is usable right after setup. For real semantic retrieval:
+The repo ships with `data/chunks.json`, so retrieval works out of the box as long as the Pinecone index is populated. To rebuild both from scratch:
 
 ```bash
-uv run scripts/build_embeddings.py
+uv run python app/ingestion.py
 ```
 
-Generates `data/embeddings.json` (requires `OPENAI_API_KEY` in `.env`, uses `text-embedding-3-small`). The file isn't version-controlled: regenerate it whenever you change the files in `content/strudel-docs/`.
-
-## Expanding the documentation
-
-`content/strudel-docs/*.md` is a **hand-curated** corpus (mini-notation, rhythm, effects, melody, arrangement) meant as a starting point, not a full copy of Strudel's official documentation. To improve the assistant's answers:
-
-1. Add/edit `.md` files in `content/strudel-docs/` (one `##` section per concept/function: it becomes an independent chunk).
-2. Re-run `uv run scripts/build_embeddings.py`.
-
-## Web search (Tavily)
-
-If you set `TAVILY_API_KEY` in `.env`, the `search_web` tool is automatically added to the OpenAI call: the model uses it when the local documentation isn't enough (e.g. generic music production questions, recent news). Without the key, the tool isn't even exposed to the model: no different behavior, no error.
-
-## Tracing (LangSmith)
-
-Setting `LANGSMITH_TRACING=true` and `LANGSMITH_API_KEY` in `.env` traces every `/api/chat` request on [smith.langchain.com](https://smith.langchain.com): RAG retrieval, OpenAI calls (including tool calls), and any Tavily searches show up as a single nested pipeline (`strudel_chat_pipeline`), useful for debugging prompts and understanding why the model answered the way it did. `LANGSMITH_PROJECT` sets the project name on LangSmith (default: "default" if omitted). Without these variables the app works normally, without tracing.
+This crawls the documentation with Tavily, splits it into chunks, writes `data/chunks.json`, and upserts the embeddings to Pinecone. It is long-running and paid (crawling + embedding thousands of chunks) — run it once.
 
 ## Project structure
 
 ```
-app.py                     # Flask: "/" route (page) and "/api/chat" (RAG + OpenAI + tool loop)
-system_prompt.py           # builds the system prompt (cheatsheet + retrieved docs + current pattern)
-web_search.py              # search_web tool (Tavily), traced with @traceable
-rag/
-  corpus.py                # loads and chunks the .md files in content/strudel-docs
-  embeddings.py            # load/save embeddings, cosine similarity
-  retrieve.py              # retrieval (semantic if embeddings exist, lexical otherwise)
-scripts/build_embeddings.py  # generates data/embeddings.json
-content/strudel-docs/*.md  # curated documentation corpus
-templates/index.html       # page (editor + chat)
-static/css/style.css
-static/js/app.js           # editor, chat, audio playback (@strudel/web via CDN)
+app/
+  server.py            # FastAPI: "/" (app shell) and "/api/chat" (RAG + markdown render)
+  backend/core.py      # hybrid retriever, retrieve_context tool, run_llm agent loop
+  ingestion.py         # crawl -> chunk -> data/chunks.json + Pinecone upsert
+  logger.py            # coloured console output for the ingestion pipeline
+  web/
+    index.html         # app shell
+    static/style.css   # the interface
+    static/app.js      # transport, pattern panels, chat
+data/chunks.json       # chunk dump that backs BM25
 ```
 
 ## Stack
 
-Flask (Python) for the backend and to serve the frontend, managed with [uv](https://docs.astral.sh/uv/) (`pyproject.toml` + `uv.lock`); `openai` SDK for chat (function calling) and embeddings, `langsmith` for tracing/observability, `tavily-python` for web search; vanilla HTML/CSS/JS on the client, `@strudel/web` via CDN for audio in the browser — no frontend bundler/build step.
+FastAPI + uvicorn serving a vanilla HTML/CSS/JS frontend (no bundler, no build step), managed with [uv](https://docs.astral.sh/uv/). LangChain for the agent and hybrid retrieval, OpenAI for chat and embeddings, Pinecone for the vector index, Tavily for crawling during ingestion, `markdown-it-py` to render answers server-side, and `@strudel/web` via CDN for audio in the browser.
 
 ## License note
 

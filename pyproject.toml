@@ -10,7 +10,6 @@ dependencies = [
     "python-dotenv>=1.0,<2.0",
     "langsmith>=0.1.100,<1.0",
     "tavily-python>=0.5,<1.0",
-    "streamlit>=1.62.0",
     "langchain-tavily>=0.2.18",
     "langchain-pinecone>=0.2.13",
     "langchain-openai>=1.1.9",
@@ -20,4 +19,7 @@ dependencies = [
     "langchain-community>=0.4.2",
     "rank-bm25>=0.2.2",
     "httpx>=0.28.1",
+    "fastapi>=0.141.1",
+    "uvicorn>=0.52.4",
+    "markdown-it-py>=4.2.0",
 ]
