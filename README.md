@@ -18,7 +18,7 @@ Requires [uv](https://docs.astral.sh/uv/).
 uv sync
 ```
 
-Create a `.env` with:
+Create a `.env` like the `.env.example` with:
 
 | Variable | Required | Used for |
 | --- | --- | --- |
